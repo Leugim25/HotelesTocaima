@@ -1,0 +1,162 @@
+@import url('https://fonts.googleapis.com/css2?family=Merriweather:wght@300&display=swap');
+
+body {
+    font-family: 'Merriweather', serif;
+    background-color: #929292;
+
+}
+
+h2 {
+    font-size: 48px;
+    margin-bottom: 30px;
+}
+
+p {
+    font-size: 18px;
+    color: rgb(48, 46, 42);
+    line-height: 1.8;
+    margin-bottom: 0;
+}
+
+a:hover {
+    text-decoration: none;
+}
+
+section {
+    padding: 70px 0;
+}
+
+.bg-dark {
+    background-color: gray;
+}
+
+.topmargin-xs {
+    margin-top: 15px;
+}
+
+.topmargin-sm {
+    margin-top: 30px;
+}
+
+.navbar {
+    background-color: #fca311;
+    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.5);
+    min-height: 85px;
+}
+
+.nav-link {
+    color: black;
+}
+
+.nav-link:hover {
+    color: rgb(141, 72, 72);
+}
+
+.logo-fanny {
+    min-width: 160px;
+    max-width: 180px;
+}
+
+.navbar-toggler {
+    font-size: 40px;
+}
+
+.navbar-toggler:focus {
+    outline: none;
+}
+
+
+/*-----------------------------------------------------------*/
+
+
+#fanny {
+    background-size: cover ;
+    padding-top: 90px;
+    min-height: 700px;
+    color: bisque;
+}
+
+.content-center {
+    max-width: 800px;
+    margin: 0 auto 60px auto;
+    text-align: center;
+}
+
+/*---------------------------------portafolio-----------------------*/
+
+.portafolio-container {
+    position: relative;
+    overflow: hidden;
+    margin: 10px 0;
+    border-radius: 2px;
+}
+
+.portafolio-container img {
+    -moz-transition: all 0.8s;
+    -webkit-transition: all 0.8s;
+    transition: all 0.8s;
+}
+
+.portafolio-container:hover img {
+    -moz-transform: scale(1.2);
+    -webkit-transform: scale(1.2);
+    transform: scale(1.2);
+}
+
+.portafolio-details {
+    position: absolute;
+    bottom: 25px;
+    left: 28px;
+    z-index: 9000;
+}
+
+.portafolio-details a h2, .portafolio-details a p {
+    color: beige;
+}
+
+.portafolio-details h2 {
+    margin-bottom: 0px;
+}
+
+
+/*-------------------------fouter----------------------*/
+
+#fouter {
+    padding: 10px 0;
+    text-align: center;
+    color: bisque;
+}
+
+#fouter a {
+    color: bisque;
+}
+
+#fouter a:hover {
+    color: bisque;
+}
+
+#fouter .list-inline .list-inline-item {
+    padding: 10px 15px;
+}
+
+
+/*-------------------------------------------------------------------*/
+@media (max-width: 575.98px) {  }
+
+
+@media (min-width: 576px) and (max-width: 767.98px) { 
+    
+ }
+
+@media (min-width: 768px) and (max-width: 991.98px) { 
+    
+ }
+
+@media (min-width: 992px) and (max-width: 1199.98px) { 
+    
+ }
+
+
+@media (min-width: 1200px) { 
+    
+ }

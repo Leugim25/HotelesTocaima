@@ -1,0 +1,65 @@
+body {
+	text-align: center;
+	font-family: sans-serif;
+	margin: 0;
+}
+
+.modal {
+	width: 100% !important;
+	height: 100vh !important;
+	background: none;
+	
+	position: absolute !important;
+	top: 0 !important;
+	left: 0 !important;
+	
+	display: flex !important;
+	
+	animation: modal 2s 3s forwards;
+	visibility: hidden;
+	opacity: 0;
+}
+
+.contenido {
+	margin: auto;
+	width: 46%;
+	height: 40%;
+    padding: 2%;
+	background: #0d6efd;
+    color: white;
+	border-radius: 10px;
+}
+
+#cerrar {
+	display: none;
+}
+
+#cerrar + label {
+	position: fixed;
+	color: #fff;
+	font-size: 25px;
+	z-index: 50;
+	background: darkred;
+	height: 40px;
+	width: 40px;
+	line-height: 40px;
+	border-radius: 50%;
+	right: 150px;
+	top: 150px;
+	cursor: pointer;
+	
+	animation: modal 2s 3s forwards;
+	visibility: hidden;
+	opacity: 0;
+}
+
+#cerrar:checked + label, #cerrar:checked ~ .modal {
+	display: none;
+}
+
+@keyframes modal {
+	100% {
+		visibility: visible;
+		opacity: 1;
+	}
+}
