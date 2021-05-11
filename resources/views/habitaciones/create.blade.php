@@ -2,7 +2,9 @@
 
 @section('sidebar')
 	<div class="menu">
-		<a href="{{ route('principal.index') }}" class="dropdown-item"><i class="icon ion-md-home lead mr-2"></i>Perfil</a>
+		<a href="{{ route('principal.index') }}" class="dropdown-item"><i class="icon ion-md-home lead mr-2"></i>Inicio</a>
+
+		<a href="{{route('huespedes.index')}}" class="dropdown-item"><i class="icon ion-md-person-add lead mr-2"></i>Añadir huesped</a>
 
 		<a href="{{ route('hoteles.index') }}" class="dropdown-item"><i class="icon ion-md-business lead mr-2"></i>Hoteles</a>
 
@@ -29,7 +31,7 @@
 
 @section('content')
 
-<h2 class="text-center mb-4">CREA UNA NUEVA HABITACIÓN</h2>
+<h2 class="text-center mb-4">AGREGA LAS HABITACIONES DEL HOTEL</h2>
 <div class="contener">
 	<div class="principal">
 		<div class="card-body ml-5" id="card-crear">
@@ -39,8 +41,7 @@
 					<form method="POST" action="{{ route('habitaciones.store') }}" enctype="multipart/form-data" novalidate>
 						@csrf
 						<div class="pagina">
-
-							<!-- Hotel -->
+							<!-- Nombres -->
 							<div class="form-group category">
 								<label for="hotel_id" class="titles">Hotel</label>
 								<select name="hotel_id" class="form-control @error('hotel') is-invalid @enderror" id="hotel_id">
@@ -137,9 +138,17 @@
 						</div>
 
 						<!-- Campo para el valor de la habitación -->
-						<div class="form-group">
+						<div class="form-group category">
 							<label for="precio" class="titles">Precio de la habitación</label>
-							<input type="text" name="precio" class="form-control @error('precio') is-invalid @enderror" id="precio" placeholder="Ej: 123.456" value="{{ old('precio') }}">
+
+							<select name="precio" class="form-control @error('precio') is-invalid @enderror" id="precio">
+								<option value="">----- Selecciona un precio -----</option>
+
+								<!-- Se recorren todos los estados de la habitación -->
+								@foreach($precio as $precio)
+								<option value="{{ $precio->id }}" {{ old('precio') == $precio->id ? 'selected' : '' }}>${{$precio->valor}} pesos</option>
+								@endforeach
+							</select>
 
 							@error('precio')
 							<span class="invalid-feedback d-block" role="alert">
@@ -147,7 +156,6 @@
 							</span>
 							@enderror
 						</div>
-
 						<!-- Agregar datos de la habitación -->
 						<div class="form-group">
 							<input type="submit" class="btn btn-warning text-white" value="Agregar Habitación">

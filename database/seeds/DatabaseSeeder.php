@@ -18,5 +18,7 @@ class DatabaseSeeder extends Seeder
         $this->call(DisponibilidadHabitacionSeeder::class);
 
         $this->call(PagosSeeder::class);
+
+        $this->call(PreciosSeeder::class);
     }
 }

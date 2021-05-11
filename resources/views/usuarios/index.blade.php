@@ -2,7 +2,7 @@
 
 @section('sidebar')
 <div class="menu">
-	<a href="{{ route('perfiles.show') }}" class="dropdown-item"><i class="icon ion-md-contact lead mr-2"></i>Perfil</a>
+	<a href="" class="dropdown-item"><i class="icon ion-md-contact lead mr-2"></i>Perfil</a>
 
 	<a href="{{ route('usuarios.index') }}" class="dropdown-item active-list"><i class="icon ion-md-alarm lead mr-2"></i>Mis reservas</a>
 
@@ -18,7 +18,7 @@
 @endsection
 
 @section('content')
-<div class="container-tabla" style="margin-top: -10%">
+<div class="container-tabla">
 	<h2 class="text-center mb-3 font-weight-bold">TUS RESERVACIONES</h2>
 	<div class="col-md-12 bg-light mx-auto" id="dataTable">
 

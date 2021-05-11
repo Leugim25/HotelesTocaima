@@ -4,6 +4,8 @@
 	<div class="menu">
 		<a href="{{ route('principal.index') }}" class="dropdown-item"><i class="icon ion-md-home lead mr-2"></i>Inicio</a>
 
+		<a href="{{route('huespedes.index')}}" class="dropdown-item"><i class="icon ion-md-person-add lead mr-2"></i>Añadir huesped</a>
+
 		<a href="{{ route('hoteles.index') }}" class="dropdown-item"><i class="icon ion-md-business lead mr-2"></i>Hoteles</a>
 
 		<a href="{{ route('habitaciones.index') }}" class="dropdown-item active-list"><i class="icon ion-md-bed lead mr-2"></i>Habitaciones</a>
@@ -25,16 +27,6 @@
 
 @section('style')
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/trix/1.2.1/trix.css" integrity="sha256-yebzx8LjuetQ3l4hhQ5eNaOxVLgqaY1y8JcrXuJrAOg=" crossorigin="anonymous" />
-@endsection
-
-@section('sidebar')
-<div class="menu">
-	<a href="{{ route('perfiles.show') }}" class="d-block text-light p-3 border-0"><i class="icon ion-md-contact lead mr-2"></i>Perfil</a>
-
-	<a href="{{ route('hoteles.index') }}" class="d-block text-light p-3 border-0"><i class="icon ion-md-business lead mr-2"></i>Hoteles</a>
-
-	<a href="#" class="d-block text-light p-3 border-0"> <i class="icon ion-md-settings lead mr-2"></i>Configuración</a>
-</div>
 @endsection
 
 @section('content')
@@ -138,9 +130,17 @@
 						</div>
 
 						<!-- Campo para el valor de la habitación -->
-						<div class="form-group">
-							<label for="precio" class="titles">Precio de la habitación</label>
-							<input type="text" name="precio" class="form-control @error('precio') is-invalid @enderror" id="precio" placeholder="Ej: 123.456" value="{{ $habitacion->precio }}">
+						<div class="form-group category">
+							<label for="precio" class="titles">Estado de la Habitación</label>
+
+							<select name="precio" class="form-control @error('precio') is-invalid @enderror" id="precio">
+								<option value="">---------- Selecciona el estado ----------</option>
+
+								<!-- Se recorren todos los estados de la habitación -->
+								@foreach($precio as $precio)
+								<option value="{{ $precio->id }}" {{ $habitacion->precio_id == $precio->id ? 'selected' : '' }}>{{$precio->valor}}</option>
+								@endforeach
+							</select>
 
 							@error('precio')
 							<span class="invalid-feedback d-block" role="alert">

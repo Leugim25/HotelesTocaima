@@ -1,12 +1,12 @@
 @if ($reservas>0)
-<a class="app-nav__item" href="#" data-toggle="dropdown" aria-label="Show notifications" title="Tienes nuevas reservaciones">
-	<i class="fas fa-bell fa-lg "></i><span class="badge badge-danger">{{$reservas}}</span>
-</a>
+	<a class="app-nav__item" href="#" data-toggle="dropdown" aria-label="Show notifications" title="Tienes nuevas reservaciones">
+		<i class="fas fa-bell fa-lg "></i><span class="badge badge-danger">{{$reservas}}</span>
+	</a>
 @else
 
-<a class="app-nav__item" href="#" data-toggle="dropdown" aria-label="Show notifications" title="No tienes reservaciones">
-	<i class="fas fa-bell fa-lg "></i><span class="badge badge-danger">{{$reservas}}</span>
-</a>
+	<a class="app-nav__item" href="#" data-toggle="dropdown" aria-label="Show notifications" title="No tienes reservaciones">
+		<i class="fas fa-bell fa-lg "></i><span class="badge badge-danger">{{$reservas}}</span>
+	</a>
 
 @endif
 

@@ -4,6 +4,8 @@
 <div class="menu">
 	<a href="{{ route('principal.index') }}" class="dropdown-item"><i class="icon ion-md-home lead mr-2"></i>Inicio</a>
 
+	<a href="{{route('huespedes.index')}}" class="dropdown-item"><i class="icon ion-md-person-add lead mr-2"></i>Añadir huesped</a>
+
 	<a href="{{ route('hoteles.index') }}" class="dropdown-item"><i class="icon ion-md-business lead mr-2"></i>Hoteles</a>
 
 	<a href="{{ route('habitaciones.index') }}" class="dropdown-item active-list"><i class="icon ion-md-bed lead mr-2"></i>Habitaciones</a>
@@ -24,13 +26,22 @@
 @endsection
 
 @section('botones')
-<div class="ml-3 py-4 mt-5 col-12">
-	<div class="buttons">
-		<h5>Crea una nueva habitación</h5>
-		<a href="{{route('habitaciones.create')}}" class="btn btn-warning text-white">Agregar habitación</a>
+@if($hoteles > 0)
+	<div class="ml-3 py-4 mt-5 col-12">
+		<div class="buttons">
+			<h5>Crea una nueva habitación</h5>
+			<a href="{{route('habitaciones.create')}}" class="btn btn-warning text-white">Agregar habitación</a>
+		</div>
 	</div>
-</div>
-
+	@else
+	<div class="ml-3 py-4 mt-5 col-12">
+		<div class="buttons">
+			<p>¡Debes crear un hotel primero!</p>
+			<a href="{{route('hoteles.create')}}" class="btn btn-warning text-white">Agregar hotel</a>
+		</div>
+	</div>	
+@endif
+	
 @endsection
 
 @section('content')
@@ -62,7 +73,7 @@
 				<td class="text-center"> {{ $habitacion->camas }} </td>
 				<td class="services"> {!! $habitacion->mobiliario !!} </td>
 				<td class=""> {!! $habitacion->servicios !!} </td>
-				<td class="text-center"> {{ $habitacion->precio }} </td>
+				<td class="text-center"> {{ $habitacion->precio->valor }} </td>
 				<td class="text-center">
 					{{ optional($habitacion->disponible)->estado }}
 				</td>

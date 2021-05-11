@@ -11,6 +11,7 @@
 	<title>{{ __('Hoteles Tocaima') }}</title>
 
 	<link rel="icon" type="image/jpg" href="{{ asset('/img/logoAmarilloNegro.png') }}">
+
 	<link href="https://cdn.datatables.net/plug-ins/1.10.24/i18n/Spanish.json">
 	<link href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css" rel="stylesheet" />
 	<link href="https://cdn.datatables.net/responsive/2.2.3/css/responsive.dataTables.min.css" rel="stylesheet">

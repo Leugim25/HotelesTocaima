@@ -75,7 +75,7 @@ class ReservacionesController extends Controller
 
     public function cancel(Request $request)
     {
-        DB::table('habitaciones')->where('id', $request->id)->update(['disponibilidad_id' =>  3]);
+        DB::table('habitaciones')->where('id', $request->id)->update(['disponibilidad_id' =>  1]);
         DB::table('auditorias')->insert([
             'description' => 'Se ha cancelado la reservacion de la habitacion: ',
             'user_name' => 'Acción realizada por' . " " ." - " .auth()->user()->name,

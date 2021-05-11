@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Principal;
+use App\Habitacion;
+use App\Huespedes;
 use Illuminate\Http\Request;
 
 class PrincipalController extends Controller
@@ -14,7 +16,13 @@ class PrincipalController extends Controller
      */
     public function index()
     {
-        return view('principal.index');
+        $habitacion = Habitacion::where('disponibilidad_id', 1)->count();
+        $data = Habitacion::where('disponibilidad_id', 1)->latest('updated_at')->first();
+        $data2 = Habitacion::where('disponibilidad_id', 3)->latest('updated_at')->first();
+        $reservas = Habitacion::where('disponibilidad_id', 3)->count();
+        $huespedes = Huespedes::all(['id'])->count();
+        $data3 = Huespedes::latest('updated_at')->first();
+        return view('principal.index', compact('habitacion', 'reservas', 'data', 'data2', 'huespedes', 'data3'));
     }
 
     /**

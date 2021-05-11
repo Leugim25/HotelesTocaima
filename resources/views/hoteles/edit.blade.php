@@ -9,6 +9,8 @@
 	<div class="menu">
 		<a href="{{ route('principal.index') }}" class="dropdown-item"><i class="icon ion-md-home lead mr-2"></i>Inicio</a>
 
+        <a href="{{route('huespedes.index')}}" class="dropdown-item"><i class="icon ion-md-person-add lead mr-2"></i>Añadir huesped</a>
+
 		<a href="{{ route('hoteles.index') }}" class="dropdown-item active-list"><i class="icon ion-md-business lead mr-2"></i>Hoteles</a>
 
 		<a href="{{ route('habitaciones.index') }}" class="dropdown-item"><i class="icon ion-md-bed lead mr-2"></i>Habitaciones</a>

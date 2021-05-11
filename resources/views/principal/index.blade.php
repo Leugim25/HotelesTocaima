@@ -2,21 +2,10 @@
 
 @section('sidebar')
 <div class="menu">
-    <div class="accordion" id="accordionExample">
-        <div class="accordion-item">
-          <h2 class="accordion-header" id="headingOne">
-                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-              Accordion Item #1
-            </button>
-          </h2>
-          <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
-            <div class="accordion-body">
-              <strong>This is the first item's accordion body.</strong> It is shown by default, until the collapse plugin adds the appropriate classes that we use to style each element. These classes control the overall appearance, as well as the showing and hiding via CSS transitions. You can modify any of this with custom CSS or overriding our default variables. It's also worth noting that just about any HTML can go within the <code>.accordion-body</code>, though the transition does limit overflow.
-            </div>
-          </div>
-        </div>
-    </div>
+    
 	<a href="{{route('principal.index')}}" class="dropdown-item active-list"><i class="icon ion-md-home lead mr-2"></i>Inicio</a>
+
+  <a href="{{route('huespedes.index')}}" class="dropdown-item"><i class="icon ion-md-person-add lead mr-2"></i>Añadir huesped</a>
 
 	<a href="{{ route('hoteles.index') }}" class="dropdown-item"><i class="icon ion-md-business lead mr-2"></i>Hoteles</a>
 
@@ -32,24 +21,92 @@
 	</a>
 
 	<form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-		@csrf
+		  @csrf
 	</form>
 </div>
 @endsection
 
+@section('style')
+  <link href="{{ asset('css/estilos.css') }}" rel="stylesheet">
+@endsection
+
 @section('content')
-<div class="card mb-3" style="max-width: 490px; max-height: 170px">
-    <div class="row g-0">
-      <div class="col-md-5">
-        <img src="{{asset('/img/people.png')}}" width="170px" height="170px" class="ml-2">
+    <div class="container-principal">
+      <div class="card mb-3" style="max-width: 490px; max-height: 170px">
+        <div class="row g-0">
+          <div class="col-md-5">
+            <img src="{{asset('/img/room-key2.png')}}" width="155px" height="155px" class="ml-2">
+          </div>
+          <div class="col-md-7" id="c1">
+            <div class="card-body">
+              <h5 class="card-title"><strong>Habitaciones disponibles</strong></h5>
+              <h3 class="card-text-habitacion">{{$habitacion}}</h3>
+              @if($habitacion > 0)
+                <p class="card-text"><small class="text-black">Última actualización {{$data->updated_at->diffForHumans()}}</small></p>
+              @else
+                <p class="card-text"><small class="text-black">No hay actualizaciones (sin habitaciones)</small></p>
+              @endif
+            </div>
+          </div>
+        </div>
       </div>
-      <div class="col-md-7">
-        <div class="card-body">
-          <h5 class="card-title"><strong>Usuarios registrados</strong></h5>
-          <p class="card-text">10</p>
-          <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+      <div class="card mb-3" style="max-width: 490px; max-height: 170px">
+        <div class="row g-0">
+          <div class="col-md-5">
+            <div>
+              <img src="{{asset('/img/room-key.png')}}" class="ml-2">
+            </div>
+          </div>
+          <div class="col-md-7" id="c2">
+            <div class="card-body">
+              <h5 class="card-title"><strong>Habitaciones reservadas</strong></h5>
+              <h3 class="card-text-habitacion">{{$reservas}}</h3>
+              @if($reservas > 0)
+                <p class="card-text"><small class="text-black">Última actualización {{$data2->updated_at->diffForHumans()}}</small></p>
+              @else
+                <p class="card-text"><small class="text-black">No hay actualizaciones (sin reservas)</small></p>
+              @endif
+                
+            </div>
+          </div>
         </div>
       </div>
     </div>
-  </div>
+    <br>
+    <div class="container-principal">
+      <div class="card mb-3" style="max-width: 470px; max-height: 170px">
+        <div class="row g-0" style="max-width: 490px;">
+          <div class="col-md-5">
+            <img src="{{asset('/img/people.png')}}" width="170px" height="155px" class="ml-2">
+          </div>
+          <div class="col-md-7" id="c3">
+            <div class="card-body">
+              <h5 class="card-title"><strong>Usuarios registrados</strong></h5>
+              <h3 class="card-text-habitacion">{{$huespedes}}</h3>
+              @if($huespedes > 0)
+               <p class="card-text"><small class="text-black">Última actualización {{$data3->updated_at->diffForHumans()}}</small></p>
+               @else
+               <p class="card-text"><small class="text-black">Sin actualizaciones (sin huespedes)</small></p>
+              @endif
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="card mb-3" style="max-width: 470px; max-height: 170px">
+        <div class="row g-0">
+          <div class="col-md-5">
+            <div>
+              <img src="{{asset('/img/room-key.png')}}" class="ml-2">
+            </div>
+          </div>
+          <div class="col-md-7" id="c2">
+            <div class="card-body">
+              <h5 class="card-title"><strong>Habitaciones reservadas</strong></h5>
+              <h3 class="card-text-habitacion">{{$reservas}}</h3>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    
 @endsection

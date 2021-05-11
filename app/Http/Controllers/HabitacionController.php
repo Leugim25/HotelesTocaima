@@ -7,7 +7,9 @@ use Carbon\Carbon;
 use App\Habitacion;
 use Illuminate\Http\Request;
 use App\DisponibilidadHabitacion;
+use App\Precios;
 use Illuminate\Routing\Controller;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
 class HabitacionController extends Controller
@@ -19,9 +21,11 @@ class HabitacionController extends Controller
      */
     public function index()
     {
+        $user = auth()->user()->habitaciones;
         $habitaciones =  Habitacion::with(['hoteles', 'disponible'])->get();
+        $hoteles = Hotel::all(['id'])->count();
 
-        return view('habitaciones.index', compact('habitaciones'));
+        return view('habitaciones.index', compact('habitaciones', 'hoteles', 'user'));
     }
 
     /**
@@ -32,9 +36,10 @@ class HabitacionController extends Controller
     public function create()
     {
         $disponible = DisponibilidadHabitacion::all(['id', 'estado']);
+        $precio = Precios::all(['id', 'valor']);
         $hoteles = Hotel::all(['id', 'titulo']);
 
-        return view('habitaciones.create', compact('disponible', 'hoteles'));
+        return view('habitaciones.create', compact('disponible', 'hoteles', 'precio'));
     }
 
     /**
@@ -66,7 +71,7 @@ class HabitacionController extends Controller
         $variable->camas = $request->camas;
         $variable->mobiliario = $request->mobiliario;
         $variable->servicios = $request->servicios;
-        $variable->precio = $request->precio;
+        $variable->precio_id = $request->precio;
         $variable->imagen = $ruta_imagen;
         $variable->disponibilidad_id = $request->disponibilidad;
         $variable->user_id = auth()->user()->id;
@@ -107,10 +112,11 @@ class HabitacionController extends Controller
     {
         $disponible = DisponibilidadHabitacion::all(['id', 'estado']);
         $hoteles = Hotel::all(['id', 'titulo']);
+        $precio = Precios::all(['id', 'valor']);
 
         $habitacion->load('hoteles');
 
-        return view('habitaciones.edit', compact('disponible', 'habitacion', 'hoteles'));
+        return view('habitaciones.edit', compact('disponible', 'habitacion', 'hoteles', 'precio'));
     }
 
     /**
@@ -137,7 +143,7 @@ class HabitacionController extends Controller
         $habitacion->camas = $request->camas;
         $habitacion->mobiliario = $request->mobiliario;
         $habitacion->servicios = $request->servicios;
-        $habitacion->precio = $request->precio;
+        $habitacion->precio_id = $request->precio;
         $habitacion->disponibilidad_id = $request->disponibilidad;
         $habitacion->save();
 
