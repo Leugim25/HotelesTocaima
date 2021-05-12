@@ -73,9 +73,11 @@
 			@forelse($obtener as $obtener)
 			<div class="col-md-4">
 				<div class="card" id="card-hotel">
-					<img src="/storage/{{$obtener->imagen}}" class="card-img-top" alt="imagen hotel">
-					<div class="card-body">
-						<h3 class="titulo-hoteles text-center">{{$obtener->titulo}}</h3>
+					<div class="p-2 bg-white">
+						<img src="/storage/{{$obtener->imagen}}" class="card-img-top" alt="imagen hotel" width="10px">
+					</div>
+					<div class="card-body" id="card-fondo">
+						<h3 class="titulo-hoteles text-center"><strong>{{$obtener->titulo}}</strong></h3>
 						<p class="text-justify">{{Str::words( strip_tags( $obtener->descripcion ), 20 )}}</p>
 						<p class="text-dark mt-1">
 							<span class="font-weight-bold">Horarios de atención:</span>
@@ -85,7 +87,7 @@
 							<span class="font-weight-bold">Creado hace </span>
 							{{ $obtener->created_at->diffForHumans() }}
 						</p>
-						<a href="{{ route('hoteles.show', ['hotel' => $obtener->id]) }}" class="btn btn-warning btn-sm d-block font-weight-bold text-uppercase">Más información</a>
+						<a href="{{ route('hoteles.show', ['hotel' => $obtener->id]) }}" class="btn btn-secondary btn-sm d-block font-weight-bold text-uppercase">Más información</a>
 					</div>
 				</div>
 			</div>
@@ -106,16 +108,18 @@
 		@foreach($grupo as $hoteles)
 		@foreach($hoteles as $hotel)
 		<div class="col-md-4 mt-4">
-			<div class="card shadow">
-				<img src="/storage/{{$hotel->imagen}}" class="card-img-top" alt="imagen hotel">
-				<div class="card-body">
-					<h3 class="text-center">{{$hotel->titulo}}</h3>
+			<div class="card shadow" id="card-hotel">
+				<div class="p-2 bg-white">
+					<img src="/storage/{{$obtener->imagen}}" class="card-img-top" alt="imagen hotel" width="10px">
+				</div>
+				<div class="card-body" id="card-fondo">
+					<h3 class="titulo-hoteles text-center"><strong>{{$obtener->titulo}}</strong></h3>
 					<p class="text-justify">{{Str::words( strip_tags( $hotel->descripcion ), 20 )}}</p>
 					<p class="text-dark mt-1">
 						<span class="font-weight-bold">Horarios de atención:</span>
 						{{$hotel->apertura}} A.M <strong>-</strong> {{$hotel->cierre}} P.M
 					</p>
-					<a href="{{ route('hoteles.show', ['hotel' => $hotel->id]) }}" class="btn btn-warning btn-sm d-block font-weight-bold text-uppercase">Más información</a>
+					<a href="{{ route('hoteles.show', ['hotel' => $hotel->id]) }}" class="btn btn-secondary btn-sm d-block font-weight-bold text-uppercase">Más información</a>
 				</div>
 			</div>
 		</div>

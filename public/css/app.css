@@ -2718,8 +2718,8 @@ fieldset:disabled a.btn {
 
 .btn-secondary {
   color: #fff;
-  background-color: #02194a;
-  border-color: #02194a;
+  background-color: #14213d;
+  border-color: #14213d;
 }
 
 .btn-secondary:hover {
@@ -7030,7 +7030,15 @@ a.close.disabled {
 }
 
 .bg-primary {
-  background-color: #0d6efd !important;
+  background-color: #2566ff !important;
+}
+
+.bg-red{
+  background-color: #e23939;
+}
+
+.bg-black {
+  background-color: #000 !important;
 }
 
 a.bg-primary:hover,
@@ -7265,6 +7273,11 @@ button.bg-dark:focus {
 
 .d-block {
   display: block !important;
+}
+
+table.dataTable thead th, table.dataTable thead td {
+  padding: 10px 18px;
+  border-bottom: 1px solid #fff !important;
 }
 
 .d-table {
@@ -11062,7 +11075,7 @@ svg {
 }
 
 .navbar-light .navbar-nav .nav-link {
-  color: #fca311;
+  color: #ffff;
 }
 
 .navbar-light .navbar-nav .nav-link:hover {
@@ -11233,7 +11246,7 @@ td {
 }
 
 .bg-secondary {
-  background-color: #02194a !important;
+  background-color: #06112b !important;
 }
 
 .btn-blueDark {
@@ -11288,7 +11301,7 @@ svg {
 }
 
 .navbar-light .navbar-nav .nav-link {
-  color: #fca311;
+  color: #ffff;
 }
 
 .navbar-light .navbar-nav .nav-link:hover {

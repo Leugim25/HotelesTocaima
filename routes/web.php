@@ -50,6 +50,8 @@ Route::get('/hoteles/habitaciones/edit/{habitacion}', 'HabitacionController@edit
 Route::put('/hoteles/habitaciones/{habitacion}', 'HabitacionController@update')->name('habitaciones.update');
 Route::delete('/hoteles/Habitaciones/{habitacion}', 'HabitacionController@destroy')->name('habitaciones.destroy');
 
+Route::get('/servicios', 'ServiciosController@index')->name('servicios.index');
+
 //Rutas para el controlador de las reservas 
 Route::get('/reservas/hotel/{hotel}/habitaciones/{habitaciones}', 'ReservaController@create')->name('reservas.create');
 Route::post('/reservas', 'ReservaController@store')->name('reservas.store');
@@ -57,11 +59,11 @@ Route::post('/reservas', 'ReservaController@store')->name('reservas.store');
 //Rutas para el controlador de las reservaciones
 Route::resource('reservaciones', 'ReservacionesController');
 Route::put('/reservaciones/reservas/{id}', 'ReservacionesController@cancel')->name('reservaciones.cancel');
+Route::get('/reservaciones/show', 'ReservacionesController@show')->name('reservaciones.show');
 
 // Buscador de hoteles
 Route::get('/buscar', 'HotelController@search')->name('buscar.show');
 
 //Rutas para el controlador de reservas
-
 
 Auth::routes();

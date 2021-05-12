@@ -10,6 +10,8 @@
 
 	<a href="{{ route('habitaciones.index') }}" class="dropdown-item"><i class="icon ion-md-bed lead mr-2"></i>Habitaciones</a>
 
+	<a href="{{ route('servicios.index')}}" class="dropdown-item"><i class="icon ion-md-today lead mr-2"></i>Servicios</a>
+
 	<a href="{{ route('auditoria.index') }}" class="dropdown-item"><i class="icon ion-md-bookmarks lead mr-2"></i>Auditoria</a>
 
 	<a href="{{route('reservaciones.index')}}" class="dropdown-item"><i class="icon ion-md-stats lead mr-2"></i>Reservaciones</a>
@@ -38,9 +40,6 @@
 <div class="col-md-12 bg-light mx-auto" id="dataTable">
 
 	<div class="card mt-2">
-		<div class="card-title mt-4">
-			<h4 class="text-center"><strong>Datos principales</strong></h4>
-		</div>
 		<div class="card-body">
 			<!-- Datos principales del hotel a crear -->
 			<table id="Tablehotels" class="table table-striped table-bordered shadow-lg mt-4 " style="width:100%">

@@ -15,11 +15,11 @@ class CreateReservasTable extends Migration
     {
         Schema::create('reservas', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
+            $table->string('title');
             $table->string('email');
             $table->string('celular');
-            $table->date('checkin');
-            $table->date('checkout');
+            $table->date('start');
+            $table->date('end');
             $table->integer('cantidad_adultos')->default(0);
             $table->integer('cantidad_ninos')->default(0);
             $table->foreignId('hotel_id')->constrained('hoteles');

@@ -11,12 +11,14 @@
 	<title>{{ __('Hoteles Tocaima') }}</title>
 
 	<link rel="icon" type="image/jpg" href="{{ asset('/img/logoAmarilloNegro.png') }}">
-
+	<script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.6.0/main.min.js" defer>
+	</script>
 	<link href="https://cdn.datatables.net/plug-ins/1.10.24/i18n/Spanish.json">
 	<link href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css" rel="stylesheet" />
 	<link href="https://cdn.datatables.net/responsive/2.2.3/css/responsive.dataTables.min.css" rel="stylesheet">
 	<link href="https://cdn.datatables.net/buttons/1.2.4/css/buttons.dataTables.min.css" rel="stylesheet" />
 	<link href="https://cdn.datatables.net/select/1.3.0/css/select.dataTables.min.css" rel="stylesheet" />
+	<link href="https://cdn.jsdelivr.net/npm/fullcalendar@5.6.0/main.min.css" rel="stylesheet">
 	<!-- Fonts -->
 	<link rel="dns-prefetch" href="//fonts.gstatic.com">
 	<link rel="preconnect" href="https://fonts.gstatic.com">
@@ -31,7 +33,7 @@
 
 <body>
 	<div id="app">
-		<nav class="navbar navbar-expand-md navbar-light bg-dark shadow-s barra">
+		<nav class="navbar navbar-expand-md navbar-light bg-black shadow-s barra">
 			<div class="container">
 				<a class="navbar-brand" href="{{ url('/') }}">
 					<img src="{{URL::asset('img/logoTipoBlanco.png')}}" width="130" height="60">

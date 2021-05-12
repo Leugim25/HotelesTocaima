@@ -10,6 +10,8 @@
 
 	<a href="{{ route('habitaciones.index') }}" class="dropdown-item"><i class="icon ion-md-bed lead mr-2"></i>Habitaciones</a>
 
+	<a href="{{ route('servicios.index')}}" class="dropdown-item"><i class="icon ion-md-today lead mr-2"></i>Servicios</a>
+
 	<a href="{{ route('auditoria.index') }}" class="dropdown-item active-list"><i class="icon ion-md-bookmarks lead mr-2"></i>Auditoria</a>
 
 	<a href="{{route('reservaciones.index')}}" class="dropdown-item"><i class="icon ion-md-stats lead mr-2"></i>Reservaciones</a>
