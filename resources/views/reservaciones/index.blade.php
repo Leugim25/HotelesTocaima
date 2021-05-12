@@ -40,7 +40,6 @@
 
 @section('content')
 <div class="container"> 
-    
     <legend class="text-primary" style="margin-top: 2%;position: relative; left: 40%;">Reservas realizadas</legend>
     <div class="row">
       <div class="col"></div>
@@ -145,10 +144,11 @@
 		dateClick: function(info)
         {
 			console.log(info);
-        // calendar.addEvent({title:"Prueba", date:info.dateStr})
+         calendar.addEvent({title:"Prueba", date:info.dateStr})
         },
-		  
+		events:"{{ url('/reservas/show')}}",
 		});  
+		
 		calendar.render();          
 		 
 		// $("#btnAgregar").click(function(){

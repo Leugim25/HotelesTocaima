@@ -55,11 +55,14 @@ Route::get('/servicios', 'ServiciosController@index')->name('servicios.index');
 //Rutas para el controlador de las reservas 
 Route::get('/reservas/hotel/{hotel}/habitaciones/{habitaciones}', 'ReservaController@create')->name('reservas.create');
 Route::post('/reservas', 'ReservaController@store')->name('reservas.store');
+Route::get('/reservas/show','ReservaController@show');
+    
+
 
 //Rutas para el controlador de las reservaciones
 Route::resource('reservaciones', 'ReservacionesController');
 Route::put('/reservaciones/reservas/{id}', 'ReservacionesController@cancel')->name('reservaciones.cancel');
-Route::get('/reservaciones/show', 'ReservacionesController@show')->name('reservaciones.show');
+Route::get('/reservaciones/show', 'ReservacionesController@show');
 
 // Buscador de hoteles
 Route::get('/buscar', 'HotelController@search')->name('buscar.show');

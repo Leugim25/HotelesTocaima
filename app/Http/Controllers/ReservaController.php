@@ -92,8 +92,10 @@ class ReservaController extends Controller
      * @param  \App\Reserva  $reserva
      * @return \Illuminate\Http\Response
      */
-    public function show(Hotel $hotel)
-    {
+    public function show()
+    {   
+        $data['eventos']= Reserva::all();
+        return response()->json($data['eventos']);
     }
 
     /**
