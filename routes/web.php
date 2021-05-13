@@ -23,6 +23,8 @@ Route::get('/inicio', 'PrincipalController@index')->name('principal.index');
 Route::get('/huespedes', 'HuespedesController@index')->name('huespedes.index');
 Route::get('/huespedes/create', 'HuespedesController@create')->name('huespedes.create');
 Route::post('/huespedes', 'HuespedesController@store')->name('huespedes.store');
+Route::delete('/huespedes/{huesped}', 'HuespedesController@destroy')->name('huespedes.destroy');
+Route::get('/huespedes/{huesped}/cuenta', 'HuespedesController@show')->name('huespedes.show');
 
 //Rutas para las auditorias
 Route::get('/auditorias', 'AuditoriasController@index')->name('auditoria.index');
@@ -50,7 +52,14 @@ Route::get('/hoteles/habitaciones/edit/{habitacion}', 'HabitacionController@edit
 Route::put('/hoteles/habitaciones/{habitacion}', 'HabitacionController@update')->name('habitaciones.update');
 Route::delete('/hoteles/Habitaciones/{habitacion}', 'HabitacionController@destroy')->name('habitaciones.destroy');
 
+//Rutas para el controlador de Servicios
 Route::get('/servicios', 'ServiciosController@index')->name('servicios.index');
+Route::post('/servicios/restaurantes', 'RestaurantesController@store')->name('restaurante.store');
+Route::delete('/servicios/restaurantes/{restaurante}', 'RestaurantesController@destroy')->name('restaurante.destroy');
+Route::post('/servicios/piscinas', 'PiscinasController@store')->name('piscina.store');
+Route::delete('/servicios/piscinas/{piscina}', 'PiscinasController@destroy')->name('piscina.destroy');
+Route::post('/servicios/bares', 'BarController@store')->name('bar.store');
+Route::delete('/servicios/bares/{bar}', 'BarController@destroy')->name('bar.destroy');
 
 //Rutas para el controlador de las reservas 
 Route::get('/reservas/hotel/{hotel}/habitaciones/{habitaciones}', 'ReservaController@create')->name('reservas.create');
@@ -63,7 +72,5 @@ Route::get('/reservaciones/show', 'ReservacionesController@show')->name('reserva
 
 // Buscador de hoteles
 Route::get('/buscar', 'HotelController@search')->name('buscar.show');
-
-//Rutas para el controlador de reservas
 
 Auth::routes();

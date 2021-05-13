@@ -2,13 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Bar;
-use App\Piscinas;
 use App\Restaurantes;
-use App\Servicios;
 use Illuminate\Http\Request;
 
-class ServiciosController extends Controller
+class RestaurantesController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -17,10 +14,7 @@ class ServiciosController extends Controller
      */
     public function index()
     {
-        $restaurantes = Restaurantes::all();
-        $piscinas = Piscinas::all();
-        $bares = Bar::all();
-        return view('servicios.index', compact('restaurantes', 'piscinas', 'bares'));
+        //
     }
 
     /**
@@ -41,16 +35,30 @@ class ServiciosController extends Controller
      */
     public function store(Request $request)
     {
-        
+        $data = request()->validate([
+            'producto' =>  'required',
+            'precio' => 'required',
+            'codigo' => 'required',
+            'vendidos',
+        ]);
+
+        $variable = new Restaurantes();
+
+        $variable->producto = $request->producto;
+        $variable->precio = $request->precio;
+        $variable->codigo = $request->codigo;
+        $variable->save();
+        //redireccionar al action
+        return redirect()->route('servicios.index');
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Servicios  $servicios
+     * @param  \App\Restaurantes  $restaurantes
      * @return \Illuminate\Http\Response
      */
-    public function show(Servicios $servicios)
+    public function show(Restaurantes $restaurantes)
     {
         //
     }
@@ -58,10 +66,10 @@ class ServiciosController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Servicios  $servicios
+     * @param  \App\Restaurantes  $restaurantes
      * @return \Illuminate\Http\Response
      */
-    public function edit(Servicios $servicios)
+    public function edit(Restaurantes $restaurantes)
     {
         //
     }
@@ -70,10 +78,10 @@ class ServiciosController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Servicios  $servicios
+     * @param  \App\Restaurantes  $restaurantes
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Servicios $servicios)
+    public function update(Request $request, Restaurantes $restaurantes)
     {
         //
     }
@@ -81,11 +89,12 @@ class ServiciosController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Servicios  $servicios
+     * @param  \App\Restaurantes  $restaurantes
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Servicios $servicios)
+    public function destroy(Restaurantes $restaurante)
     {
-        //
+        $restaurante->delete();
+        return redirect()->route('servicios.index')->withSuccess('servicio eliminado exitosamente');
     }
 }

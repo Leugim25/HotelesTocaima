@@ -2759,8 +2759,8 @@ fieldset:disabled a.btn {
 
 .btn-success {
   color: #fff;
-  background-color: #38c172;
-  border-color: #38c172;
+  background-color: #004b23;
+  border-color: #004b23;
 }
 
 .btn-success:hover {
@@ -2841,14 +2841,14 @@ fieldset:disabled a.btn {
 
 .btn-warning {
   color: #212529;
-  background-color: #fca311;
-  border-color: #fca311;
+  background-color: #ff9d00;
+  border-color: #ff9d00;
 }
 
 .btn-warning:hover {
   color: #212529;
-  background-color: #e48f03;
-  border-color: #d78703;
+  background-color: #fca311;
+  border-color: #fca311;
 }
 
 .btn-warning:focus,
@@ -11021,6 +11021,18 @@ td {
 
 .bg-secondary {
   background-color: #02194a !important;
+}
+
+.bg-brown{
+  background-color: #993b12;
+}
+
+.btn-brown{
+  background-color: #993b12;
+}
+
+.btn-brown:hover{
+  background-color: #6d2a0d;
 }
 
 .btn-blueDark {

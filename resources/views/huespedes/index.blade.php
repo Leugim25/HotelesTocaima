@@ -28,12 +28,22 @@
 @endsection
 
 @section('botones')
-<div class="ml-3 py-4 mt-5 col-12">
-	<div class="buttons">
-		<h5>Agrega un nuevo huesped</h5>
-		<a href="{{ route('huespedes.create') }}" class="btn btn-warning text-white">Agregar huesped</a>
-	</div>
-</div>
+	@if($habitacion > 0)
+		<div class="ml-3 py-4 mt-5 col-12">
+			<div class="buttons">
+				<h5>Agrega un nuevo huesped</h5>
+				<a href="{{ route('huespedes.create') }}" class="btn btn-warning text-white">Agregar huesped</a>
+			</div>
+		</div>
+		@else
+		<div class="ml-3 py-4 mt-5 col-12">
+			<div class="buttons">
+				<h5>No hay habitaciones disponibles</h5>
+				<a href="{{route('habitaciones.create')}}" class="btn btn-warning text-white">Agregar habitación</a>
+			</div>
+		</div>
+	@endif
+
 @endsection
 @section('content')
 <h2 class="text-center mb-3 font-weight-bold">TUS HUESPEDES</h2>
@@ -61,13 +71,18 @@
 						<td class="text-center"> {{ $huesped->cedula }} </td>
 						<td class="text-center"> {{ $huesped->celular }} </td>
 						<td class="text-center"> {{ $huesped->habitacion->n_habitacion }} </td>
-						<td class="text-justify"> 
-							<a href="" class="btn btn-warning text-white w-100">Ver</a>
+						<td>
+							@if($huespedes > 0)
+								<a href="{{ route('huespedes.show', ['huesped' => $huesped->id]) }}" class="btn btn-warning text-white w-100">Ver cuenta</a>
+							@endif
 						</td>
-						
 						<td>
 							<a href="" class="btn btn-secondary text-white w-100">Editar</a>
-							<a href="" class="btn btn-danger text-white w-100 mt-2">Eliminar</a>
+							<form action="{{route('huespedes.destroy', ['huesped' => $huesped->id]) }}" method="POST">
+								@csrf
+								@method('DELETE')
+								<input type="submit" class="btn btn-danger d-block text-white mt-2 w-100" value="Eliminar" &time>
+							</form>
 						</td>
 					</tr>
 					@endforeach

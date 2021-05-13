@@ -96,7 +96,7 @@
 
             <!-- Campo para la descripcion del hotel -->
             <div class="input-group input-group-icon">
-                <label for="descripcion">Descripción del hotel</label>
+                <p class="text-white text-center" for="descripcion">Descripción del hotel</p>
                 <input id="descripcion" type="hidden" name="descripcion" value="{{ old('descripcion') }}">
                 <trix-editor 
                     class="form-control @error('descripcion') is-invalid @enderror "
@@ -112,7 +112,7 @@
 
             <!-- Campo para agregar imagenes del hotel -->
             <div class="form-group mt-3 category">
-                <label for="imagen">Elige la imagen</label>
+                <p class="text-white text-center" for="imagen">Elige la imagen</p>
                 <input 
                     id="imagen" 
                     type="file" 
@@ -129,7 +129,7 @@
 
         <div class="row">
             <div class="col-half">
-                <label>Hora de apertura</label>
+                <p class="text-white text-center">Hora de apertura</p>
                 <div class="input-group">
                     <!-- Campo para la apertura del hotel -->
                     <div class="form-group">
@@ -145,7 +145,7 @@
                 </div>
             </div>
             <div class="col-half">
-            <label>Hora de cierre</label>
+            <p class="text-white text-center">Hora de cierre</p>
                 <div class="input-group">
                     <!-- Campo para el cierre del hotel -->
                     <div class="form-group">
@@ -163,7 +163,7 @@
 
         <div class="row">
             <div class="col-half">
-            <label>WhatsApp</label>
+            <p class="text-white text-center">WhatsApp</p>
             <div class="input-group input-group-icon">
                 <input type="text" name="urlWhatsApp" class= "@error('urlWhatsApp') is-invalid @enderror" id="urlWhatsApp" placeholder="Ej: 3124567890" value="{{ old('urlWhatsApp') }}">
                                 
@@ -178,7 +178,7 @@
             </div>
             </div>
             <div class="col-half">
-                <label>Categoria del hotel</label>
+                <p class="text-white text-center">Categoria del hotel</p>
                 <div class="input-group">
                     <select name="categoria" class="@error('categoria') is-invalid @enderror" id="categoria">
                         <option value="">----- Seleccione una opción -----</option>
@@ -198,7 +198,7 @@
             </div>
         </div>
         
-        <label>Url Facebook</label>
+        <p class="text-white text-center">Url Facebook</p>
         <div class="input-group input-group-icon">
             <input type="text" name="urlFacebook" class= "@error('urlFacebook') is-invalid @enderror" id="urlFacebook" placeholder="https://facebook.com/tu_sitio" value="{{ old('urlFacebook') }}">
                                 

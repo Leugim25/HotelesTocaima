@@ -2,10 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Bar;
 use App\Precios;
 use App\Huespedes;
 use Carbon\Carbon;
 use App\Habitacion;
+use App\Piscinas;
+use App\Restaurantes;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -19,7 +22,10 @@ class HuespedesController extends Controller
     public function index()
     {
         $huesped = Huespedes::all();
-        return view('huespedes.index', compact('huesped'));
+        $huespedes = Huespedes::all(['id'])->count();
+        $habitacion = Habitacion::where('disponibilidad_id', 1)->count();
+        
+        return view('huespedes.index', compact('huesped', 'huespedes' , 'habitacion'));
     }
 
     /**
@@ -82,7 +88,12 @@ class HuespedesController extends Controller
      */
     public function show(Huespedes $huespedes)
     {
-        //
+        $huesped = Huespedes::all();
+        $restaurante = Restaurantes::all(['id', 'producto', 'precio', 'codigo', 'vendidos']);
+        $piscina = Piscinas::all(['id', 'opcion', 'precio']);
+        $bar = Bar::all(['id', 'producto', 'precio', 'codigo', 'vendido', 'cantidad']);
+        
+        return view('huespedes.show', compact('huesped', 'restaurante' , 'piscina', 'bar'));
     }
 
     /**
@@ -114,8 +125,11 @@ class HuespedesController extends Controller
      * @param  \App\Huespedes  $huespedes
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Huespedes $huespedes)
+    public function destroy(Huespedes $huesped)
     {
-        //
+        $huesped->delete();
+
+        return redirect()->route('huespedes.index')->withSuccess('huesped eliminado exitosamente');
+
     }
 }

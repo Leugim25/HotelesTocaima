@@ -1,4 +1,32 @@
-@extends('layouts.app')
+<div class="wrapper ">
+    <div class="center-container">
+        <p><strong>Чистый CSS-аккордеон</strong></p>
+        <div class="tab">
+            <input id="tab-one" type="checkbox" name="tabs">
+            <label for="tab-one">Label One</label>
+            <div class="tab-content">
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Tenetur, architecto, explicabo perferendis nostrum, maxime impedit atque odit sunt pariatur illo obcaecati soluta molestias iure facere dolorum adipisci eum? Saepe, itaque.</p>
+            </div>
+        </div>
+        <div class="tab">
+            <input id="tab-two" type="checkbox" name="tabs">
+            <label for="tab-two">Label Two</label>
+            <div class="tab-content">
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Tenetur, architecto, explicabo perferendis nostrum, maxime impedit atque odit sunt pariatur illo obcaecati soluta molestias iure facere dolorum adipisci eum? Saepe, itaque.</p>
+            </div>
+        </div>
+        <div class="tab">
+            <input id="tab-three" type="checkbox" name="tabs">
+            <label for="tab-three">Label Three</label>
+            <div class="tab-content">
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Tenetur, architecto, explicabo perferendis nostrum, maxime impedit atque odit sunt pariatur illo obcaecati soluta molestias iure facere dolorum adipisci eum? Saepe, itaque.</p>
+            </div>
+        </div>
+    </div>
+<div>
+
+
+    @extends('layouts.app')
 
 @section('sidebar')
 <div class="menu">
@@ -28,28 +56,14 @@
 @endsection
 @section('style')
 	<link href="{{ asset('css/estilos_services.css') }}" rel="stylesheet">
-	<style>
-		html{
-			scroll-behavior: smooth;
-		}
-	</style>
 @endsection
 @section('content')
 
-<h2 class="text-center mb-4 font-weight-bold" style="text-transform: uppercase;" id="inicio">SERVICIOS DEL HOTEL </h2>
-<div>
-	<a href="#restaurante" class="btn btn-danger text-white d-inline" id="btns">Servicio de restaurante <img src="{{asset('/img/restaurante.svg')}}" width="20px" height="20px"></a>
-	<a href="#piscina" class="btn btn-primary text-white d-inline" id="btns">Servicio de piscina <img src="{{asset('/img/piscina.svg')}}" width="20px" height="20px"></a>
-	<a href="#bar" class="btn btn-brown text-white d-inline" id="btns">Servicio de bar <img src="{{asset('/img/cerveza.svg')}}" width="20px" height="20px"></a>			
-</div>
-
-<div class="center-container"  style="margin-top: 5%" id="restaurante">
+<h2 class="text-center mb-4 font-weight-bold" style="text-transform: uppercase;">SERVICIOS DEL HOTEL </h2>
+<div class="center-container">
 	<div class="card mt-2">
-		<div class="card-body restaurante">
-			<div>
-				<h3>Servicio de <strong style="color: #e23939">Restaurante</strong><img src="{{asset('/img/restaurante.svg')}}" width="50px" height="50px"></h3>
-			</div>
-			
+		<div class="card-body">
+			<h3>Servicio de <strong style="color: #e23939">Restaurante</strong></h3>
 			<hr>
 			<!-- Datos principales del hotel a crear -->
 			<table id="Tablehotels" class="table table-striped table-bordered shadow-lg mt-4 " style="width:100%">
@@ -59,8 +73,6 @@
 					<tr>
 						<th scope="col">Servicio</th>
 						<th scope="col">Precio</th>
-						<th scope="col">Código</th>
-						<th scope="col">Vendidos</th>
 						<th scope="col">Acciones</th>
 					</tr>
 				</thead>
@@ -69,8 +81,6 @@
 						<tr>
 							<td>{{$restaurante->producto}}</td>
 							<td>${{$restaurante->precio}} pesos</td>
-							<td>{{$restaurante->codigo}}</td>
-							<td>{{$restaurante->vendidos}}</td>
 							<td>
 								<a href="" class="btn btn-secondary text-white d-block mt-2">Editar</a>
 								<form action="{{route('restaurante.destroy', ['restaurante' => $restaurante->id]) }}" method="POST">
@@ -99,12 +109,6 @@
 							<strong>{{$message}}</strong>
 						</span>
 					@enderror
-					<input type="text" name="codigo" class= " @error('codigo') is-invalid @enderror text-center" style="width: 40%; margin-top: 2%" id="codigo" placeholder="Código" value="{{ old('codigo') }}"/>
-					@error('codigo')
-						<span class="invalid-feedback d-block" role="alert">
-							<strong>{{$message}}</strong>
-						</span>
-					@enderror
 					<input type="submit" class="btn btn-success text-white" style="float: right" value="Agregar servicio">
 				</form>
 			</div>
@@ -112,12 +116,11 @@
 	</div>
 </div>
 <br>
-<div class="center-container" id="piscina">
+<div class="center-container">
 	<div class="card mt-2">
-		<div class="card-body piscina">
-			<h3 class="d-inline">Servicio de <strong style="color: #3966e2">Piscina <img src="{{asset('/img/piscina.svg')}}" width="50px" height="50px"></strong></h3>
-			<a href="#inicio" class="btn btn-warning text-white d-inline" style="float: right" id="btns">Regresar</a>
-			<hr class="hr-cambio">
+		<div class="card-body">
+			<h3>Servicio de <strong style="color: #3966e2">Piscina</strong></h3>
+			<hr>
 			<!-- Datos principales del hotel a crear -->
 			<table id="TablePiscina" class="table table-striped table-bordered shadow-lg mt-4 " style="width:100%">
 				
@@ -146,7 +149,7 @@
 					@endforeach
 				</tbody>
 			</table>
-			<hr class="hr-cambio">
+			<hr>
 			<div>
 				<form method="POST" action="{{route('piscina.store')}}" novalidate>
 					@csrf
@@ -169,79 +172,38 @@
 		</div>
 	</div>
 </div>
-<br>
-<div class="center-container" id="bar">
+
+<div class="center-container">
 	<div class="card mt-2">
-		<div class="card-body bar">
-			<h3 class="d-inline">Servicio de <strong style="color: #8a2a04">Bar <img src="{{asset('/img/cerveza.svg')}}" width="50px" height="50px"></strong></h3>
-			<a href="#inicio" class="btn btn-warning text-white d-inline regresar" style="float: right" id="btns">Regresar</a>
-			<hr class="hr-cambio">
+		<div class="card-body">
+			<h3>Servicio de <strong style="color: #b93500">Bar</strong></h3>
+			<hr>
 			<!-- Datos principales del hotel a crear -->
 			<table id="TableBar" class="table table-striped table-bordered shadow-lg mt-4 " style="width:100%">
 				
 				<thead class="bg-brown text-white">
 					
 					<tr>
-						<th scope="col">Producto</th>
+						<th scope="col">Servicio</th>
 						<th scope="col">Precio</th>
-						<th scope="col">Código</th>
-						<th scope="col">Cantidad</th>
-						<th scope="col">Vendido</th>
 						<th scope="col">Acciones</th>
 					</tr>
 				</thead>
 				<tbody class="bg-white">
-					@foreach($bares as $bar)
-						<tr>
-							<td>{{$bar->producto}}</td>
-							<td>${{$bar->precio}} pesos</td>
-							<td>{{$bar->codigo}}</td>
-							<td>{{$bar->cantidad}}</td>
-							<td>{{$bar->vendido}}</td>
-							<td>
-								<a href="" class="btn btn-secondary text-white d-block mt-2">Editar</a>
-								<form action="{{route('bar.destroy', ['bar' => $bar->id]) }}" method="POST">
-									@csrf
-									@method('DELETE')
-									<input type="submit" class="btn btn-danger d-block text-white mt-2 w-100" value="Eliminar" &time>
-								</form>
-							</td>
-						</tr>
-					@endforeach
+					<tr>
+						<td></td>
+						<td></td>
+						<td>
+							<a href="" class="btn btn-success text-white d-block">Agregar</a>
+							<a href="" class="btn btn-secondary text-white d-block mt-2">Editar</a>
+							<a href="" class="btn btn-danger text-white d-block mt-2">Eliminar</a>
+						</td>
+					</tr>
 				</tbody>
 			</table>
-			<hr class="hr-cambio">
-			<form method="POST" action="{{route('bar.store')}}" novalidate>
-				@csrf
-				<input type="text" name="producto" class= " @error('producto') is-invalid @enderror text-center" style="width: 40%" id="producto" placeholder="Producto" value="{{ old('producto') }}"/>
-				@error('producto')
-					<span class="invalid-feedback d-block" role="alert">
-						<strong>{{$message}}</strong>
-					</span>
-				@enderror
-				<input type="text" name="precio" class= " @error('precio') is-invalid @enderror text-center" style="width: 40%; margin-left: 26px" id="precio" placeholder="Precio" value="{{ old('precio') }}"/>
-				@error('precio')
-					<span class="invalid-feedback d-block" role="alert">
-						<strong>{{$message}}</strong>
-					</span>
-				@enderror
-				<input type="text" name="codigo" class= " @error('codigo') is-invalid @enderror text-center" style="width: 40%; margin-top: 2%" id="codigo" placeholder="Código" value="{{ old('codigo') }}"/>
-				@error('codigo')
-					<span class="invalid-feedback d-block" role="alert">
-						<strong>{{$message}}</strong>
-					</span>
-				@enderror
-				<input type="text" name="cantidad" class= " @error('cantidad') is-invalid @enderror text-center" style="width: 40%; margin-top: 2%; margin-left: 26px" id="cantidad" placeholder="Cantidad" value="{{ old('cantidad') }}"/>
-				@error('cantidad')
-					<span class="invalid-feedback d-block" role="alert">
-						<strong>{{$message}}</strong>
-					</span>
-				@enderror
-				<input type="submit" class="btn btn-success text-white" style="float: right" value="Agregar servicio">
-			</form>
+
 		</div>
 	</div>
-	<br>
 </div>
 
 @endsection

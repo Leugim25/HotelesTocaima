@@ -94,21 +94,6 @@
           </div>
         </div>
       </div>
-      <div class="card mb-3" style="max-width: 470px; max-height: 170px">
-        <div class="row g-0">
-          <div class="col-md-5">
-            <div>
-              <img src="{{asset('/img/room-key.png')}}" class="ml-2">
-            </div>
-          </div>
-          <div class="col-md-7" id="c2">
-            <div class="card-body">
-              <h5 class="card-title"><strong>Habitaciones reservadas</strong></h5>
-              <h3 class="card-text-habitacion">{{$reservas}}</h3>
-            </div>
-          </div>
-        </div>
-      </div>
     </div>
     
 @endsection

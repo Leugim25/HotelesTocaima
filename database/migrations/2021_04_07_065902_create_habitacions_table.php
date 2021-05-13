@@ -22,7 +22,7 @@ class CreateHabitacionsTable extends Migration
 
         Schema::create('precios', function (Blueprint $table) {
             $table->id();
-            $table->string('valor');
+            $table->float('valor');
             $table->timestamps();
         });
 

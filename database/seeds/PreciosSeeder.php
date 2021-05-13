@@ -13,114 +13,114 @@ class PreciosSeeder extends Seeder
     public function run()
     {
         DB::table('precios')->insert([
-            'valor' => '10.000',
+            'valor' => '10000',
             'created_at' => date('Y-m-d H:i:s'),
             'updated_at' => date('Y-m-d H:i:s'),
         ]);
 
         DB::table('precios')->insert([
-            'valor' => '15.000',
+            'valor' => '15000',
             'created_at' => date('Y-m-d H:i:s'),
             'updated_at' => date('Y-m-d H:i:s'),
         ]);
         
         DB::table('precios')->insert([
-            'valor' => '20.000',
+            'valor' => '20000',
             'created_at' => date('Y-m-d H:i:s'),
             'updated_at' => date('Y-m-d H:i:s'),
         ]);
         
         DB::table('precios')->insert([
-            'valor' => '25.000',
+            'valor' => '25000',
             'created_at' => date('Y-m-d H:i:s'),
             'updated_at' => date('Y-m-d H:i:s'),
         ]);
         DB::table('precios')->insert([
-            'valor' => '30.000',
+            'valor' => '30000',
             'created_at' => date('Y-m-d H:i:s'),
             'updated_at' => date('Y-m-d H:i:s'),
         ]);
 
         DB::table('precios')->insert([
-            'valor' => '35.000',
+            'valor' => '35000',
             'created_at' => date('Y-m-d H:i:s'),
             'updated_at' => date('Y-m-d H:i:s'),
         ]);
         
         DB::table('precios')->insert([
-            'valor' => '40.000',
+            'valor' => '40000',
             'created_at' => date('Y-m-d H:i:s'),
             'updated_at' => date('Y-m-d H:i:s'),
         ]);
         
         DB::table('precios')->insert([
-            'valor' => '45.000',
+            'valor' => '45000',
             'created_at' => date('Y-m-d H:i:s'),
             'updated_at' => date('Y-m-d H:i:s'),
         ]);
         
         DB::table('precios')->insert([
-            'valor' => '50.000',
+            'valor' => '50000',
             'created_at' => date('Y-m-d H:i:s'),
             'updated_at' => date('Y-m-d H:i:s'),
         ]);
         
         DB::table('precios')->insert([
-            'valor' => '55.000',
+            'valor' => '55000',
             'created_at' => date('Y-m-d H:i:s'),
             'updated_at' => date('Y-m-d H:i:s'),
         ]);
         
         DB::table('precios')->insert([
-            'valor' => '60.000',
+            'valor' => '60000',
             'created_at' => date('Y-m-d H:i:s'),
             'updated_at' => date('Y-m-d H:i:s'),
         ]);
         
         DB::table('precios')->insert([
-            'valor' => '65.000',
+            'valor' => '65000',
             'created_at' => date('Y-m-d H:i:s'),
             'updated_at' => date('Y-m-d H:i:s'),
         ]);
         
         DB::table('precios')->insert([
-            'valor' => '70.000',
+            'valor' => '70000',
             'created_at' => date('Y-m-d H:i:s'),
             'updated_at' => date('Y-m-d H:i:s'),
         ]);
         
         DB::table('precios')->insert([
-            'valor' => '75.000',
+            'valor' => '75000',
             'created_at' => date('Y-m-d H:i:s'),
             'updated_at' => date('Y-m-d H:i:s'),
         ]);
         
         DB::table('precios')->insert([
-            'valor' => '80.000',
+            'valor' => '80000',
             'created_at' => date('Y-m-d H:i:s'),
             'updated_at' => date('Y-m-d H:i:s'),
         ]);
         
         DB::table('precios')->insert([
-            'valor' => '85.000',
+            'valor' => '85000',
             'created_at' => date('Y-m-d H:i:s'),
             'updated_at' => date('Y-m-d H:i:s'),
         ]);
         
         DB::table('precios')->insert([
-            'valor' => '90.000',
+            'valor' => '90000',
             'created_at' => date('Y-m-d H:i:s'),
             'updated_at' => date('Y-m-d H:i:s'),
         ]);
         
         DB::table('precios')->insert([
-            'valor' => '95.000',
+            'valor' => '95000',
             'created_at' => date('Y-m-d H:i:s'),
             'updated_at' => date('Y-m-d H:i:s'),
         ]);
         
         DB::table('precios')->insert([
-            'valor' => '100.000',
+            'valor' => '100000',
             'created_at' => date('Y-m-d H:i:s'),
             'updated_at' => date('Y-m-d H:i:s'),
         ]);
