@@ -18,8 +18,8 @@ class CreateReservasTable extends Migration
             $table->string('title');
             $table->string('email');
             $table->string('celular');
-            $table->date('start');
-            $table->date('end');
+            $table->dateTime('start');
+            $table->dateTime('end');
             $table->integer('cantidad_adultos')->default(0);
             $table->integer('cantidad_ninos')->default(0);
             $table->foreignId('hotel_id')->constrained('hoteles');

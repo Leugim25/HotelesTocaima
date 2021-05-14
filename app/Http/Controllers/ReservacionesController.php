@@ -19,7 +19,8 @@ class ReservacionesController extends Controller
     {
         $reservaciones = Reserva::with(['habitacion', 'hoteles'])->get();
 
-        return view('reservaciones.index', compact('reservaciones'));
+        $reservas = Reserva::all();
+        return view('reservaciones.index', compact('reservaciones','reservas'));
     }
 
     /**
@@ -51,8 +52,7 @@ class ReservacionesController extends Controller
      */
     public function show()
     {
-        $reservas = Reserva::all();
-        return view('reservaciones.index',compact('reservas'));
+        
     }
 
     /**

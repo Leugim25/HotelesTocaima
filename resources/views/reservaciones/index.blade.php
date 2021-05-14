@@ -2,7 +2,7 @@
 
 @section('sidebar')
 <div class="menu">
-	<a href="{{route('principal.index')}}" class="dropdown-item"><i class="icon ion-md-home lead mr-2"></i>Inicio</a>
+	<a href="{{ route('principal.index') }}" class="dropdown-item"><i class="icon ion-md-home lead mr-2"></i>Inicio</a>
 
 	<a href="{{route('huespedes.index')}}" class="dropdown-item"><i class="icon ion-md-person-add lead mr-2"></i>Añadir huesped</a>
 
@@ -14,7 +14,7 @@
 
 	<a href="{{ route('auditoria.index') }}" class="dropdown-item"><i class="icon ion-md-bookmarks lead mr-2"></i>Auditoria</a>
 
-	<a href="{{route('reservaciones.index')}}" class="dropdown-item active-list"><i class="icon ion-md-stats lead mr-2"></i>Reservaciones</a>
+	<a href="{{route('reservaciones.index')}}" class="dropdown-item active-list" ><i class="icon ion-md-stats lead mr-2"></i>Reservaciones</a >
 
 	<a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();document.getElementById('logout-form').submit();">
 		<i class="icon ion-md-exit lead mr-2"></i>
@@ -27,55 +27,138 @@
 </div>
 @endsection
 
+@section('style')
+	<style>
+	#calendar{
+		width: 800px;
+	  margin: 40px auto;
+	  font-family: Arial, Helvetica, sans-serif;
+	  font-size: 14px;
+	}
+	</style>
+@endsection
+
 @section('content')
+<div class="container"> 
+    <legend class="text-primary" style="margin-top: 2%;position: relative; left: 40%;">Reservas realizadas</legend>
+    <div class="row">
+      <div class="col"></div>
+      <div class="col-16"> <div id='calendar'></div></div>
+      <div class="col"></div>
+    </div>
+</div>
+<div class="modal fade" id="Agregar" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <!-- Modal Header -->
+            <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Agregar evento</h5>
+                <button type="button" class="close" data-dismiss="modal">
+                    <span aria-hidden="true">×</span>
+                    <span class="sr-only">Close</span>
+                </button>
+            </div>
+              <!-- Modal Body -->
+            <div class="modal-body">
+              <p class="statusMsg"></p>
+            <form id="FormEvent" method="post" enctype="multipart/form-data">
+              <div class="form-row">
+                  <div class="form-group col-md-6">
+                      <label for="txtName"> Nombre:</label>
+                      <input class="form-control" id="txtName" name="name" type="text" placeholder="Nombre del evento">
+                    </div>
+                  <div class="form-group col-md-6">
+                      <label for="txtFecha">Fecha de inicio</label>
+                    <input class="form-control" id="txtFecha" name="start" type="text" disabled>
+                  </div>
+                  {{-- <div class="form-group col-md-6">
+                      <label for="txtFechaFinal">Fecha Final</label>
+                      <input class="form-control"type="date" id="txtFechaFinal" name="finish" max="2030-01-01">
+                  </div> --}}
+              </div>
+              <div class="form-group">
+                  <label for="inputDescription">Descripción</label>
+                  <textarea class="form-control" id="txtDescripcion" name="description"  cols="20" rows="10" placeholder="Descripción del evento.."></textarea>
+              </div>
+              <div class="form-group">
+                <label for="imagen_principal">Imagen </label>
+                <input id="txtImagen"
+                type="file"class="form-control" name="imagen_location">     
+            </div>            
+              <div class="form-group">
+                  <label for="txtPlace">Sitio </label>
+                  <select  name ="place_id" id="txtPlace" class="form-control" required>
+                      <option value="">----------</option>
+                     
+              </select>
+              </div>
+              <div class="form-row">
+                  <div class="form-group col-md-6">
+                    <label for="txtName"> Hora inicio:</label>
+                    <input class="form-control" min="04:00" max="24:00"  step="600" id="txtHora" name="horainicio" type="time">
+                  </div>
+                  <div class="form-group col-md-6">
+                      <label for="txtFecha">Hora final</label>
+                    <input class="form-control" id="txtFinal" min="04:00" max="24:00"  step="600" name="horafin" type="time">
+                  </div>
+              </div>
 
-<h2 class="text-center mb-3 font-weight-bold">ADMINISTRA LAS RESERVACIONES</h2>
-<div class="col-md-12 bg-light mx-auto" id="dataTable">
-
-	<div class="card mt-2">
-		<div class="card-body">
-			<!-- Datos principales del hotel a crear -->
-			<table id="Tablehotels" class="table table-striped table-bordered shadow-lg mt-4 " style="width:100%">
-				<thead class="bg-dark text-white">
-					<tr>
-						<th scope="col">Nº</th>
-						<th scope="col">Nombre del hotel</th>
-						<th scope="col">N° Habitacion</th>
-						<th scope="col">Estado de la reservacion</th>
-						<th scope="col">Acciones</th>
-					</tr>
-				</thead>
-				<tbody class="bg-white">
-					@foreach ($reservaciones as $reservacion)
-					<tr>
-						<td>{{$reservacion->id}}</td>
-						<td>{{$reservacion->hoteles->titulo}}</td>
-						<td>{{$reservacion->habitacion->n_habitacion}}</td>
-						<td>
-							{{$reservacion->habitacion->disponible->estado}}
-						</td>
-						<td>
-							@if ($reservacion->habitacion->disponible->id == 4)
-							<a href="{{route('reservaciones.edit', $reservacion->id)}}" class="btn btn-danger">
-								Editar
-							</a>
-							@elseif($reservacion->habitacion->disponible->id == 5)
-								<p>Denegada <img src="{{asset('img/x.png')}}" class="d-inline" width="22" height="22"></p>
-							@elseif($reservacion->habitacion->disponible->id == 3)
-								<p>aprobada <img src="{{asset('img/checked.png')}}" class="d-inline" width="22" height="22"></p>
-							@endif
-						</td>
-					</tr>
-					@endforeach
-				</tbody>
-			</table>
-
-		</div>
-	</div>
+              <div class="form-group">
+                  <label for="inputPuntos">Color:</label>
+                  <input  class="form-control" type="color" id="txtColor" name="color">
+              </div>
+              <!-- Modal Footer -->
+              <div class="modal-footer">
+                <input type="submit" id="btnAgregar" class="btn btn-success" value="Agregar">
+                <a id="btnEliminar" class="btn btn-danger">Eliminar</a>        
+                <a class="btn btn-secondary" data-dismiss="modal">Cerrar</a>
+              </div>
+            </form>  
+            </div>
+        </div>
+    </div>
 </div>
 
 @endsection
+
 @section('script')
+<script> 
+	document.addEventListener('DOMContentLoaded', function() {
+		var calendarEl = document.getElementById('calendar');
+		var calendar = new FullCalendar.Calendar(calendarEl, {
+		  initialView: 'dayGridMonth',
+		  headerToolbar:{
+			left:'prev,next today Agregar',
+			center:'title',
+			right:'dayGridMonth,timeGridWeek,timeGridDay'
+		  },
+		  customButtons:{
+			// Agregar:{
+			//   text:"Agregar evento",
+			//   click:function(){
+				
+			//   }
+			// }
+		  },
+			
+		dateClick: function(info)
+        {
+			console.log(info);
+          	calendar.addEvent({title:"Prueba", date:info.dateStr})
+        },
+		events:"{{ url('/reservas/show')}}",
+		});  
+		
+		calendar.render();          
+		 
+		// $("#btnAgregar").click(function(){
+		//   // objEvent=recolectarInfo("POST");
+		//   // enviarInfo('',objEvent);
+		// });
+		
+	  
+	  });
+	</script>
 <script>
 	$(document).ready(function() {
 		$('#Tablehotels').DataTable({
@@ -128,7 +211,6 @@
 					}
 				}
 			],
-
 			"columnDefs": [{
 				"targets": 3,
 				"data": "estado",
@@ -151,12 +233,10 @@
 							break;
 						default:
 							"<span></span>";
-
 					}
 				}
 			}],
 		});
-
 	});
 </script>
 @endsection
