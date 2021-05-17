@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateBarsTable extends Migration
+class CreateItemsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,11 @@ class CreateBarsTable extends Migration
      */
     public function up()
     {
-        Schema::create('bares', function (Blueprint $table) {
+        Schema::create('items', function (Blueprint $table) {
             $table->id();
             $table->string('producto');
-            $table->float('precio');
+            $table->string('precio');
             $table->string('codigo');
-            $table->integer('cantidad');
-            $table->integer('vendido')->default(0);
             $table->timestamps();
         });
     }
@@ -31,6 +29,6 @@ class CreateBarsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('bars');
+        Schema::dropIfExists('items');
     }
 }

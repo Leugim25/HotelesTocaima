@@ -15,10 +15,9 @@ class Servicios extends Migration
     {
         Schema::create('servicios', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('restaurante_id')->references('id')->on('restaurantes')->comment('Llave foranea para los restaurantes');
-            $table->foreignId('piscina_id')->references('id')->on('piscinas')->onDelete('cascade')->comment('Llave foranea para piscinas');
-            $table->foreignId('bar_id')->references('id')->on('bares')->onDelete('cascade')->comment('Llave foranea para los bares');
-            $table->foreignId('huesped_id')->references('id')->on('huespedes')->onDelete('cascade')->comment('Llave foranea para los huespedes');
+            $table->foreignId('restaurante_id')->references('id')->on('restaurantes')->comment('Llave foranea para los servicios');
+            $table->foreignId('piscinas_id')->references('id')->on('piscinas')->comment('Llave foranea para los servicios');
+            $table->foreignId('bares_id')->references('id')->on('bares')->comment('Llave foranea para los servicios');
             $table->timestamps();
         });
     }

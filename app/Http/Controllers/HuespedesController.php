@@ -7,10 +7,12 @@ use App\Precios;
 use App\Huespedes;
 use Carbon\Carbon;
 use App\Habitacion;
+use App\Hotel;
 use App\Piscinas;
 use App\Restaurantes;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Servicios;
 
 class HuespedesController extends Controller
 {
@@ -19,13 +21,19 @@ class HuespedesController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+    
     public function index()
     {
         $huesped = Huespedes::all();
         $huespedes = Huespedes::all(['id'])->count();
         $habitacion = Habitacion::where('disponibilidad_id', 1)->count();
+        $hoteles = Hotel::all()->count();
         
-        return view('huespedes.index', compact('huesped', 'huespedes' , 'habitacion'));
+        return view('huespedes.index', compact('huesped', 'huespedes' , 'habitacion', 'hoteles'));
     }
 
     /**
@@ -89,11 +97,31 @@ class HuespedesController extends Controller
     public function show(Huespedes $huespedes)
     {
         $huesped = Huespedes::all();
-        $restaurante = Restaurantes::all(['id', 'producto', 'precio', 'codigo', 'vendidos']);
-        $piscina = Piscinas::all(['id', 'opcion', 'precio']);
-        $bar = Bar::all(['id', 'producto', 'precio', 'codigo', 'vendido', 'cantidad']);
+        $products = Restaurantes::all();
         
-        return view('huespedes.show', compact('huesped', 'restaurante' , 'piscina', 'bar'));
+        return view('huespedes.show', compact('huesped', 'products'));
+    }
+
+    public function showbar(Huespedes $huespedes)
+    {
+        $huesped = Huespedes::all();
+        $products = Bar::all();
+        
+        return view('huespedes.showbar', compact('huesped', 'products'));
+    }
+
+    public function service(Request $request, Huespedes $huespedes)
+    {
+
+        $order = Restaurantes::create($request->all());
+
+        $products = $request->input('products', []);
+        $quantities = $request->input('quantities', []);
+        for ($product=0; $product < count($products); $product++) {
+            if ($products[$product] != '') {
+                $order->products()->attach($products[$product], ['quantity' => $quantities[$product]]);
+            }
+        }
     }
 
     /**

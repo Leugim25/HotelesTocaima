@@ -16,6 +16,10 @@
   text-align: center;
 }
 
+#card-huesped{
+  width: 51% !important;
+}
+
 label{
 color: #9b9b9b;
 }

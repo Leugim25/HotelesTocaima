@@ -75,7 +75,7 @@
 				<td class="text-center"> {{ $habitacion->camas }} </td>
 				<td class="services"> {!! $habitacion->mobiliario !!} </td>
 				<td class=""> {!! $habitacion->servicios !!} </td>
-				<td class="text-center"> {{ $habitacion->precio->valor }} </td>
+				<td class="text-center"> {{ number_format($habitacion->precio->valor) }} </td>
 				<td class="text-center">
 					{{ optional($habitacion->disponible)->estado }}
 				</td>

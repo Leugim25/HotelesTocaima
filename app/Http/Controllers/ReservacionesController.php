@@ -19,8 +19,7 @@ class ReservacionesController extends Controller
     {
         $reservaciones = Reserva::with(['habitacion', 'hoteles'])->get();
 
-        $reservas = Reserva::all();
-        return view('reservaciones.index', compact('reservaciones','reservas'));
+        return view('reservaciones.index', compact('reservaciones'));
     }
 
     /**
@@ -50,9 +49,9 @@ class ReservacionesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show()
+    public function show($id)
     {
-        
+        //
     }
 
     /**
@@ -76,7 +75,7 @@ class ReservacionesController extends Controller
 
     public function cancel(Request $request)
     {
-        DB::table('habitaciones')->where('id', $request->id)->update(['disponibilidad_id' =>  1]);
+        DB::table('habitaciones')->where('id', $request->id)->update(['disponibilidad_id' =>  3]);
         DB::table('auditorias')->insert([
             'description' => 'Se ha cancelado la reservacion de la habitacion: ',
             'user_name' => 'Acción realizada por' . " " ." - " .auth()->user()->name,

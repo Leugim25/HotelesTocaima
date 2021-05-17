@@ -48,7 +48,7 @@
 										</p>
 										<p class="text-dark mt-1">
 											<span class="font-weight-bold text-info">Precio: </span>
-											{{$habitacion->precio}}
+											${{$habitacion->precio->valor}} pesos la noche
 										</p>
 										<p class="text-dark mt-1">
 											<span class="font-weight-bold text-info">Estado:</span>

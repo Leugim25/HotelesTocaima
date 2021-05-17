@@ -92,7 +92,7 @@
         </div>
         <div class="card" id="card-huesped">
             <div class="card-header">
-                <h4 class="text-center" style="color: rgb(44, 44, 44)">SERVICIO DE <strong><span style="color: #ff3535">RESTAURANTE</span></strong></h4>
+                <h4 class="text-center" style="color: rgb(44, 44, 44)">SERVICIO DE <strong><span style="color: #8d4719">BAR</span></strong></h4>
             </div>
     
             <div class="card-body">
@@ -106,7 +106,7 @@
                     <tbody>
                         <tr id="product0">
                             <td>
-                                <select name="producto[]" class="form-control">
+                                <select name="products[]" class="form-control">
                                     <option value="">----------------- Seleccione un producto -----------------</option>
                                     @foreach ($products as $product)
                                         <option value="{{ $product->id }}">

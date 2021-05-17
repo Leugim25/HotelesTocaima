@@ -24,7 +24,9 @@ Route::get('/huespedes', 'HuespedesController@index')->name('huespedes.index');
 Route::get('/huespedes/create', 'HuespedesController@create')->name('huespedes.create');
 Route::post('/huespedes', 'HuespedesController@store')->name('huespedes.store');
 Route::delete('/huespedes/{huesped}', 'HuespedesController@destroy')->name('huespedes.destroy');
-Route::get('/huespedes/{huesped}/cuenta', 'HuespedesController@show')->name('huespedes.show');
+Route::get('/huespedes/{huesped}/servicio/restaurante', 'HuespedesController@show')->name('huespedes.show');
+Route::post('/huespedes/{huesped}/cuenta', 'HuespedesController@service')->name('huespedes.service');
+Route::get('/huespedes/{huesped}/servicio/bar', 'HuespedesController@showbar')->name('huespedes.showbar');
 
 //Rutas para las auditorias
 Route::get('/auditorias', 'AuditoriasController@index')->name('auditoria.index');
@@ -64,12 +66,9 @@ Route::delete('/servicios/bares/{bar}', 'BarController@destroy')->name('bar.dest
 //Rutas para el controlador de las reservas 
 Route::get('/reservas/hotel/{hotel}/habitaciones/{habitaciones}', 'ReservaController@create')->name('reservas.create');
 Route::post('/reservas', 'ReservaController@store')->name('reservas.store');
-Route::get('/reservas/show','ReservaController@show');
 
-//Rutas para el controlador de las reservaciones
 Route::resource('reservaciones', 'ReservacionesController');
 Route::put('/reservaciones/reservas/{id}', 'ReservacionesController@cancel')->name('reservaciones.cancel');
-Route::get('/reservaciones/show', 'ReservacionesController@show');
 
 // Buscador de hoteles
 Route::get('/buscar', 'HotelController@search')->name('buscar.show');

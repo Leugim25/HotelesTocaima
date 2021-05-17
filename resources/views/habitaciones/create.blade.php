@@ -148,7 +148,7 @@
 
 								<!-- Se recorren todos los estados de la habitación -->
 								@foreach($precio as $precio)
-								<option value="{{ $precio->id }}" {{ old('precio') == $precio->id ? 'selected' : '' }}>${{$precio->valor}} pesos</option>
+								<option value="{{ $precio->id }}" {{ old('precio') == $precio->id ? 'selected' : '' }}>${{ number_format($precio->valor) }} pesos</option>
 								@endforeach
 							</select>
 
@@ -162,6 +162,7 @@
 						<div class="form-group">
 							<input type="submit" class="btn btn-warning text-white" value="Agregar Habitación">
 						</div>
+						
 						<input type="hidden" name="hotel_id" value="{{ $hotel->id }}" />
 					</form>
 				</div>

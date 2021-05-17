@@ -140,7 +140,7 @@
 
 								<!-- Se recorren todos los estados de la habitación -->
 								@foreach($precio as $precio)
-								<option value="{{ $precio->id }}" {{ $habitacion->precio_id == $precio->id ? 'selected' : '' }}>{{$precio->valor}}</option>
+									<option value="{{ $precio->id }}" {{ $habitacion->precio_id == $precio->id ? 'selected' : '' }}>{{ number_format($precio->valor) }}</option>
 								@endforeach
 							</select>
 

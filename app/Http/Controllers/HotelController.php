@@ -26,6 +26,7 @@ class HotelController extends Controller
     public function index()
     {
         $hoteles = auth()->user()->hoteles;
+        
         return view('hoteles.index')->with('hoteles', $hoteles);
     }
 

@@ -28,7 +28,7 @@
 @endsection
 
 @section('botones')
-	@if($habitacion > 0)
+	@if($hoteles > 0 && $habitacion)
 		<div class="ml-3 py-4 mt-5 col-12">
 			<div class="buttons">
 				<h5>Agrega un nuevo huesped</h5>
@@ -59,7 +59,7 @@
 						<th scope="col">cedula</th>
 						<th scope="col">celular</th>
 						<th scope="col">Habitación</th>
-						<th scope="col">Cuenta</th>
+						<th scope="col">Servicios</th>
 						<th scope="col">Acciones</th>
 					</tr>
 				</thead>
@@ -73,7 +73,18 @@
 						<td class="text-center"> {{ $huesped->habitacion->n_habitacion }} </td>
 						<td>
 							@if($huespedes > 0)
-								<a href="{{ route('huespedes.show', ['huesped' => $huesped->id]) }}" class="btn btn-warning text-white w-100">Ver cuenta</a>
+							<ul>
+								<li>
+									<a href="{{ route('huespedes.show', ['huesped' => $huesped->id]) }}" class="d-block">Restaurante</a>
+								</li>
+								<li>
+									<a href="{{ route('huespedes.showbar', ['huesped' => $huesped->id]) }}" class="d-block">Bar</a>
+								</li>
+								<li>
+									<a href="{{ route('huespedes.show', ['huesped' => $huesped->id]) }}" class="d-block">Piscina</a>
+								</li>
+							</ul>
+								
 							@endif
 						</td>
 						<td>

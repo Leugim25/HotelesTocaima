@@ -39,6 +39,7 @@
 @section('content')
 
 <h2 class="text-center mb-3 font-weight-bold">ADMINISTRA TUS HOTELES</h2>
+
 <div class="col-md-12 bg-light mx-auto" id="dataTable">
 
 	<div class="card mt-2">

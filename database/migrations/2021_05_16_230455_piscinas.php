@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreatePiscinasTable extends Migration
+class Piscinas extends Migration
 {
     /**
      * Run the migrations.
@@ -15,8 +15,9 @@ class CreatePiscinasTable extends Migration
     {
         Schema::create('piscinas', function (Blueprint $table) {
             $table->id();
-            $table->string("opcion");
-            $table->float('precio');
+            $table->string('producto');
+            $table->string('precio');
+            $table->string('codigo');
             $table->timestamps();
         });
     }
@@ -28,6 +29,8 @@ class CreatePiscinasTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('piscinas');
+        {
+            Schema::dropIfExists('piscinas');
+        }
     }
 }

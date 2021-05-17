@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Cuenta;
+use App\Items;
 use Illuminate\Http\Request;
 
-class CuentaController extends Controller
+class ItemsController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -46,10 +46,10 @@ class CuentaController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Cuenta  $cuenta
+     * @param  \App\Items  $items
      * @return \Illuminate\Http\Response
      */
-    public function show(Cuenta $cuenta)
+    public function show(Items $items)
     {
         //
     }
@@ -57,10 +57,10 @@ class CuentaController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Cuenta  $cuenta
+     * @param  \App\Items  $items
      * @return \Illuminate\Http\Response
      */
-    public function edit(Cuenta $cuenta)
+    public function edit(Items $items)
     {
         //
     }
@@ -69,10 +69,10 @@ class CuentaController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Cuenta  $cuenta
+     * @param  \App\Items  $items
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Cuenta $cuenta)
+    public function update(Request $request, Items $items)
     {
         //
     }
@@ -80,10 +80,10 @@ class CuentaController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Cuenta  $cuenta
+     * @param  \App\Items  $items
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Cuenta $cuenta)
+    public function destroy(Items $items)
     {
         //
     }
