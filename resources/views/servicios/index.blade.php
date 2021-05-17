@@ -85,21 +85,21 @@
 			</table>
 			<hr>
 			<div>
-				<form method="POST" action="{{route('restaurante.store')}}" novalidate>
-					@csrf
-					<input type="text" name="producto" class= " @error('producto') is-invalid @enderror text-center" style="width: 40%" id="producto" placeholder="Servicio" value="{{ old('producto') }}"/>
+				<form method="POST"  novalidate id ="form-restaurante" enctype="multipart/form-data">
+					
+					<input type="text" name="producto" class= " @error('producto') is-invalid @enderror text-center" style="width: 40%" id="producto_resta" placeholder="Servicio" value="{{ old('producto') }}"/>
 					@error('producto')
 						<span class="invalid-feedback d-block" role="alert">
 							<strong>{{$message}}</strong>
 						</span>
 					@enderror
-					<input type="text" name="precio" class= " @error('precio') is-invalid @enderror text-center" style="width: 40%; margin-left: 26px" id="precio" placeholder="Precio" value="{{ old('precio') }}"/>
+					<input type="text" name="precio" class= " @error('precio') is-invalid @enderror text-center" style="width: 40%; margin-left: 26px" id="precio_resta" placeholder="Precio" value="{{ old('precio') }}"/>
 					@error('precio')
 						<span class="invalid-feedback d-block" role="alert">
 							<strong>{{$message}}</strong>
 						</span>
 					@enderror
-					<input type="text" name="codigo" class= " @error('codigo') is-invalid @enderror text-center" style="width: 40%; margin-top: 2%" id="codigo" placeholder="Código" value="{{ old('codigo') }}"/>
+					<input type="text" name="codigo" class= " @error('codigo') is-invalid @enderror text-center" style="width: 40%; margin-top: 2%" id="codigo_resta" placeholder="Código" value="{{ old('codigo') }}"/>
 					@error('codigo')
 						<span class="invalid-feedback d-block" role="alert">
 							<strong>{{$message}}</strong>
@@ -148,16 +148,18 @@
 			</table>
 			<hr class="hr-cambio">
 			<div>
-				<form method="POST" action="{{route('piscina.store')}}" novalidate>
-					@csrf
-					<input type="text" name="opcion" class= " @error('opcion') is-invalid @enderror text-center" style="width: 40%" id="opcion" placeholder="opcion" value="{{ old('opcion') }}"/>
+				<form method="POST" novalidate id ="form-piscina" enctype="multipart/form-data">
+					<select  name="opcion" id="opcion">
+						<option value="{{ old('opcion')}}">Piscina</option>
+						<option value="{{ old('opcion')}}">Jacuzzi</option>
+					</select>
 					@error('opcion')
 						<span class="invalid-feedback d-block" role="alert">
 							<strong>{{$message}}</strong>
 						</span>
 					@enderror
 					
-					<input type="text" name="precio" class= " @error('precio') is-invalid @enderror text-center" style="width: 40%; margin-left: 26px" id="precio" placeholder="Precio" value="{{ old('precio') }}"/>
+					<input type="text" name="precio" class= " @error('precio') is-invalid @enderror text-center" style="width: 40%; margin-left: 26px" id="precio_piscina" placeholder="Precio" value="{{ old('precio') }}"/>
 					@error('precio')
 						<span class="invalid-feedback d-block" role="alert">
 							<strong>{{$message}}</strong>
@@ -211,27 +213,27 @@
 				</tbody>
 			</table>
 			<hr class="hr-cambio">
-			<form method="POST" action="{{route('bar.store')}}" novalidate>
-				@csrf
-				<input type="text" name="producto" class= " @error('producto') is-invalid @enderror text-center" style="width: 40%" id="producto" placeholder="Producto" value="{{ old('producto') }}"/>
+			<form method="POST"  novalidate id="form-bar"enctype="multipart/form-data">
+				
+				<input type="text" name="producto_bar" class= " @error('producto') is-invalid @enderror text-center" style="width: 40%" id="producto_bar" placeholder="Producto" value="{{ old('producto') }}"/>
 				@error('producto')
 					<span class="invalid-feedback d-block" role="alert">
 						<strong>{{$message}}</strong>
 					</span>
 				@enderror
-				<input type="text" name="precio" class= " @error('precio') is-invalid @enderror text-center" style="width: 40%; margin-left: 26px" id="precio" placeholder="Precio" value="{{ old('precio') }}"/>
+				<input type="text" name="precio" class= " @error('precio') is-invalid @enderror text-center" style="width: 40%; margin-left: 26px" id="precio_bar" placeholder="Precio" value="{{ old('precio') }}"/>
 				@error('precio')
 					<span class="invalid-feedback d-block" role="alert">
 						<strong>{{$message}}</strong>
 					</span>
 				@enderror
-				<input type="text" name="codigo" class= " @error('codigo') is-invalid @enderror text-center" style="width: 40%; margin-top: 2%" id="codigo" placeholder="Código" value="{{ old('codigo') }}"/>
+				<input type="text" name="codigo" class= " @error('codigo') is-invalid @enderror text-center" style="width: 40%; margin-top: 2%" id="codigo_bar" placeholder="Código" value="{{ old('codigo') }}"/>
 				@error('codigo')
 					<span class="invalid-feedback d-block" role="alert">
 						<strong>{{$message}}</strong>
 					</span>
 				@enderror
-				<input type="text" name="cantidad" class= " @error('cantidad') is-invalid @enderror text-center" style="width: 40%; margin-top: 2%; margin-left: 26px" id="cantidad" placeholder="Cantidad" value="{{ old('cantidad') }}"/>
+				<input type="text" name="cantidad" class= " @error('cantidad') is-invalid @enderror text-center" style="width: 40%; margin-top: 2%; margin-left: 26px" id="cantidad_bar" placeholder="Cantidad" value="{{ old('cantidad') }}"/>
 				@error('cantidad')
 					<span class="invalid-feedback d-block" role="alert">
 						<strong>{{$message}}</strong>
@@ -247,8 +249,91 @@
 @endsection
 
 @section('script')
+
 <script>
 	$(document).ready(function() {
+		$('#form-piscina').on('submit', function(e) {
+        e.preventDefault(); 
+		var formDate = new FormData(this);
+		formData.append('_token',$('input[name=_token]').val());
+		$.ajax({
+              type: 'POST',
+              url: '{{ url('/servicios/piscinas')}}',
+              data: formData,
+              contentType: false,
+              cache: false,
+              processData:false,
+              success:function(data)
+              {
+ 
+                console.log(data);
+
+              }, error:function(response){
+                $.each(response.responseJSON.errors, function(key,value) {
+                  alert(value);
+                 
+                });
+                  
+              }
+            });
+
+		
+		});
+		$('#form-bar').on('submit', function(e) {
+        e.preventDefault(); 
+		var formDate = new FormData(this);
+		formData.append('_token',$('input[name=_token]').val());
+		$.ajax({
+              type: 'POST',
+              url: '{{ url('/servicios/bares')}}',
+              data: formData,
+              contentType: false,
+              cache: false,
+              processData:false,
+              success:function(data)
+              {
+ 
+                console.log(data);
+
+              }, error:function(response){
+                $.each(response.responseJSON.errors, function(key,value) {
+                  alert(value);
+                 
+                });
+                 
+              }
+            });
+		
+		});
+		$('#form-restaurante').on('submit', function(e) {
+        e.preventDefault(); 
+		var formDate = new FormData(this);
+		formData.append('_token',$('input[name=_token]').val());
+		$.ajax({
+              type: 'POST',
+              url: '{{ url('/servicios/restaurantes')}}',
+              data: formData,
+              contentType: false,
+              cache: false,
+              processData:false,
+              success:function(data)
+              {
+ 
+                console.log(data);
+
+              }, error:function(response){
+                $.each(response.responseJSON.errors, function(key,value) {
+                  alert(value);
+                 
+                });
+                  
+              }
+            });
+		
+		});
+
+
+
 		$('#Tablehotels').DataTable({
 			"language": {
 				"lengthMenu": "Mostrar _MENU_ registros por pagina     .",

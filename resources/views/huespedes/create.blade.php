@@ -112,11 +112,11 @@
                 <p class="text-white text-center">Habitaciones disponibles</p>
                 <div class="input-group">
                     <select name="habitacion_id" class="@error('habitacion_id') is-invalid @enderror" id="habitacion_id">
-                        <option value="">----- Seleccione una opción -----</option>
+                        <option value="">------------------------------ Seleccione una habitación ------------------------------</option>
 
                         <!-- Se recorren todas las habitaciones disponibles -->
                         @foreach($habitacion as $habitacion)
-                            <option value="{{ $habitacion->id }}" {{ old('habitacion_id') == $habitacion->id ? 'selected' : '' }} >Habitación {{$habitacion->n_habitacion}}</option>
+                            <option value="{{ $habitacion->id }}" {{ old('habitacion_id') == $habitacion->id ? 'selected' : '' }} >Habitación {{$habitacion->n_habitacion}}: Valor ${{number_format($habitacion->precio->valor)}} pesos</option>
                         @endforeach
                     </select>
 
@@ -127,25 +127,16 @@
                     @enderror
                 </div>
         </div>
+        <label class="text-white" for="fechaActencion">Check-in:</label>
+        <input type="date" class="form-control" id="fechaAtencion" required>
+
+        <label class="text-white mt-4" for="fechaActencion">Check-out:</label>
+        <input type="date" class="form-control" id="fechaAtencion" required>
         
         <!-- Agregar datos del hotel -->
         <div class="form-group">
-            <input type="submit" class="btn btn-warning text-white" value="Agregar Huesped">
+            <input type="submit" class="btn btn-warning text-white mt-4" value="Agregar Huesped">
         </div>
     </form>
 </div>
-@endsection
-
-@section('js')
-    <script>
-        $( function() {
-            $("#habitacion").change( function() {
-                if ($(this).val() === '1') {
-                    $("#precio").prop("disabled", false);
-                } else {
-                    $("#precio").prop("disabled", true);
-                }
-            });
-        });
-    </script>
 @endsection
