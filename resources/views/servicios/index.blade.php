@@ -85,7 +85,7 @@
 			</table>
 			<hr>
 			<div>
-				<form method="POST"  novalidate id ="form-restaurante" enctype="multipart/form-data">
+				<form method="post" id ="form-restaurante" enctype="multipart/form-data">
 					
 					<input type="text" name="producto" class= " @error('producto') is-invalid @enderror text-center" style="width: 40%" id="producto_resta" placeholder="Servicio" value="{{ old('producto') }}"/>
 					@error('producto')
@@ -148,10 +148,10 @@
 			</table>
 			<hr class="hr-cambio">
 			<div>
-				<form method="POST" novalidate id ="form-piscina" enctype="multipart/form-data">
+				<form method="post" id ="form-piscina" enctype="multipart/form-data">
 					<select  name="opcion" id="opcion">
-						<option value="{{ old('opcion')}}">Piscina</option>
-						<option value="{{ old('opcion')}}">Jacuzzi</option>
+						<option value="Piscina">Piscina</option>
+						<option value="Jacuzzi">Jacuzzi</option>
 					</select>
 					@error('opcion')
 						<span class="invalid-feedback d-block" role="alert">
@@ -213,9 +213,9 @@
 				</tbody>
 			</table>
 			<hr class="hr-cambio">
-			<form method="POST"  novalidate id="form-bar"enctype="multipart/form-data">
+			<form method="post" id="form-bar" enctype="multipart/form-data">
 				
-				<input type="text" name="producto_bar" class= " @error('producto') is-invalid @enderror text-center" style="width: 40%" id="producto_bar" placeholder="Producto" value="{{ old('producto') }}"/>
+				<input type="text" name="producto" class= " @error('producto') is-invalid @enderror text-center" style="width: 40%" id="producto_bar" placeholder="Producto" value="{{ old('producto') }}"/>
 				@error('producto')
 					<span class="invalid-feedback d-block" role="alert">
 						<strong>{{$message}}</strong>
@@ -254,7 +254,7 @@
 	$(document).ready(function() {
 		$('#form-piscina').on('submit', function(e) {
         e.preventDefault(); 
-		var formDate = new FormData(this);
+		var formData = new FormData(this);
 		formData.append('_token',$('input[name=_token]').val());
 		$.ajax({
               type: 'POST',
@@ -281,7 +281,7 @@
 		});
 		$('#form-bar').on('submit', function(e) {
         e.preventDefault(); 
-		var formDate = new FormData(this);
+		var formData = new FormData(this);
 		formData.append('_token',$('input[name=_token]').val());
 		$.ajax({
               type: 'POST',
@@ -307,7 +307,7 @@
 		});
 		$('#form-restaurante').on('submit', function(e) {
         e.preventDefault(); 
-		var formDate = new FormData(this);
+		var formData = new FormData(this);
 		formData.append('_token',$('input[name=_token]').val());
 		$.ajax({
               type: 'POST',
@@ -319,7 +319,7 @@
               success:function(data)
               {
  
-                console.log(data);
+                alert("Se ha añadido el producto"+ " "+data.producto+" "+ " a la cuenta !!");
 
               }, error:function(response){
                 $.each(response.responseJSON.errors, function(key,value) {

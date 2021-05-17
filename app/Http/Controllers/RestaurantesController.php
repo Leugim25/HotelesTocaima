@@ -40,20 +40,21 @@ class RestaurantesController extends Controller
      */
     public function store(Request $request)
     {
-        // $data = request()->validate([
-        //     'producto' =>  'required',
-        //     'precio' => 'required',
-        //     'codigo' => 'required',
-        //     'vendidos',
-        // ]);
+        $request->validate([
+            'producto' => 'required',
+            'precio' => 'required',  //validar que sea double, cambiar desde la migración
+            'codigo' => 'required' //debe ser unico, a mi parecer
+        ]);
+        $datos= request()->except(['_token']);
             
-        // $variable = new Restaurantes();
+        $variable = new Restaurantes();
 
-        // $variable->producto = $request->producto;
-        // $variable->precio = $request->precio;
-        // $variable->codigo = $request->codigo;
-        // $variable->save();
-        //redireccionar al action
+        $variable->producto = $datos['producto'];
+        $variable->precio = $datos['precio'];
+        $variable->codigo = $datos['codigo'];
+        $variable->vendidos = 1;
+        $variable->save();
+        
         return response()->json($request);
     }
 
