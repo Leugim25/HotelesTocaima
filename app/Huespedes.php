@@ -8,7 +8,7 @@ class Huespedes extends Model
 {
 
     protected $fillable = [
-        'nombres', 'cedula', 'direccion', 'celular', 'email', 'habitacion_id'
+        'nombres', 'cedula', 'direccion', 'celular', 'email', 'habitacion_id', 'checkin', 'checkout'
     ];
 
     // Relacion 1:n

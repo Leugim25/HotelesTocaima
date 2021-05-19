@@ -22,10 +22,7 @@ class ServiciosController extends Controller
     
     public function index()
     {
-        $restaurantes = Restaurantes::all();
-        $piscinas = Piscinas::all();
-        $bares = Bar::all();
-        return view('servicios.index', compact('restaurantes', 'piscinas', 'bares'));
+        return view('servicios.index');
     }
 
     /**

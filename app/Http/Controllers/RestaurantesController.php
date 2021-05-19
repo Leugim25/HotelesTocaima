@@ -40,21 +40,22 @@ class RestaurantesController extends Controller
      */
     public function store(Request $request)
     {
-        // $data = request()->validate([
-        //     'producto' =>  'required',
-        //     'precio' => 'required',
-        //     'codigo' => 'required',
-        //     'vendidos',
-        // ]);
+         $data = request()->validate([
+             'producto' =>  'required',
+             'precio' => 'required',
+             'codigo' => 'required',
+             'vendidos',
+         ]);
             
-        // $variable = new Restaurantes();
+         $variable = new Restaurantes();
 
-        // $variable->producto = $request->producto;
-        // $variable->precio = $request->precio;
-        // $variable->codigo = $request->codigo;
-        // $variable->save();
-        //redireccionar al action
-        return response()->json($request);
+         $variable->producto = $request->producto;
+         $variable->precio = $request->precio;
+         $variable->codigo = $request->codigo;
+         $variable->save();
+        
+        return redirect()->route('servicios.index');
+        
     }
 
     /**

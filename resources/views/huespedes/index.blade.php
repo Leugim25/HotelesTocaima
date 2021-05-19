@@ -57,7 +57,7 @@
 					<tr>
 						<th scope="col">Nombres</th>
 						<th scope="col">cedula</th>
-						<th scope="col">celular</th>
+						<th scope="col">Fechas</th>
 						<th scope="col">Habitación</th>
 						<th scope="col">Servicios</th>
 						<th scope="col">Acciones</th>
@@ -69,7 +69,20 @@
 						
 						<td class="text-center"> {{ $huesped->nombres }} </td>
 						<td class="text-center"> {{ $huesped->cedula }} </td>
-						<td class="text-center"> {{ $huesped->celular }} </td>
+						<td class="text-center">
+							<strong>Llegada</strong> 
+							{{ $huesped->checkin }} 
+							<hr>
+							<strong>Salida</strong>
+							{{ $huesped->checkout}}
+							<hr>
+							{{Carbon\Carbon::parse($huesped->checkin)->diffInDays($huesped->checkout)}} días y
+							@if(Carbon\Carbon::parse($huesped->checkin)->diffInDays($huesped->checkout)-1 == 0)
+								{{Carbon\Carbon::parse($huesped->checkin)->diffInDays($huesped->checkout)}} noches
+								@else
+								{{Carbon\Carbon::parse($huesped->checkin)->diffInDays($huesped->checkout)-1}} noches
+							@endif
+						</td>
 						<td class="text-center"> {{ $huesped->habitacion->n_habitacion }} </td>
 						<td>
 							@if($huespedes > 0)
@@ -94,6 +107,7 @@
 								@method('DELETE')
 								<input type="submit" class="btn btn-danger d-block text-white mt-2 w-100" value="Eliminar" &time>
 							</form>
+							<a href="" class="btn btn-info text-white w-100 mt-2">Ver cuenta</a>
 						</td>
 					</tr>
 					@endforeach

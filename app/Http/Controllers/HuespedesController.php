@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Bar;
+use App\Cuenta;
 use App\Precios;
 use App\Huespedes;
 use Carbon\Carbon;
@@ -26,13 +27,13 @@ class HuespedesController extends Controller
         $this->middleware('auth');
     }
     
-    public function index()
+    public function index(Request $req)
     {
         $huesped = Huespedes::all();
         $huespedes = Huespedes::all(['id'])->count();
         $habitacion = Habitacion::where('disponibilidad_id', 1)->count();
         $hoteles = Hotel::all()->count();
-        
+       
         return view('huespedes.index', compact('huesped', 'huespedes' , 'habitacion', 'hoteles'));
     }
 
@@ -62,6 +63,8 @@ class HuespedesController extends Controller
             'direccion' => 'required',
             'celular' => 'required',
             'email' => 'required',
+            'checkin' => 'required',
+            'checkout' => 'required',
             'habitacion_id' => 'required',
         ]);
 
@@ -71,6 +74,8 @@ class HuespedesController extends Controller
             'direccion' => $data['direccion'],
             'celular' => $data['celular'],
             'email' => $data['email'],
+            'checkin' => $data['checkin'],
+            'checkout' => $data['checkout'],
             'habitacion_id' => $data['habitacion_id']
         ]);
 
@@ -97,9 +102,9 @@ class HuespedesController extends Controller
     public function show(Huespedes $huespedes)
     {
         $huesped = Huespedes::all();
-        $products = Restaurantes::all();
+        $restaurantes = Restaurantes::all();
         
-        return view('huespedes.show', compact('huesped', 'products'));
+        return view('huespedes.show', compact('huesped', 'restaurantes'));
     }
 
     public function showbar(Huespedes $huespedes)
@@ -112,16 +117,18 @@ class HuespedesController extends Controller
 
     public function service(Request $request, Huespedes $huespedes)
     {
+        $data = request()->validate([
+            'item' =>  'required',
+            'valor' => 'required',
+        ]);
 
-        $order = Restaurantes::create($request->all());
+        Cuenta::create([
+            'item' => $data['item'],
+            'valor' => $data['valor'],
+        ]);
 
-        $products = $request->input('products', []);
-        $quantities = $request->input('quantities', []);
-        for ($product=0; $product < count($products); $product++) {
-            if ($products[$product] != '') {
-                $order->products()->attach($products[$product], ['quantity' => $quantities[$product]]);
-            }
-        }
+        return redirect()->route('huespedes.show', auth()->user()->id)->withSuccess('servicio agregado exitosamente');
+        
     }
 
     /**

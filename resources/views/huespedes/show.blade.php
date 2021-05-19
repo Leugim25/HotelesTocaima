@@ -106,29 +106,34 @@
                     <tbody>
                         <tr id="product0">
                             <td>
-                                <select name="producto[]" class="form-control">
-                                    <option value="">----------------- Seleccione un producto -----------------</option>
-                                    @foreach ($products as $product)
-                                        <option value="{{ $product->id }}">
-                                            {{ $product->producto }} (${{ number_format($product->precio) }})
-                                        </option>
-                                    @endforeach
-                                </select>
+                                    <select name="item" class="@error('item') is-invalid @enderror" id="item">
+                                        <option value="">----------------- Seleccione un producto -----------------</option>
+                
+                                        <!-- Se recorren todas las habitaciones disponibles -->
+                                        @foreach($restaurantes as $restaurante)
+                                            <option value="{{ $restaurante->id }}" {{ old('item') == $restaurante->id ? 'selected' : '' }} >Habitación {{$restaurante->producto}}: Valor ${{number_format($restaurante->precio)}} pesos</option>
+                                        @endforeach
+                                    </select>
+                
+                                    @error('item')
+                                        <span class="invalid-feedback d-block" role="alert">
+                                            <strong>{{$message}}</strong>
+                                        </span>
+                                    @enderror
+                               
                             </td>
                             <td>
-                                <input type="number" name="quantities[]" class="form-control" value="1" />
+                                <input type="number" name="valor" id="valor" class="form-control" value="1" />
                             </td>
                         </tr>
                         <tr id="product1"></tr>
                     </tbody>
                 </table>
-    
-                <div class="row">
-                    <div class="col-md-12">
-                        <button id="add_row" class="btn btn-default pull-left">+ Agregar filas</button>
-                        <button id='delete_row' class="pull-right btn btn-danger">- Eliminar filas</button>
-                    </div>
-                </div>
+                <p>Lista</p>
+                <textarea name="" id="" cols="100" rows="10" class="w100">
+                    
+                </textarea>
+                
             </div>
         </div>
     </div>

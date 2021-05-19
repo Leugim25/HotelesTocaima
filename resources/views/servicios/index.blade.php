@@ -38,9 +38,7 @@
 
 <h2 class="text-center mb-4 font-weight-bold" style="text-transform: uppercase;" id="inicio">SERVICIOS DEL HOTEL </h2>
 <div>
-	<a href="#restaurante" class="btn btn-danger text-white d-inline" id="btns">Servicio de restaurante <img src="{{asset('/img/restaurante.svg')}}" width="20px" height="20px"></a>
-	<a href="#piscina" class="btn btn-primary text-white d-inline" id="btns">Servicio de piscina <img src="{{asset('/img/piscina.svg')}}" width="20px" height="20px"></a>
-	<a href="#bar" class="btn btn-brown text-white d-inline" id="btns">Servicio de bar <img src="{{asset('/img/cerveza.svg')}}" width="20px" height="20px"></a>			
+	<a href="#restaurante" class="btn btn-danger text-white d-inline" id="btns">Agregar servicio <img src="{{asset('/img/restaurante.svg')}}" width="20px" height="20px"></a>
 </div>
 
 <div class="center-container"  style="margin-top: 5%" id="restaurante">
@@ -65,27 +63,12 @@
 					</tr>
 				</thead>
 				<tbody class="bg-white">
-					@foreach($restaurantes as $restaurante)
-						<tr>
-							<td>{{$restaurante->producto}}</td>
-							<td>${{$restaurante->precio}} pesos</td>
-							<td>{{$restaurante->codigo}}</td>
-							<td>{{$restaurante->vendidos}}</td>
-							<td>
-								<a href="" class="btn btn-secondary text-white d-block mt-2">Editar</a>
-								<form action="{{route('restaurante.destroy', ['restaurante' => $restaurante->id]) }}" method="POST">
-									@csrf
-									@method('DELETE')
-									<input type="submit" class="btn btn-danger d-block text-white mt-2 w-100" value="Eliminar" &time>
-								</form>
-							</td>
-						</tr>
-					@endforeach
+					
 				</tbody>
 			</table>
 			<hr>
 			<div>
-				<form method="POST"  novalidate id ="form-restaurante" enctype="multipart/form-data">
+				<form method="POST" action="" novalidate id ="form-restaurante" enctype="multipart/form-data">
 					
 					<input type="text" name="producto" class= " @error('producto') is-invalid @enderror text-center" style="width: 40%" id="producto_resta" placeholder="Servicio" value="{{ old('producto') }}"/>
 					@error('producto')
@@ -112,139 +95,6 @@
 	</div>
 </div>
 <br>
-<div class="center-container" id="piscina">
-	<div class="card mt-2">
-		<div class="card-body piscina">
-			<h3 class="d-inline">Servicio de <strong style="color: #3966e2">Piscina <img src="{{asset('/img/piscina.svg')}}" width="50px" height="50px"></strong></h3>
-			<a href="#inicio" class="btn btn-warning text-white d-inline" style="float: right" id="btns">Regresar</a>
-			<hr class="hr-cambio">
-			<!-- Datos principales del hotel a crear -->
-			<table id="TablePiscina" class="table table-striped table-bordered shadow-lg mt-4 " style="width:100%">
-				
-				<thead class="bg-primary text-white">
-					
-					<tr>
-						<th scope="col">Servicio</th>
-						<th scope="col">Precio</th>
-						<th scope="col">Acciones</th>
-					</tr>
-				</thead>
-				<tbody class="bg-white">
-					@foreach($piscinas as $piscina)
-						<tr>
-							<td>{{$piscina->opcion}}</td>
-							<td>${{$piscina->precio}} pesos</td>
-							<td>
-								<a href="" class="btn btn-secondary text-white d-block mt-2">Editar</a>
-								<form action="{{route('piscina.destroy', ['piscina' => $piscina->id]) }}" method="POST">
-									@csrf
-									@method('DELETE')
-									<input type="submit" class="btn btn-danger d-block text-white mt-2 w-100" value="Eliminar" &time>
-								</form>
-							</td>
-						</tr>
-					@endforeach
-				</tbody>
-			</table>
-			<hr class="hr-cambio">
-			<div>
-				<form method="POST" novalidate id ="form-piscina" enctype="multipart/form-data">
-					<select  name="opcion" id="opcion">
-						<option value="{{ old('opcion')}}">Piscina</option>
-						<option value="{{ old('opcion')}}">Jacuzzi</option>
-					</select>
-					@error('opcion')
-						<span class="invalid-feedback d-block" role="alert">
-							<strong>{{$message}}</strong>
-						</span>
-					@enderror
-					
-					<input type="text" name="precio" class= " @error('precio') is-invalid @enderror text-center" style="width: 40%; margin-left: 26px" id="precio_piscina" placeholder="Precio" value="{{ old('precio') }}"/>
-					@error('precio')
-						<span class="invalid-feedback d-block" role="alert">
-							<strong>{{$message}}</strong>
-						</span>
-					@enderror
-					<input type="submit" class="btn btn-success text-white" style="float: right" value="Agregar servicio">
-				</form>
-			</div>
-		</div>
-	</div>
-</div>
-<br>
-<div class="center-container" id="bar">
-	<div class="card mt-2">
-		<div class="card-body bar">
-			<h3 class="d-inline">Servicio de <strong style="color: #8a2a04">Bar <img src="{{asset('/img/cerveza.svg')}}" width="50px" height="50px"></strong></h3>
-			<a href="#inicio" class="btn btn-warning text-white d-inline regresar" style="float: right" id="btns">Regresar</a>
-			<hr class="hr-cambio">
-			<!-- Datos principales del hotel a crear -->
-			<table id="TableBar" class="table table-striped table-bordered shadow-lg mt-4 " style="width:100%">
-				
-				<thead class="bg-brown text-white">
-					
-					<tr>
-						<th scope="col">Producto</th>
-						<th scope="col">Precio</th>
-						<th scope="col">Código</th>
-						<th scope="col">Cantidad</th>
-						<th scope="col">Vendido</th>
-						<th scope="col">Acciones</th>
-					</tr>
-				</thead>
-				<tbody class="bg-white">
-					@foreach($bares as $bar)
-						<tr>
-							<td>{{$bar->producto}}</td>
-							<td>${{$bar->precio}} pesos</td>
-							<td>{{$bar->codigo}}</td>
-							<td>{{$bar->cantidad}}</td>
-							<td>{{$bar->vendido}}</td>
-							<td>
-								<a href="" class="btn btn-secondary text-white d-block mt-2">Editar</a>
-								<form action="{{route('bar.destroy', ['bar' => $bar->id]) }}" method="POST">
-									@csrf
-									@method('DELETE')
-									<input type="submit" class="btn btn-danger d-block text-white mt-2 w-100" value="Eliminar" &time>
-								</form>
-							</td>
-						</tr>
-					@endforeach
-				</tbody>
-			</table>
-			<hr class="hr-cambio">
-			<form method="POST"  novalidate id="form-bar"enctype="multipart/form-data">
-				
-				<input type="text" name="producto_bar" class= " @error('producto') is-invalid @enderror text-center" style="width: 40%" id="producto_bar" placeholder="Producto" value="{{ old('producto') }}"/>
-				@error('producto')
-					<span class="invalid-feedback d-block" role="alert">
-						<strong>{{$message}}</strong>
-					</span>
-				@enderror
-				<input type="text" name="precio" class= " @error('precio') is-invalid @enderror text-center" style="width: 40%; margin-left: 26px" id="precio_bar" placeholder="Precio" value="{{ old('precio') }}"/>
-				@error('precio')
-					<span class="invalid-feedback d-block" role="alert">
-						<strong>{{$message}}</strong>
-					</span>
-				@enderror
-				<input type="text" name="codigo" class= " @error('codigo') is-invalid @enderror text-center" style="width: 40%; margin-top: 2%" id="codigo_bar" placeholder="Código" value="{{ old('codigo') }}"/>
-				@error('codigo')
-					<span class="invalid-feedback d-block" role="alert">
-						<strong>{{$message}}</strong>
-					</span>
-				@enderror
-				<input type="text" name="cantidad" class= " @error('cantidad') is-invalid @enderror text-center" style="width: 40%; margin-top: 2%; margin-left: 26px" id="cantidad_bar" placeholder="Cantidad" value="{{ old('cantidad') }}"/>
-				@error('cantidad')
-					<span class="invalid-feedback d-block" role="alert">
-						<strong>{{$message}}</strong>
-					</span>
-				@enderror
-				<input type="submit" class="btn btn-success text-white" style="float: right" value="Agregar servicio">
-			</form>
-		</div>
-	</div>
-	<br>
-</div>
 
 @endsection
 
