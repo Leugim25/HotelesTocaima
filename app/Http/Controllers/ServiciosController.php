@@ -6,6 +6,7 @@ use App\Bar;
 use App\Piscinas;
 use App\Restaurantes;
 use App\Servicios;
+use App\Items;
 use Illuminate\Http\Request;
 
 class ServiciosController extends Controller
@@ -21,10 +22,20 @@ class ServiciosController extends Controller
     }
     
     public function index()
-    {
-        return view('servicios.index');
+    {   
+        $servicios = Servicios::all();
+        return view('servicios.index',compact('servicios'));
     }
-
+    public function items(Request $request, Servicios $servicios)
+    {
+        $items = new Items();
+        $items->producto = $request->producto;
+        $items->precio = $request->precio;
+        $items->codigo = $request->codigo;
+        $items->servicios_id = $servicios->id;
+        $items->save();
+        return redirect()->route('servicios.index')->withSuccess('Item añadido al servicio de' . ' ' . $servicios->nombre_servicio);
+    }
     /**
      * Show the form for creating a new resource.
      *
@@ -43,7 +54,12 @@ class ServiciosController extends Controller
      */
     public function store(Request $request)
     {
-        
+        $servicio = new Servicios();
+        $servicio->nombre_servicio = $request->name;
+        $servicio->save();
+
+        return redirect()->route('servicios.index')->withSuccess('Nuevo servicio creado, agrega tus Items !');
+
     }
 
     /**
@@ -77,7 +93,9 @@ class ServiciosController extends Controller
      */
     public function update(Request $request, Servicios $servicios)
     {
-        //
+         $servicios->nombre_servicio = $request->name;
+         $servicios->save();
+         return redirect()->route('servicios.index')->withSuccess('Servicio actualizado !');
     }
 
     /**

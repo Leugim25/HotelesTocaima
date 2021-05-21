@@ -13,6 +13,7 @@
 	<link rel="icon" type="image/jpg" href="{{ asset('/img/logoAmarilloNegro.png') }}">
 	<script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.6.0/main.min.js" defer>
 	</script>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 	<link href="https://cdn.datatables.net/plug-ins/1.10.24/i18n/Spanish.json">
 	<link href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css" rel="stylesheet" />
 	<link href="https://cdn.datatables.net/responsive/2.2.3/css/responsive.dataTables.min.css" rel="stylesheet">
@@ -112,22 +113,24 @@
 	</div>
 	<!-- Scripts -->
 
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.perfect-scrollbar/1.5.0/perfect-scrollbar.min.js"></script>
-	<script src="//cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
-	<script src="https://cdn.datatables.net/responsive/2.2.3/js/dataTables.responsive.min.js"></script>
-	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-	<script src="//cdn.datatables.net/plug-ins/1.10.24/i18n/Spanish.json"></script>
-	<script src="//cdn.datatables.net/buttons/1.2.4/js/dataTables.buttons.min.js"></script>
-	<script src="//cdn.datatables.net/buttons/1.2.4/js/buttons.flash.min.js"></script>
-	<script src="https://cdn.datatables.net/buttons/1.2.4/js/buttons.html5.min.js"></script>
-	<script src="https://cdn.datatables.net/buttons/1.2.4/js/buttons.print.min.js"></script>
-	<script src="https://cdn.datatables.net/buttons/1.2.4/js/buttons.colVis.min.js"></script>
-	<script src="https://cdn.rawgit.com/bpampuch/pdfmake/0.1.18/build/pdfmake.min.js"></script>
-	<script src="https://cdn.rawgit.com/bpampuch/pdfmake/0.1.18/build/vfs_fonts.js"></script>
-	<script src="//cdnjs.cloudflare.com/ajax/libs/jszip/2.5.0/jszip.min.js"></script>
-	<script src="https://cdn.datatables.net/select/1.3.0/js/dataTables.select.min.js"></script>
-	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/js/bootstrap-datepicker.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" ></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.perfect-scrollbar/1.5.0/perfect-scrollbar.min.js" ></script>
+	<script src="//cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js" ></script>
+	<script src="https://cdn.datatables.net/responsive/2.2.3/js/dataTables.responsive.min.js" ></script>
+	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js" ></script>
+	<script src="//cdn.datatables.net/plug-ins/1.10.24/i18n/Spanish.json" ></script>
+	<script src="//cdn.datatables.net/buttons/1.2.4/js/dataTables.buttons.min.js" ></script>
+	<script src="//cdn.datatables.net/buttons/1.2.4/js/buttons.flash.min.js" ></script>
+	<script src="https://cdn.datatables.net/buttons/1.2.4/js/buttons.html5.min.js" ></script>
+	<script src="https://cdn.datatables.net/buttons/1.2.4/js/buttons.print.min.js" ></script>
+	<script src="https://cdn.datatables.net/buttons/1.2.4/js/buttons.colVis.min.js" ></script>
+	<script src="https://cdn.rawgit.com/bpampuch/pdfmake/0.1.18/build/pdfmake.min.js" ></script>
+	<script src="https://cdn.rawgit.com/bpampuch/pdfmake/0.1.18/build/vfs_fonts.js" ></script>
+	<script src="//cdnjs.cloudflare.com/ajax/libs/jszip/2.5.0/jszip.min.js" ></script>
+	<script src="https://cdn.datatables.net/select/1.3.0/js/dataTables.select.min.js" ></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/js/bootstrap-datepicker.min.js" ></script>
 	@include('sweetalert::alert')
 	@yield('script')
 </body>

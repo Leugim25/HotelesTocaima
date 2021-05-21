@@ -10,21 +10,12 @@ class Servicios extends Model
 
     // Campos que se agregaran
     protected $fillable = [
-        'restaurante_id', 'piscina_id', 'bar_id',
+        'nombre_servicio',
     ];
 
-    public function restaurante()
+    public function items()
     {
-        return $this->belongsTo(Restaurantes::class, 'restaurante_id');
+        return $this->hasMany('App\Items','servicios_id');
     }
-
-    public function piscina()
-    {
-        return $this->belongsTo(Piscinas::class, 'piscina_id');
-    }
-
-    public function bar()
-    {
-        return $this->belongsTo(Bar::class, 'bar_id');
-    }
+    
 }
