@@ -21,9 +21,9 @@
 		{{ __('Cerrar sesión') }}
 	</a>
 
-	<form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+	{{-- <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
 		@csrf
-	</form>
+	</form> --}}
 </div>
 @endsection
 @section('style')
@@ -37,71 +37,148 @@
 @section('content')
 
 <h2 class="text-center mb-4 font-weight-bold" style="text-transform: uppercase;" id="inicio">SERVICIOS DEL HOTEL </h2>
-<div>
-	<a href="#restaurante" class="btn btn-danger text-white d-inline" id="btns">Agregar servicio <img src="{{asset('/img/restaurante.svg')}}" width="20px" height="20px"></a>
-</div>
 
-<div class="center-container"  style="margin-top: 5%" id="restaurante">
+<div class="row">
+@foreach ($servicios as $servicio)
+	<a href="#servicio_{{ $servicio->id }}" class="btn btn-danger text-white d-inline" id="btns">Sección de {{ $servicio->nombre_servicio }}  <img src="{{asset('/img/restaurante.svg')}}" width="20px" height="20px"></a>
+@endforeach	
+<a class="btn btn-success text-white d-inline ml-5"data-toggle="modal" data-target="#Agregar" >Agregar Servicio</a>
+</div>
+@foreach ($servicios as $servicio)
+<div class="center-container"  style="margin-top: 5%" id="servicio_{{ $servicio->id }}">
 	<div class="card mt-2">
-		<div class="card-body restaurante">
-			<div>
-				<h3>Servicio de <strong style="color: #e23939">Restaurante</strong><img src="{{asset('/img/restaurante.svg')}}" width="50px" height="50px"></h3>
-			</div>
-			
+		<div class="card-body">
+		<div class="row">
+			<h3>Servicio de <strong style="color: #e23939">{{ $servicio->nombre_servicio }}</strong><img src="{{asset('/img/restaurante.svg')}}" width="50px" height="50px"></h3>
+			<a  class="btn btn-primary ml-4 h-50" data-toggle="modal" data-target="#Edit_{{ $servicio->id }}"> Editar</a>
+		</div>	
 			<hr>
-			<!-- Datos principales del hotel a crear -->
-			<table id="Tablehotels" class="table table-striped table-bordered shadow-lg mt-4 " style="width:100%">
+			<table class="table table-bordered shadow-lg mt-4 " style="width:100%">
 				
 				<thead class="bg-red text-white">
-					
 					<tr>
-						<th scope="col">Servicio</th>
-						<th scope="col">Precio</th>
+						<th scope="col">Producto</th>
 						<th scope="col">Código</th>
-						<th scope="col">Vendidos</th>
+						<th scope="col">Precio</th>
 						<th scope="col">Acciones</th>
 					</tr>
 				</thead>
 				<tbody class="bg-white">
-					
+					<tr>
+						@foreach ($servicio->items as $item)
+						<td>{{ $item->producto }}</td>
+						<td>{{ $item->precio }}</td>
+						<td>{{ $item->codigo }}</td>
+						<td>
+							<a href="" class="btn btn-secondary text-white d-block mt-2">Editar</a>
+							<form  method="POST">
+								@csrf
+								@method('DELETE')
+								<input type="submit" class="btn btn-danger d-block text-white mt-2 w-100" value="Eliminar" &time>
+							</form>
+						</td>
+						@endforeach
+					</tr>					
 				</tbody>
 			</table>
 			<hr>
 			<div>
-<<<<<<< HEAD
-				<form method="POST" action="" novalidate id ="form-restaurante" enctype="multipart/form-data">
-=======
-				<form method="post" id ="form-restaurante" enctype="multipart/form-data">
->>>>>>> 2071407d2b7e4e77244fc4b402885a0e07b4ef22
-					
-					<input type="text" name="producto" class= " @error('producto') is-invalid @enderror text-center" style="width: 40%" id="producto_resta" placeholder="Servicio" value="{{ old('producto') }}"/>
-					@error('producto')
-						<span class="invalid-feedback d-block" role="alert">
-							<strong>{{$message}}</strong>
-						</span>
-					@enderror
-					<input type="text" name="precio" class= " @error('precio') is-invalid @enderror text-center" style="width: 40%; margin-left: 26px" id="precio_resta" placeholder="Precio" value="{{ old('precio') }}"/>
+				<form  action ="{{ route('items.store',$servicio->id) }}"method="POST"   enctype="multipart/form-data">
+					@csrf
+					<div class="row form-group">
+						<label for="producto">Producto</label>
+						<input type="text" name="producto" class= " @error('producto') is-invalid @enderror text-center ml-3 mr-5"  placeholder="Nombre producto" value="{{ old('producto') }}" required/>
+						@error('producto')
+							<span class="invalid-feedback d-block" role="alert">
+								<strong>{{$message}}</strong>
+							</span>
+						@enderror
+						<label for="precio">Precio</label>
+					<input type="number" name="precio" class= " @error('precio') is-invalid @enderror text-center  ml-3 mr-5"  placeholder="Precio" value="{{ old('precio') }}"required />
 					@error('precio')
 						<span class="invalid-feedback d-block" role="alert">
 							<strong>{{$message}}</strong>
 						</span>
 					@enderror
-					<input type="text" name="codigo" class= " @error('codigo') is-invalid @enderror text-center" style="width: 40%; margin-top: 2%" id="codigo_resta" placeholder="Código" value="{{ old('codigo') }}"/>
+					<label for="codigo">Codigo</label>
+					<input type="text" name="codigo" class= " @error('codigo') is-invalid @enderror text-center  ml-3 mr-5"  placeholder="Código" value="{{ old('codigo') }}" required/>
 					@error('codigo')
 						<span class="invalid-feedback d-block" role="alert">
 							<strong>{{$message}}</strong>
 						</span>
 					@enderror
+					</div>
 					<input type="submit" class="btn btn-success text-white" style="float: right" value="Agregar servicio">
 				</form>
 			</div>
 		</div>
 	</div>
 </div>
+<div class="modal fade" id="Edit_{{ $servicio->id }}" role="dialog">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<!-- Modal Header -->
+			<div class="modal-header">
+					<h5 class="modal-title" id="exampleModalLabel"> Editar Servicio {{ $servicio->nombre_servicio }}</h5>
+				<button type="button" class="close" data-dismiss="modal">
+					<span aria-hidden="true">×</span>
+					<span class="sr-only">Close</span>
+				</button>
+			</div>
+
+			<!-- Modal Body -->
+			<div class="modal-body">
+				<p class="statusMsg"></p>
+				<form action="{{ route('servicios.update',$servicio->id) }}" method="POST" enctype="multipart/form-data">
+					@csrf
+					<div class="form-group">
+						<label for="slug"> Nombre:</label>
+						<input class= "form-control" name="name" type="text" value="{{ $servicio->nombre_servicio }}">
+					</div>
+					<!-- Modal Footer -->
+					<div class="modal-footer">
+						<a class="btn btn-danger" data-dismiss="modal">Cerrar</a>
+						<input type="submit" class="btn btn-primary" value="Editar"/>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+</div>
+@endforeach
+<div class="modal fade" id="Agregar" role="dialog">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<!-- Modal Header -->
+				<div class="modal-header">
+						<h5 class="modal-title" id="exampleModalLabel">Agregar un nuevo servicio</h5>
+					<button type="button" class="close" data-dismiss="modal">
+						<span aria-hidden="true">×</span>
+						<span class="sr-only">Close</span>
+					</button>
+				</div>
+	
+				<!-- Modal Body -->
+				<div class="modal-body">
+					<p class="statusMsg"></p>
+					<form action="{{ route('servicios.store') }}" method="POST" enctype="multipart/form-data">
+						@csrf
+						<div class="form-group">
+							<label for="slug"> Nombre:</label>
+							<input class= "form-control" name="name" type="text" required>
+						</div>
+						<!-- Modal Footer -->
+						<div class="modal-footer">
+							<a class="btn btn-danger" data-dismiss="modal">Cerrar</a>
+							<input type="submit" class="btn btn-primary" value="Crear"/>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
 <br>
-<<<<<<< HEAD
-=======
-<div class="center-container" id="piscina">
+{{-- <div class="center-container" id="piscina">
 	<div class="card mt-2">
 		<div class="card-body piscina">
 			<h3 class="d-inline">Servicio de <strong style="color: #3966e2">Piscina <img src="{{asset('/img/piscina.svg')}}" width="50px" height="50px"></strong></h3>
@@ -231,100 +308,39 @@
 				<input type="submit" class="btn btn-success text-white" style="float: right" value="Agregar servicio">
 			</form>
 		</div>
-	</div>
+	</div> 
 	<br>
-</div>
->>>>>>> 2071407d2b7e4e77244fc4b402885a0e07b4ef22
-
+</div>--}}
 @endsection
-
 @section('script')
 
 <script>
 	$(document).ready(function() {
-		$('#form-piscina').on('submit', function(e) {
-        e.preventDefault(); 
-		var formData = new FormData(this);
-		formData.append('_token',$('input[name=_token]').val());
-		$.ajax({
-              type: 'POST',
-              url: '{{ url('/servicios/piscinas')}}',
-              data: formData,
-              contentType: false,
-              cache: false,
-              processData:false,
-              success:function(data)
-              {
+		// $('#form-servicios').on('submit', function(e) {
+        // e.preventDefault(); 
+		// var formData = new FormData(this);
+		// formData.append('_token',$('input[name=_token]').val());
+		// $.ajax({
+        //       type: 'POST',
+        //       url: '{{ url('/servicios/piscinas')}}',
+        //       data: formData,
+        //       contentType: false,
+        //       cache: false,
+        //       processData:false,
+        //       success:function(data)
+        //       {
  
-                console.log(data);
+        //         console.log(data);
 
-              }, error:function(response){
-                $.each(response.responseJSON.errors, function(key,value) {
-                  alert(value);
+        //       }, error:function(response){
+        //         $.each(response.responseJSON.errors, function(key,value) {
+        //           alert(value);
                  
-                });
+        //         });
                   
-              }
-            });
-
-		
-		});
-		$('#form-bar').on('submit', function(e) {
-        e.preventDefault(); 
-		var formData = new FormData(this);
-		formData.append('_token',$('input[name=_token]').val());
-		$.ajax({
-              type: 'POST',
-              url: '{{ url('/servicios/bares')}}',
-              data: formData,
-              contentType: false,
-              cache: false,
-              processData:false,
-              success:function(data)
-              {
- 
-                console.log(data);
-
-              }, error:function(response){
-                $.each(response.responseJSON.errors, function(key,value) {
-                  alert(value);
-                 
-                });
-                 
-              }
-            });
-		
-		});
-		$('#form-restaurante').on('submit', function(e) {
-        e.preventDefault(); 
-		var formData = new FormData(this);
-		formData.append('_token',$('input[name=_token]').val());
-		$.ajax({
-              type: 'POST',
-              url: '{{ url('/servicios/restaurantes')}}',
-              data: formData,
-              contentType: false,
-              cache: false,
-              processData:false,
-              success:function(data)
-              {
- 
-                alert("Se ha añadido el producto"+ " "+data.producto+" "+ " a la cuenta !!");
-
-              }, error:function(response){
-                $.each(response.responseJSON.errors, function(key,value) {
-                  alert(value);
-                 
-                });
-                  
-              }
-            });
-		
-		});
-
-
-
-		$('#Tablehotels').DataTable({
+        //       }
+        //     });
+		$('.card-body > table').DataTable({
 			"language": {
 				"lengthMenu": "Mostrar _MENU_ registros por pagina     .",
 				"zeroRecords": "No hay resultados para mostrar",
@@ -375,113 +391,115 @@
 				}
 			]
 		});
+		});
 		
-		$('#TablePiscina').DataTable({
-			"language": {
-				"lengthMenu": "Mostrar _MENU_ registros por pagina     .",
-				"zeroRecords": "No hay resultados para mostrar",
-				"info": "Página _PAGE_ de _PAGES_",
-				"infoEmpty": "No hay registros",
-				"infoFiltered": "(Filtrado de _MAX_ resgistros totales)",
-				"search": "Buscar",
-				"paginate": {
-					"next": "Siguiente",
-					"previous": "Anterior"
-				}
-			},
-			dom: 'lBfrtip',
-			buttons: [{
-					extend: 'copy',
-					text: 'Copiar',
-					exportOptions: {
-						columns: ':visible'
-					}
-				},
-				{
-					extend: 'excel',
-					text: 'Exportar a Excel',
-					exportOptions: {
-						columns: ':visible'
-					}
-				},
-				{
-					extend: 'pdf',
-					text: 'Exportar a PDF',
-					exportOptions: {
-						columns: ':visible'
-					}
-				},
-				{
-					extend: 'print',
-					text: 'Imprimir',
-					exportOptions: {
-						columns: ':visible'
-					}
-				},
-				{
-					extend: 'colvis',
-					text: 'Visibilidad de columnas',
-					exportOptions: {
-						columns: ':visible'
-					}
-				}
-			]
-		});
+		
+		
+		// $('#TablePiscina').DataTable({
+		// 	"language": {
+		// 		"lengthMenu": "Mostrar _MENU_ registros por pagina     .",
+		// 		"zeroRecords": "No hay resultados para mostrar",
+		// 		"info": "Página _PAGE_ de _PAGES_",
+		// 		"infoEmpty": "No hay registros",
+		// 		"infoFiltered": "(Filtrado de _MAX_ resgistros totales)",
+		// 		"search": "Buscar",
+		// 		"paginate": {
+		// 			"next": "Siguiente",
+		// 			"previous": "Anterior"
+		// 		}
+		// 	},
+		// 	dom: 'lBfrtip',
+		// 	buttons: [{
+		// 			extend: 'copy',
+		// 			text: 'Copiar',
+		// 			exportOptions: {
+		// 				columns: ':visible'
+		// 			}
+		// 		},
+		// 		{
+		// 			extend: 'excel',
+		// 			text: 'Exportar a Excel',
+		// 			exportOptions: {
+		// 				columns: ':visible'
+		// 			}
+		// 		},
+		// 		{
+		// 			extend: 'pdf',
+		// 			text: 'Exportar a PDF',
+		// 			exportOptions: {
+		// 				columns: ':visible'
+		// 			}
+		// 		},
+		// 		{
+		// 			extend: 'print',
+		// 			text: 'Imprimir',
+		// 			exportOptions: {
+		// 				columns: ':visible'
+		// 			}
+		// 		},
+		// 		{
+		// 			extend: 'colvis',
+		// 			text: 'Visibilidad de columnas',
+		// 			exportOptions: {
+		// 				columns: ':visible'
+		// 			}
+		// 		}
+		// 	]
+		// });
 
-		$('#TableBar').DataTable({
-			"language": {
-				"lengthMenu": "Mostrar _MENU_ registros por pagina     .",
-				"zeroRecords": "No hay resultados para mostrar",
-				"info": "Página _PAGE_ de _PAGES_",
-				"infoEmpty": "No hay registros",
-				"infoFiltered": "(Filtrado de _MAX_ resgistros totales)",
-				"search": "Buscar",
-				"paginate": {
-					"next": "Siguiente",
-					"previous": "Anterior"
-				}
-			},
-			dom: 'lBfrtip',
-			buttons: [{
-					extend: 'copy',
-					text: 'Copiar',
-					exportOptions: {
-						columns: ':visible'
-					}
-				},
-				{
-					extend: 'excel',
-					text: 'Exportar a Excel',
-					exportOptions: {
-						columns: ':visible'
-					}
-				},
-				{
-					extend: 'pdf',
-					text: 'Exportar a PDF',
-					exportOptions: {
-						columns: ':visible'
-					}
-				},
-				{
-					extend: 'print',
-					text: 'Imprimir',
-					exportOptions: {
-						columns: ':visible'
-					}
-				},
-				{
-					extend: 'colvis',
-					text: 'Visibilidad de columnas',
-					exportOptions: {
-						columns: ':visible'
-					}
-				}
-			]
-		});
+		// $('#TableBar').DataTable({
+		// 	"language": {
+		// 		"lengthMenu": "Mostrar _MENU_ registros por pagina     .",
+		// 		"zeroRecords": "No hay resultados para mostrar",
+		// 		"info": "Página _PAGE_ de _PAGES_",
+		// 		"infoEmpty": "No hay registros",
+		// 		"infoFiltered": "(Filtrado de _MAX_ resgistros totales)",
+		// 		"search": "Buscar",
+		// 		"paginate": {
+		// 			"next": "Siguiente",
+		// 			"previous": "Anterior"
+		// 		}
+		// 	},
+		// 	dom: 'lBfrtip',
+		// 	buttons: [{
+		// 			extend: 'copy',
+		// 			text: 'Copiar',
+		// 			exportOptions: {
+		// 				columns: ':visible'
+		// 			}
+		// 		},
+		// 		{
+		// 			extend: 'excel',
+		// 			text: 'Exportar a Excel',
+		// 			exportOptions: {
+		// 				columns: ':visible'
+		// 			}
+		// 		},
+		// 		{
+		// 			extend: 'pdf',
+		// 			text: 'Exportar a PDF',
+		// 			exportOptions: {
+		// 				columns: ':visible'
+		// 			}
+		// 		},
+		// 		{
+		// 			extend: 'print',
+		// 			text: 'Imprimir',
+		// 			exportOptions: {
+		// 				columns: ':visible'
+		// 			}
+		// 		},
+		// 		{
+		// 			extend: 'colvis',
+		// 			text: 'Visibilidad de columnas',
+		// 			exportOptions: {
+		// 				columns: ':visible'
+		// 			}
+		// 		}
+		// 	]
+		// });
 
-		$('#Table').DataTable({});
-	});
+		// $('#Table').DataTable({});
 </script>
 
 @endsection

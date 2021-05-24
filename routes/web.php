@@ -58,13 +58,16 @@ Route::delete('/hoteles/Habitaciones/{habitacion}', 'HabitacionController@destro
 
 //Rutas para el controlador de Servicios
 Route::get('/servicios', 'ServiciosController@index')->name('servicios.index');
-Route::post('/servicios/restaurantes', 'RestaurantesController@store')->name('restaurante.store');
-Route::delete('/servicios/restaurantes/{restaurante}', 'RestaurantesController@destroy')->name('restaurante.destroy');
-Route::post('/servicios/piscinas', 'PiscinasController@store')->name('piscina.store');
-Route::delete('/servicios/piscinas/{piscina}', 'PiscinasController@destroy')->name('piscina.destroy');
-Route::post('/servicios/bares', 'BarController@store')->name('bar.store');
-Route::delete('/servicios/bares/{bar}', 'BarController@destroy')->name('bar.destroy');
-
+// Route::post('/servicios/restaurantes', 'RestaurantesController@store')->name('restaurante.store');
+// Route::delete('/servicios/restaurantes/{restaurante}', 'RestaurantesController@destroy')->name('restaurante.destroy');
+// Route::post('/servicios/piscinas', 'PiscinasController@store')->name('piscina.store');
+// Route::delete('/servicios/piscinas/{piscina}', 'PiscinasController@destroy')->name('piscina.destroy');
+// Route::post('/servicios/bares', 'BarController@store')->name('bar.store');
+// Route::delete('/servicios/bares/{bar}', 'BarController@destroy')->name('bar.destroy');
+//Items
+Route::post('/items/{servicios}','ServiciosController@items')->name('items.store');
+Route::post('/servicio/store','ServiciosController@store')->name('servicios.store');
+Route::post('/servicio/update/{servicios}','ServiciosController@update')->name('servicios.update');
 //Rutas para el controlador de las reservas 
 Route::get('/reservas/hotel/{hotel}/habitaciones/{habitaciones}', 'ReservaController@create')->name('reservas.create');
 Route::post('/reservas', 'ReservaController@store')->name('reservas.store');
