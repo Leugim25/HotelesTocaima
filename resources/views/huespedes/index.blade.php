@@ -20,7 +20,6 @@
 		<i class="icon ion-md-exit lead mr-2"></i>
 		{{ __('Cerrar sesión') }}
 	</a>
-
 	<form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
 		@csrf
 	</form>
@@ -28,14 +27,21 @@
 @endsection
 
 @section('botones')
-	@if($hoteles > 0 && $habitacion)
+	@if($hoteles > 0 && $habitacion > 0)
 		<div class="ml-3 py-4 mt-5 col-12">
 			<div class="buttons">
 				<h5>Agrega un nuevo huesped</h5>
 				<a href="{{ route('huespedes.create') }}" class="btn btn-warning text-white">Agregar huesped</a>
 			</div>
 		</div>
-		@else
+		@elseif($hoteles == 0)
+		<div class="ml-3 py-4 mt-5 col-12">
+			<div class="buttons">
+				<h5>¡Debes agregar tu hotel primero!</h5>
+				<a href="{{ route('hoteles.create') }}" class="btn btn-warning text-white">Agregar hotel</a>
+			</div>
+		</div>
+		@elseif($habitacion == 0)
 		<div class="ml-3 py-4 mt-5 col-12">
 			<div class="buttons">
 				<h5>No hay habitaciones disponibles</h5>
@@ -43,7 +49,6 @@
 			</div>
 		</div>
 	@endif
-
 @endsection
 @section('content')
 <h2 class="text-center mb-3 font-weight-bold">TUS HUESPEDES</h2>
@@ -56,10 +61,8 @@
 				<thead class="bg-dark text-white">
 					<tr>
 						<th scope="col">Nombres</th>
-						<th scope="col">cedula</th>
-						<th scope="col">Fechas</th>
 						<th scope="col">Habitación</th>
-						<th scope="col">Servicios</th>
+						<th scope="col">Fechas</th>
 						<th scope="col">Acciones</th>
 					</tr>
 				</thead>
@@ -68,7 +71,7 @@
 					<tr>
 						
 						<td class="text-center"> {{ $huesped->nombres }} </td>
-						<td class="text-center"> {{ $huesped->cedula }} </td>
+						<td class="text-center"> Habitación número {{ $huesped->habitacion->n_habitacion }} </td>
 						<td class="text-center">
 							<strong>Llegada</strong> 
 							{{ $huesped->checkin }} 
@@ -77,29 +80,16 @@
 							{{ $huesped->checkout}}
 							<hr>
 							{{Carbon\Carbon::parse($huesped->checkin)->diffInDays($huesped->checkout)}} días y
+
 							@if(Carbon\Carbon::parse($huesped->checkin)->diffInDays($huesped->checkout)-1 == 0)
-								{{Carbon\Carbon::parse($huesped->checkin)->diffInDays($huesped->checkout)}} noches
+									{{Carbon\Carbon::parse($huesped->checkin)->diffInDays($huesped->checkout)}} noches
+								@elseif(Carbon\Carbon::parse($huesped->checkin)->diffInDays($huesped->checkout)-1 < 0)
+									{{Carbon\Carbon::parse($huesped->checkin)->diffInDays($huesped->checkout)}} noches
 								@else
-								{{Carbon\Carbon::parse($huesped->checkin)->diffInDays($huesped->checkout)-1}} noches
+									{{Carbon\Carbon::parse($huesped->checkin)->diffInDays($huesped->checkout)-1}} noches
 							@endif
 						</td>
-						<td class="text-center"> {{ $huesped->habitacion->n_habitacion }} </td>
-						<td>
-							@if($huespedes > 0)
-							<ul>
-								<li>
-									<a href="{{ route('huespedes.show', ['huesped' => $huesped->id]) }}" class="d-block">Restaurante</a>
-								</li>
-								<li>
-									<a href="{{ route('huespedes.showbar', ['huesped' => $huesped->id]) }}" class="d-block">Bar</a>
-								</li>
-								<li>
-									<a href="{{ route('huespedes.show', ['huesped' => $huesped->id]) }}" class="d-block">Piscina</a>
-								</li>
-							</ul>
-								
-							@endif
-						</td>
+						
 						<td>
 							<a href="" class="btn btn-secondary text-white w-100">Editar</a>
 							<form action="{{route('huespedes.destroy', ['huesped' => $huesped->id]) }}" method="POST">
@@ -107,7 +97,7 @@
 								@method('DELETE')
 								<input type="submit" class="btn btn-danger d-block text-white mt-2 w-100" value="Eliminar" &time>
 							</form>
-							<a href="" class="btn btn-info text-white w-100 mt-2">Ver cuenta</a>
+							<a href="{{route('huespedes.information', ['huesped' => $huesped->id]) }}" class="btn btn-info text-white w-100 mt-2">Más información</a>
 						</td>
 					</tr>
 					@endforeach

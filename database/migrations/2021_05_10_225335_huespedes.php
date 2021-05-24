@@ -20,8 +20,8 @@ class Huespedes extends Migration
             $table->string('direccion');
             $table->string('celular');
             $table->string('email');
-            $table->date('checkin');
-            $table->date('checkout');
+            $table->date('checkin')->nullable();
+            $table->date('checkout')->nullable();
             $table->foreignId('habitacion_id')->references('id')->on('habitaciones')->onDelete('cascade')->comment('Llave foranea para tomar las habitaciones');
             $table->timestamps();
         });

@@ -14,7 +14,7 @@ class Hotel extends Model
     ];
 
 
-     // Obtiene la categoria del hotel via FK
+    // Obtiene la categoria del hotel via FK
     public function categoria() {
         return $this->belongsTo(CategoriaHotel::class);
     }

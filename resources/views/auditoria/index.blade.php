@@ -1,5 +1,9 @@
 @extends('layouts.app')
 
+@section('style')
+	
+@endsection
+
 @section('sidebar')
 <div class="menu">
 	<a href="{{ route('principal.index') }}" class="dropdown-item"><i class="icon ion-md-home lead mr-2"></i>Inicio</a>

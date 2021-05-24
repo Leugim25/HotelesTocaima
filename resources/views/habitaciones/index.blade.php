@@ -34,6 +34,11 @@
 			<h5>Crea una nueva habitación</h5>
 			<a href="{{route('habitaciones.create')}}" class="btn btn-warning text-white">Agregar habitación</a>
 		</div>
+
+		<div class="buttons">
+			<h5>Todas las habitaciones</h5>
+			<a href="{{route('habitaciones.all')}}" class="btn btn-warning text-white">Ver habitaciones</a>
+		</div>
 	</div>
 	@else
 	<div class="ml-3 py-4 mt-5 col-12">

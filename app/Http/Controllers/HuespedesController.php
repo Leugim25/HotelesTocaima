@@ -33,8 +33,13 @@ class HuespedesController extends Controller
         $huespedes = Huespedes::all(['id'])->count();
         $habitacion = Habitacion::where('disponibilidad_id', 1)->count();
         $hoteles = Hotel::all()->count();
-       
-        return view('huespedes.index', compact('huesped', 'huespedes' , 'habitacion', 'hoteles'));
+        $obtener = Huespedes::all(['id']);
+        return view('huespedes.index', compact('huesped', 'huespedes' , 'habitacion', 'hoteles', 'obtener'));
+    }
+
+    public function information(Habitacion $habitacion){
+        $huesped = Huespedes::all();
+        return view('huespedes.information', compact('huesped'));
     }
 
     /**
@@ -63,8 +68,6 @@ class HuespedesController extends Controller
             'direccion' => 'required',
             'celular' => 'required',
             'email' => 'required',
-            'checkin' => 'required',
-            'checkout' => 'required',
             'habitacion_id' => 'required',
         ]);
 
@@ -74,8 +77,6 @@ class HuespedesController extends Controller
             'direccion' => $data['direccion'],
             'celular' => $data['celular'],
             'email' => $data['email'],
-            'checkin' => $data['checkin'],
-            'checkout' => $data['checkout'],
             'habitacion_id' => $data['habitacion_id']
         ]);
 

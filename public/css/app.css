@@ -7033,6 +7033,14 @@ a.close.disabled {
   background-color: #2566ff !important;
 }
 
+.bg-disponible {
+  background-color: #0ac749;
+}
+
+.bg-reservada{
+  background-color: #ffbc2c;
+}
+
 .bg-red{
   background-color: #e23939;
 }
@@ -7251,6 +7259,20 @@ button.bg-dark:focus {
 
 .rounded-0 {
   border-radius: 0 !important;
+}
+
+.contener {
+  width: 90%;
+  max-width: 900px;
+  margin: 20px auto;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: 140px 140px 140px;
+  grid-gap: 20px;
+}
+
+.contener .image-contener {
+  grid-column-start: ;
 }
 
 .clearfix::after {

@@ -21,6 +21,7 @@ Route::get('/inicio', 'PrincipalController@index')->name('principal.index');
 
 //Rutas para el controlador de los huspedes
 Route::get('/huespedes', 'HuespedesController@index')->name('huespedes.index');
+Route::get('/huespedes/{huesped}/information', 'HuespedesController@information')->name('huespedes.information');
 Route::get('/huespedes/create', 'HuespedesController@create')->name('huespedes.create');
 Route::post('/huespedes', 'HuespedesController@store')->name('huespedes.store');
 Route::delete('/huespedes/{huesped}', 'HuespedesController@destroy')->name('huespedes.destroy');
@@ -46,6 +47,7 @@ Route::delete('/hoteles/{hotel}', 'HotelController@destroy')->name('hoteles.dest
 
 //Rutas para el controlador de las habitaciones
 Route::get('/habitaciones', 'HabitacionController@index')->name('habitaciones.index');
+Route::get('/habitaciones/all', 'HabitacionController@all')->name('habitaciones.all');
 Route::get('/habitaciones/create', 'HabitacionController@create')->name('habitaciones.create');
 Route::post('/habitaciones', 'HabitacionController@store')->name('habitaciones.store');
 Route::get('/habitaciones/{habitaciones}', 'HabitacionController@show')->name('habitaciones.show');

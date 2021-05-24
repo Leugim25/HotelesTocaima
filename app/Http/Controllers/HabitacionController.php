@@ -179,4 +179,10 @@ class HabitacionController extends Controller
         return redirect()->route('habitaciones.index', $request->hotel_id)->withSuccess('Habitación eliminada exitosamente');
         ;
     }
+
+    public function all(){
+        $habitaciones =  Habitacion::with(['hoteles', 'disponible'])->paginate(12);
+        $todas = Habitacion::all()->count();
+        return view('habitaciones.all', compact('habitaciones', 'todas'));
+    }
 }
