@@ -27,7 +27,7 @@ class HuespedesController extends Controller
         $this->middleware('auth');
     }
     
-    public function index(Request $req)
+    public function index(Habitacion $habitaciones)
     {
         $huesped = Huespedes::all();
         $huespedes = Huespedes::all(['id'])->count();
@@ -37,8 +37,8 @@ class HuespedesController extends Controller
         return view('huespedes.index', compact('huesped', 'huespedes' , 'habitacion', 'hoteles', 'obtener'));
     }
 
-    public function information(Habitacion $habitacion){
-        $huesped = Huespedes::all();
+    public function information($huesped){
+        $huesped = Huespedes::where('id', $huesped)->first();
         return view('huespedes.information', compact('huesped'));
     }
 
@@ -103,19 +103,11 @@ class HuespedesController extends Controller
     public function show(Huespedes $huespedes)
     {
         $huesped = Huespedes::all();
-        $restaurantes = Restaurantes::all();
         
-        return view('huespedes.show', compact('huesped', 'restaurantes'));
+        return view('huespedes.show', compact('huesped'));
     }
 
-    public function showbar(Huespedes $huespedes)
-    {
-        $huesped = Huespedes::all();
-        $products = Bar::all();
-        
-        return view('huespedes.showbar', compact('huesped', 'products'));
-    }
-
+    
     public function service(Request $request, Huespedes $huespedes)
     {
         $data = request()->validate([
@@ -138,9 +130,20 @@ class HuespedesController extends Controller
      * @param  \App\Huespedes  $huespedes
      * @return \Illuminate\Http\Response
      */
-    public function edit(Huespedes $huespedes)
+    public function edit(Request $request, Huespedes $huesped)
     {
-        //
+        $request->validate([
+            'checkout' => 'required',
+            'h_salida' => 'required',
+            'habitacion_id' => 'required',
+        ]);
+
+        $huesped->checkout = $request->checkout;
+        $huesped->h_salida = $request->h_salida;
+        $huesped->habitacion_id = $request->habitacion_id;
+        $huesped->save();
+
+        return redirect()->route('huespedes.information', $huesped->id)->withSuccess('¡Check-in agregado o actualizado!');
     }
 
     /**
@@ -150,9 +153,20 @@ class HuespedesController extends Controller
      * @param  \App\Huespedes  $huespedes
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Huespedes $huespedes)
+    public function update(Request $request, Huespedes $huesped)
     {
-        //
+        $request->validate([
+            'checkin' => 'required',
+            'h_entrada' => 'required',
+            'habitacion_id' => 'required',
+        ]);
+
+        $huesped->checkin = $request->checkin;
+        $huesped->h_entrada = $request->h_entrada;
+        $huesped->habitacion_id = $request->habitacion_id;
+        $huesped->save();
+
+        return redirect()->route('huespedes.information', $huesped->id)->withSuccess('¡Check-in agregado o actualizado!');
     }
 
     /**

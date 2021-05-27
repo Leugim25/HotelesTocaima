@@ -66,7 +66,6 @@
 				<th scope="col">Nº de Habitación</th>
 				<th scope="col">Nº Camas</th>
 				<th scope="col">Mobiliario</th>
-				<th scope="col">Servicios</th>
 				<th scope="col">Precio</th>
 				<th scope="col">Disponibilidad</th>
 				<th scope="col">Acciones</th>
@@ -76,10 +75,9 @@
 			@foreach($habitaciones as $habitacion)
 			<tr>
 				<td>{{$habitacion->hoteles->titulo}}</td>
-				<td class="text-center"> {{ $habitacion->n_habitacion }} </td>
+				<td class="text-center"> Habitación {{ $habitacion->n_habitacion }} </td>
 				<td class="text-center"> {{ $habitacion->camas }} </td>
 				<td class="services"> {!! $habitacion->mobiliario !!} </td>
-				<td class=""> {!! $habitacion->servicios !!} </td>
 				<td class="text-center"> {{ number_format($habitacion->precio->valor) }} </td>
 				<td class="text-center">
 					{{ optional($habitacion->disponible)->estado }}
@@ -91,7 +89,6 @@
 						@method('DELETE')
 						<input type="submit" class="btn btn-danger d-block text-white mt-2 w-100" value="Eliminar" &time>
 					</form>
-					<a href="" class="btn btn-warning d-block text-white mt-2">Ver</a>
 				</td>
 			</tr>
 			@endforeach
@@ -116,7 +113,7 @@
 				}
 			},
 			"columnDefs": [{
-				"targets": 6,
+				"targets": 5,
 				"data": "Disponibilidad",
 				"render": function(data, type, row, meta) {
 					switch (data) {

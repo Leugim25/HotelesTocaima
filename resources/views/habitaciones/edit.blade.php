@@ -118,25 +118,12 @@
 							@enderror
 						</div>
 
-						<!-- Campo para los servicios ofrecidos en la habitación -->
-						<div class="form-group mt-2 category">
-							<label for="servicios">Servicios</label>
-							<input id="servicios" type="hidden" name="servicios" value="{{ $habitacion->servicios }}">
-							<trix-editor class="form-control @error('servicios') is-invalid @enderror " input="servicios"></trix-editor>
-
-							@error('servicios')
-							<span class="invalid-feedback d-block" role="alert">
-								<strong>{{$message}}</strong>
-							</span>
-							@enderror
-						</div>
-
 						<!-- Campo para el valor de la habitación -->
 						<div class="form-group category">
-							<label for="precio" class="titles">Estado de la Habitación</label>
+							<label for="precio" class="titles">Precio de la habitación</label>
 
 							<select name="precio" class="form-control @error('precio') is-invalid @enderror" id="precio">
-								<option value="">---------- Selecciona el estado ----------</option>
+								<option value="">---------- Selecciona el precio ----------</option>
 
 								<!-- Se recorren todos los estados de la habitación -->
 								@foreach($precio as $precio)

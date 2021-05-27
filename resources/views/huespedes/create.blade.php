@@ -116,7 +116,7 @@
 
                         <!-- Se recorren todas las habitaciones disponibles -->
                         @foreach($habitacion as $habitacion)
-                            <option value="{{ $habitacion->id }}" {{ old('habitacion_id') == $habitacion->id ? 'selected' : '' }} >Habitación {{$habitacion->n_habitacion}}: Valor ${{number_format($habitacion->precio->valor)}} pesos</option>
+                            <option value="{{ $habitacion->id }}" {{ old('habitacion_id') == $habitacion->id ? 'selected' : '' }} >Habitación número {{$habitacion->n_habitacion}}: Valor ${{number_format($habitacion->precio->valor)}} pesos</option>
                         @endforeach
                     </select>
 
@@ -127,23 +127,7 @@
                     @enderror
                 </div>
         </div>
-            <label class="text-white" for="fechaActencion">Check-in:</label>
-            <input type="date" name="checkin" class="form-control datepicker @error('checkin') is-invalid @enderror" id="checkin" value="{{ old('checkin') }}">
-
-            @error('checkin')
-            <span class="invalid-feedback d-block" role="alert">
-                <strong>{{$message}}</strong>
-            </span>
-            @enderror
-
-            <label class="text-white mt-4" for="fechaActencion">Check-out:</label>
-
-            <input type="date" name="checkout" class="form-control datepicker @error('checkout') is-invalid @enderror" id="checkout" value="{{ old('checkout') }}">
-            @error('checkout')
-            <span class="invalid-feedback d-block" role="alert">
-                <strong>{{$message}}</strong>
-            </span>
-            @enderror
+           
         <!-- Agregar datos del hotel -->
         <div class="form-group">
             <input type="submit" class="btn btn-warning text-white mt-4" value="Agregar Huesped">

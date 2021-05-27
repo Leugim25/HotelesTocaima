@@ -21,13 +21,13 @@ Route::get('/inicio', 'PrincipalController@index')->name('principal.index');
 
 //Rutas para el controlador de los huspedes
 Route::get('/huespedes', 'HuespedesController@index')->name('huespedes.index');
-Route::get('/huespedes/{huesped}/information', 'HuespedesController@information')->name('huespedes.information');
 Route::get('/huespedes/create', 'HuespedesController@create')->name('huespedes.create');
 Route::post('/huespedes', 'HuespedesController@store')->name('huespedes.store');
+Route::get('/huespedes/{huesped}/information', 'HuespedesController@information')->name('huespedes.information');
 Route::delete('/huespedes/{huesped}', 'HuespedesController@destroy')->name('huespedes.destroy');
-Route::get('/huespedes/{huesped}/servicio/restaurante', 'HuespedesController@show')->name('huespedes.show');
-Route::post('/huespedes/{huesped}/cuenta', 'HuespedesController@service')->name('huespedes.service');
-Route::get('/huespedes/{huesped}/servicio/bar', 'HuespedesController@showbar')->name('huespedes.showbar');
+Route::post('/huespedes/{huesped}/information/cuenta', 'HuespedesController@service')->name('huespedes.service');
+Route::post('/huespedes/{huesped}/information/update-checkin', 'HuespedesController@update')->name('huespedes.update');
+Route::post('/huespedes/{huesped}/information/update-checkout', 'HuespedesController@edit')->name('huespedes.edit');
 
 //Rutas para las auditorias
 Route::get('/auditorias', 'AuditoriasController@index')->name('auditoria.index');
@@ -46,8 +46,8 @@ Route::put('/hoteles/{hotel}', 'HotelController@update')->name('hoteles.update')
 Route::delete('/hoteles/{hotel}', 'HotelController@destroy')->name('hoteles.destroy');
 
 //Rutas para el controlador de las habitaciones
-Route::get('/habitaciones', 'HabitacionController@index')->name('habitaciones.index');
-Route::get('/habitaciones/all', 'HabitacionController@all')->name('habitaciones.all');
+Route::get('/hotel/habitaciones', 'HabitacionController@index')->name('habitaciones.index');
+Route::get('/hotel/habitaciones/all', 'HabitacionController@all')->name('habitaciones.all');
 Route::get('/habitaciones/create', 'HabitacionController@create')->name('habitaciones.create');
 Route::post('/habitaciones', 'HabitacionController@store')->name('habitaciones.store');
 Route::get('/habitaciones/{habitaciones}', 'HabitacionController@show')->name('habitaciones.show');
@@ -58,16 +58,15 @@ Route::delete('/hoteles/Habitaciones/{habitacion}', 'HabitacionController@destro
 
 //Rutas para el controlador de Servicios
 Route::get('/servicios', 'ServiciosController@index')->name('servicios.index');
-// Route::post('/servicios/restaurantes', 'RestaurantesController@store')->name('restaurante.store');
-// Route::delete('/servicios/restaurantes/{restaurante}', 'RestaurantesController@destroy')->name('restaurante.destroy');
-// Route::post('/servicios/piscinas', 'PiscinasController@store')->name('piscina.store');
-// Route::delete('/servicios/piscinas/{piscina}', 'PiscinasController@destroy')->name('piscina.destroy');
-// Route::post('/servicios/bares', 'BarController@store')->name('bar.store');
-// Route::delete('/servicios/bares/{bar}', 'BarController@destroy')->name('bar.destroy');
+
 //Items
-Route::post('/items/{servicios}','ServiciosController@items')->name('items.store');
+Route::post('/servicio/items/{servicios}','ServiciosController@items')->name('items.store');
+Route::delete('/servicio/items/delete/{servicios}','ServiciosController@delete')->name('items.delete');
+Route::post('/servicio/items/update/{items}','ServiciosController@edit')->name('items.edit');
 Route::post('/servicio/store','ServiciosController@store')->name('servicios.store');
 Route::post('/servicio/update/{servicios}','ServiciosController@update')->name('servicios.update');
+Route::delete('/servicio/delete/{servicios}', 'ServiciosController@destroy')->name('servicios.destroy');
+
 //Rutas para el controlador de las reservas 
 Route::get('/reservas/hotel/{hotel}/habitaciones/{habitaciones}', 'ReservaController@create')->name('reservas.create');
 Route::post('/reservas', 'ReservaController@store')->name('reservas.store');

@@ -32,8 +32,13 @@
 	</div>
 @endsection
 
-@section('botones')    
-    <a href="{{ route('hoteles.index') }}" class="btn btn-warning text-white">Regresar</a>
+@section('botones')   
+<div class="ml-3 py-4 mt-5 col-12">
+    <div class="buttons">
+        <h5>Regresa al menú principal</h5>
+        <a href="{{ route('hoteles.index') }}" class="btn btn-warning text-white">Regresar</a>
+    </div>
+</div>
 @endsection
 
 @section('content')
@@ -99,7 +104,7 @@
                 <p class="text-white text-center" for="descripcion">Descripción del hotel</p>
                 <input id="descripcion" type="hidden" name="descripcion" value="{{ old('descripcion') }}">
                 <trix-editor 
-                    class="form-control @error('descripcion') is-invalid @enderror "
+                    class="form-control w-100 @error('descripcion') is-invalid @enderror "
                     input="descripcion"
                 ></trix-editor>
 
@@ -129,7 +134,7 @@
 
         <div class="row">
             <div class="col-half">
-                <p class="text-white text-center">Hora de apertura</p>
+                <p class="text-white text-left">Hora de apertura</p>
                 <div class="input-group">
                     <!-- Campo para la apertura del hotel -->
                     <div class="form-group">
@@ -145,7 +150,7 @@
                 </div>
             </div>
             <div class="col-half">
-            <p class="text-white text-center">Hora de cierre</p>
+            <p class="text-white text-left">Hora de cierre</p>
                 <div class="input-group">
                     <!-- Campo para el cierre del hotel -->
                     <div class="form-group">
@@ -163,7 +168,7 @@
 
         <div class="row">
             <div class="col-half">
-            <p class="text-white text-center">WhatsApp</p>
+            <p class="text-white text-center">Número de WhatsApp</p>
             <div class="input-group input-group-icon">
                 <input type="text" name="urlWhatsApp" class= "@error('urlWhatsApp') is-invalid @enderror" id="urlWhatsApp" placeholder="Ej: 3124567890" value="{{ old('urlWhatsApp') }}">
                                 
@@ -198,7 +203,7 @@
             </div>
         </div>
         
-        <p class="text-white text-center">Url Facebook</p>
+        <p class="text-white text-center">Url de la página de Facebook</p>
         <div class="input-group input-group-icon">
             <input type="text" name="urlFacebook" class= "@error('urlFacebook') is-invalid @enderror" id="urlFacebook" placeholder="https://facebook.com/tu_sitio" value="{{ old('urlFacebook') }}">
                                 
@@ -216,12 +221,11 @@
             <input type="submit" class="btn btn-warning text-white" value="Agregar Hotel">
         </div>
     </form>
-    
 </div>
-    
+<br>
 @endsection
 
 @section('script')
 <script src="https://cdnjs.cloudflare.com/ajax/libs/trix/1.2.1/trix.js" integrity="sha256-2D+ZJyeHHlEMmtuQTVtXt1gl0zRLKr51OCxyFfmFIBM=" crossorigin="anonymous" defer></script>
-<script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous" defer></script>
+
 @endsection

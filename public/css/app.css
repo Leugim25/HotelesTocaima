@@ -7261,18 +7261,9 @@ button.bg-dark:focus {
   border-radius: 0 !important;
 }
 
-.contener {
-  width: 90%;
-  max-width: 900px;
-  margin: 20px auto;
+.contener-huesped {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  grid-template-rows: 140px 140px 140px;
-  grid-gap: 20px;
-}
-
-.contener .image-contener {
-  grid-column-start: ;
+  grid-template-columns: 50% 50%;
 }
 
 .clearfix::after {
@@ -11124,6 +11115,57 @@ svg {
   color: white;
 }
 
+.titulo-hoteles{
+  color: #333;
+    font-size: 1.8rem;
+    margin-left: 9%;
+    margin-right: 9%;
+    text-transform: uppercase;
+    border-bottom: 3px solid #002386 !important;
+    display: inline-block;
+    padding-bottom: .5rem;
+    padding-right: 1rem;
+    padding-left: 1rem;
+}
+
+.titulo-huespedes{
+    text-transform: uppercase;
+    border-bottom: 3px solid #2566ff !important;
+    display: inline-block;
+    padding-bottom: .5rem;
+    padding-right: 1rem;
+    padding-left: 1rem;
+    padding-top: 1rem;
+    margin-left: 15%;
+    margin-right: 15%;
+
+}
+ 
+.titulo-huespedes:hover{
+  border-bottom: 3px solid #002386 !important;
+}
+
+.titulo-informa {
+  text-transform: uppercase;
+  border-bottom: 3px solid #2566ff !important;
+  display: inline-block;
+  padding-bottom: .5rem;
+  padding-right: 1rem;
+  padding-left: 1rem;
+  padding-top: 1rem;
+  margin-left: 7%;
+  margin-right: 7%;
+}
+
+.titulo-informa:hover{
+  border-bottom: 3px solid #002386 !important;
+}
+
+.imagen-huesped{
+  height: 400px;
+  width: 100%;
+}
+
 #card-crear {
   background-color: #3b3b3b !important;
   color: white;
@@ -11180,6 +11222,7 @@ a:hover {
 
 #sidebar-container {
   min-height: 100vh;
+  width: 90%;
   border-top-right-radius: 10px;
   border-bottom-right-radius: 10px;
   box-shadow: 0px 0px 20px #727272;
@@ -11412,12 +11455,6 @@ a:hover {
   border-color: black;
 }
 
-#sidebar-container {
-  min-height: 100vh;
-  width: 90%;
-  
-}
-
 #sidebar-container:hover{
   width: 90%;
   border-top-right-radius: 10px;
@@ -11430,6 +11467,16 @@ a:hover {
 
 #sidebar-container .menu {
   width: 18rem;
+}
+
+#multipart{
+  border-top: 3px solid #2566ff !important;
+  border-right: 3px solid #2566ff !important;
+  border-bottom: 3px solid #2566ff !important;
+}
+
+.titles-huesped:hover {
+  color: #2566ff;
 }
 
 .titulo-categoria {

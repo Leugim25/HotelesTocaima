@@ -43,7 +43,7 @@
 					<form method="POST" action="{{ route('habitaciones.store') }}" enctype="multipart/form-data" novalidate>
 						@csrf
 						<div class="pagina">
-							<!-- Nombres -->
+							<!-- Hotel -->
 							<div class="form-group category">
 								<label for="hotel_id" class="titles">Hotel</label>
 								<select name="hotel_id" class="form-control @error('hotel') is-invalid @enderror" id="hotel_id">
@@ -120,19 +120,6 @@
 							<trix-editor class="form-control @error('mobiliario') is-invalid @enderror " input="mobiliario"></trix-editor>
 
 							@error('mobiliario')
-							<span class="invalid-feedback d-block" role="alert">
-								<strong>{{$message}}</strong>
-							</span>
-							@enderror
-						</div>
-
-						<!-- Campo para los servicios ofrecidos en la habitación -->
-						<div class="form-group mt-2 category">
-							<label for="servicios">Servicios</label>
-							<input id="servicios" type="hidden" name="servicios" value="{{ old('servicios') }}" placeholder="Aquí va una breve descripción del HOTEL">
-							<trix-editor class="form-control @error('servicios') is-invalid @enderror " input="servicios"></trix-editor>
-
-							@error('servicios')
 							<span class="invalid-feedback d-block" role="alert">
 								<strong>{{$message}}</strong>
 							</span>

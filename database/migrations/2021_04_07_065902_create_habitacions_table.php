@@ -28,10 +28,9 @@ class CreateHabitacionsTable extends Migration
 
         Schema::create('habitaciones', function (Blueprint $table) {
             $table->id();
-            $table->integer('n_habitacion');
+            $table->integer('n_habitacion')->unique();
             $table->integer('camas');
             $table->mediumText('mobiliario');
-            $table->mediumText('servicios');
             $table->foreignId('precio_id')->references('id')->on('precios')->onDelete('cascade')->comment('Llave foranea para el precio de las habitaciones');
             $table->string('imagen')->default('bed.png');
             $table->foreignId('disponibilidad_id')->references('id')->on('disponibilidad_habitacion')->comment('Llave foranea para el estado de las habitaciones');

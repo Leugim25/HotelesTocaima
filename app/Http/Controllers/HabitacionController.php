@@ -9,7 +9,6 @@ use Illuminate\Http\Request;
 use App\DisponibilidadHabitacion;
 use App\Precios;
 use Illuminate\Routing\Controller;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
 class HabitacionController extends Controller
@@ -19,18 +18,14 @@ class HabitacionController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function __construct()
-    {
-        $this->middleware('auth');
-    }
     
-    public function index()
+    public function index(Hotel $hotel)
     {
-        $user = auth()->user()->habitaciones;
+
         $habitaciones =  Habitacion::with(['hoteles', 'disponible'])->get();
         $hoteles = Hotel::all(['id'])->count();
 
-        return view('habitaciones.index', compact('habitaciones', 'hoteles', 'user'));
+        return view('habitaciones.index', compact('habitaciones', 'hoteles'));
     }
 
     /**
@@ -58,10 +53,9 @@ class HabitacionController extends Controller
         //return response()->json($request);
         $request->validate([
             'hotel_id' =>  'required',
-            'n_habitacion' => 'required|min:1',
+            'n_habitacion' => 'required|min:1|unique:habitaciones',
             'camas' => 'required',
             'mobiliario' => 'required',
-            'servicios' => 'required',
             'precio' => 'required',
             'imagen' => 'required|image',
             'disponibilidad' => 'required',
@@ -75,7 +69,6 @@ class HabitacionController extends Controller
         $variable->n_habitacion = $request->n_habitacion;
         $variable->camas = $request->camas;
         $variable->mobiliario = $request->mobiliario;
-        $variable->servicios = $request->servicios;
         $variable->precio_id = $request->precio;
         $variable->imagen = $ruta_imagen;
         $variable->disponibilidad_id = $request->disponibilidad;
@@ -138,7 +131,6 @@ class HabitacionController extends Controller
             'n_habitacion' => 'required|min:1',
             'camas' => 'required',
             'mobiliario' => 'required',
-            'servicios' => 'required',
             'precio' => 'required',
             'disponibilidad' => 'required',
         ]);
@@ -147,10 +139,11 @@ class HabitacionController extends Controller
         $habitacion->n_habitacion = $request->n_habitacion;
         $habitacion->camas = $request->camas;
         $habitacion->mobiliario = $request->mobiliario;
-        $habitacion->servicios = $request->servicios;
         $habitacion->precio_id = $request->precio;
         $habitacion->disponibilidad_id = $request->disponibilidad;
+        
         $habitacion->save();
+        
 
         DB::table('auditorias')->insert([
             'description' => 'Se ha editado la habitación número' . " " . $request->n_habitacion . " " . 'del hotel con el id' . " " . $request->hotel_id,

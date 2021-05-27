@@ -62,44 +62,50 @@
 					<tr>
 						<th scope="col">Nombres</th>
 						<th scope="col">Habitación</th>
+						<th scope="col">Estado</th>
 						<th scope="col">Fechas</th>
 						<th scope="col">Acciones</th>
 					</tr>
 				</thead>
 				<tbody class="bg-white">
 					@foreach($huesped as $huesped)
-					<tr>
-						
-						<td class="text-center"> {{ $huesped->nombres }} </td>
-						<td class="text-center"> Habitación número {{ $huesped->habitacion->n_habitacion }} </td>
-						<td class="text-center">
-							<strong>Llegada</strong> 
-							{{ $huesped->checkin }} 
-							<hr>
-							<strong>Salida</strong>
-							{{ $huesped->checkout}}
-							<hr>
-							{{Carbon\Carbon::parse($huesped->checkin)->diffInDays($huesped->checkout)}} días y
+							<tr>
+								<td class="text-center"> {{ $huesped->nombres }} </td>
+								<td class="text-center"> 
+									Habitación número {{ $huesped->habitacion->n_habitacion }} 
+								</td>
+								<td class="text-center">
+									{{ $huesped->habitacion->disponible->estado }}
+								</td>
+								<td class="text-center">
+									<strong>Llegada</strong> 
+									{{ $huesped->checkin }} 
+									<hr>
+									<strong>Salida</strong>
+									{{ $huesped->checkout}}
+									<hr>
+									{{Carbon\Carbon::parse($huesped->checkin)->diffInDays($huesped->checkout)}} días y
 
-							@if(Carbon\Carbon::parse($huesped->checkin)->diffInDays($huesped->checkout)-1 == 0)
-									{{Carbon\Carbon::parse($huesped->checkin)->diffInDays($huesped->checkout)}} noches
-								@elseif(Carbon\Carbon::parse($huesped->checkin)->diffInDays($huesped->checkout)-1 < 0)
-									{{Carbon\Carbon::parse($huesped->checkin)->diffInDays($huesped->checkout)}} noches
-								@else
-									{{Carbon\Carbon::parse($huesped->checkin)->diffInDays($huesped->checkout)-1}} noches
-							@endif
-						</td>
-						
-						<td>
-							<a href="" class="btn btn-secondary text-white w-100">Editar</a>
-							<form action="{{route('huespedes.destroy', ['huesped' => $huesped->id]) }}" method="POST">
-								@csrf
-								@method('DELETE')
-								<input type="submit" class="btn btn-danger d-block text-white mt-2 w-100" value="Eliminar" &time>
-							</form>
-							<a href="{{route('huespedes.information', ['huesped' => $huesped->id]) }}" class="btn btn-info text-white w-100 mt-2">Más información</a>
-						</td>
-					</tr>
+									@if(Carbon\Carbon::parse($huesped->checkin)->diffInDays($huesped->checkout)-1 == 0)
+											{{Carbon\Carbon::parse($huesped->checkin)->diffInDays($huesped->checkout)}} noches
+										@elseif(Carbon\Carbon::parse($huesped->checkin)->diffInDays($huesped->checkout)-1 < 0)
+											{{Carbon\Carbon::parse($huesped->checkin)->diffInDays($huesped->checkout)}} noches
+										@else
+											{{Carbon\Carbon::parse($huesped->checkin)->diffInDays($huesped->checkout)-1}} noches
+									@endif
+								</td>
+								
+								<td>
+									<a href="" class="btn btn-secondary text-white w-100">Editar</a>
+									<form action="{{route('huespedes.destroy', ['huesped' => $huesped->id]) }}" method="POST">
+										@csrf
+										@method('DELETE')
+										<input type="submit" class="btn btn-danger d-block text-white mt-2 w-100" value="Eliminar" &time>
+									</form>
+									<a href="{{route('huespedes.information', ['huesped' => $huesped->id]) }}" class="btn btn-info text-white w-100 mt-2">Más información</a>
+								</td>
+							</tr>
+					
 					@endforeach
 				</tbody>
 			</table>
@@ -127,6 +133,32 @@
 				}
 			},
 			dom: 'lBfrtip',
+			"columnDefs": [{
+				"targets": 2,
+				"data": "Habitación",
+				"render": function(data, type, row, meta) {
+					switch (data) {
+						case 'Disponible':
+							return "<span class='badge badge-success'>Disponible</span>";
+							break;
+						case 'Ocupada':
+							return "<span class='badge badge-danger'>Ocupada</span>";
+							break;
+						case 'Reservada':
+							return "<span class='badge badge-warning'>Reservada</span>";
+							break;
+						case 'En espera':
+							return "<span class='badge badge-primary'>En espera</span>";
+							break;
+						case 'Cancelada':
+							return "<span class='badge badge-secondary'>Cancelada</span>";
+							break;
+						default:
+							"<span></span>";
+
+					}
+				}
+			}],
 			buttons: [{
 					extend: 'copy',
 					text: 'Copiar',

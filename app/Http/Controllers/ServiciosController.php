@@ -31,7 +31,7 @@ class ServiciosController extends Controller
         $items = new Items();
         $items->producto = $request->producto;
         $items->precio = $request->precio;
-        $items->codigo = $request->codigo;
+        $items->cantidad = $request->cantidad;
         $items->servicios_id = $servicios->id;
         $items->save();
         return redirect()->route('servicios.index')->withSuccess('Item añadido al servicio de' . ' ' . $servicios->nombre_servicio);
@@ -54,11 +54,14 @@ class ServiciosController extends Controller
      */
     public function store(Request $request)
     {
+        $ruta_imagen = $request['imagen']->store('upload-imagenesServicios', 'public');
         $servicio = new Servicios();
         $servicio->nombre_servicio = $request->name;
+        $servicio->color = $request->color;
+        $servicio->imagen = $ruta_imagen;
         $servicio->save();
 
-        return redirect()->route('servicios.index')->withSuccess('Nuevo servicio creado, agrega tus Items !');
+        return redirect()->route('servicios.index')->withSuccess('Nuevo servicio creado, ¡agrega tus items!');
 
     }
 
@@ -79,9 +82,13 @@ class ServiciosController extends Controller
      * @param  \App\Servicios  $servicios
      * @return \Illuminate\Http\Response
      */
-    public function edit(Servicios $servicios)
+    public function edit(Request $request, Items $items)
     {
-        //
+        $items->producto = $request->producto;
+        $items->precio = $request->precio;
+        $items->cantidad = $request->cantidad;
+        $items->save();
+        return redirect()->route('servicios.index')->withSuccess('¡Servicio actualizado!');
     }
 
     /**
@@ -93,9 +100,19 @@ class ServiciosController extends Controller
      */
     public function update(Request $request, Servicios $servicios)
     {
-         $servicios->nombre_servicio = $request->name;
-         $servicios->save();
-         return redirect()->route('servicios.index')->withSuccess('Servicio actualizado !');
+
+        if (request('imagen')) {
+            // obtener la ruta de la imagen
+            $ruta_imagen = $request['imagen']->store('upload-imagenesServicios', 'public');
+
+            // Asignar al objeto
+            $servicios->imagen = $ruta_imagen;
+        }
+
+        $servicios->nombre_servicio = $request->name;
+        $servicios->color = $request->color;
+        $servicios->save();
+        return redirect()->route('servicios.index')->withSuccess('¡Servicio actualizado!');
     }
 
     /**
@@ -106,6 +123,12 @@ class ServiciosController extends Controller
      */
     public function destroy(Servicios $servicios)
     {
-        //
+        $servicios->delete();
+        return redirect()->route('servicios.index')->withSuccess('¡Servicio eliminado exitosamente!');
+    }
+
+    public function delete (Items $servicios) {
+        $servicios->delete();
+        return redirect()->route('servicios.index')->withSuccess('¡Item eliminado exitosamente!');
     }
 }

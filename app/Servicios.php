@@ -10,7 +10,7 @@ class Servicios extends Model
 
     // Campos que se agregaran
     protected $fillable = [
-        'nombre_servicio',
+        'nombre_servicio', 'color',
     ];
 
     public function items()

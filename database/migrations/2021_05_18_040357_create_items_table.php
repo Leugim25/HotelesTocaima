@@ -17,7 +17,7 @@ class CreateItemsTable extends Migration
             $table->id();
             $table->string('producto');
             $table->string('precio');
-            $table->string('codigo');
+            $table->string('cantidad');
             $table->foreignId('servicios_id')->references('id')->on('servicios')->onDelete('cascade')->comment('Llave foranea para los servicios');
             $table->timestamps();
         });
