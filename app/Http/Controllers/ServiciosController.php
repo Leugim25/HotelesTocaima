@@ -2,9 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Bar;
-use App\Piscinas;
-use App\Restaurantes;
 use App\Servicios;
 use App\Items;
 use Illuminate\Http\Request;

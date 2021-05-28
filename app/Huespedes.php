@@ -16,4 +16,12 @@ class Huespedes extends Model
     {
         return $this->belongsTo(Habitacion::class, 'habitacion_id'); // FK de esta tabla
     }
+
+    public function cuenta() {
+        return $this->hasMany(Cuenta::class, 'huespedes_id');
+    }
+
+    public function huespedesService() {
+        return $this->hasMany(HuespedServices::class, 'huespedes_id');
+    }
 }

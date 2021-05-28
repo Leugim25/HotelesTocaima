@@ -88,7 +88,7 @@
 								<div class="modal-dialog">
 									<div class="modal-content">
 										<!-- Modal Header -->
-										<div class="modal-header">
+										<div class="modal-header bg-secondary text-white">
 												<h5 class="modal-title" id="exampleModalLabel"> Editar item (<strong>{{ $item->producto }}</strong>)</h5>
 											<button type="button" class="close" data-dismiss="modal">
 												<span aria-hidden="true">×</span>
@@ -162,7 +162,7 @@
 		<div class="modal-dialog">
 			<div class="modal-content">
 				<!-- Modal Header -->
-				<div class="modal-header">
+				<div class="modal-header bg-secondary text-white">
 						<h5 class="modal-title" id="exampleModalLabel"> Editar servicio de <strong>{{ $servicio->nombre_servicio }}</strong></h5>
 					<button type="button" class="close" data-dismiss="modal">
 						<span aria-hidden="true">×</span>
@@ -215,7 +215,7 @@
 		<div class="modal-dialog">
 			<div class="modal-content">
 				<!-- Modal Header -->
-				<div class="modal-header">
+				<div class="modal-header bg-secondary text-white">
 						<h5 class="modal-title" id="exampleModalLabel">Agregar un nuevo servicio</h5>
 					<button type="button" class="close" data-dismiss="modal">
 						<span aria-hidden="true">×</span>

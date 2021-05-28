@@ -68,7 +68,7 @@
 						<h4 class="titulo-informa">Cuenta total del huesped</h4>
 						<li><h6><strong class="titles-huesped">Número de habitación: </strong>{{$huesped->habitacion->n_habitacion}}</h6></li>
 						<li><h6><strong class="titles-huesped">Precio de la habitación: </strong> ${{number_format($huesped->habitacion->precio->valor)}} pesos</h6></li>
-						<a href="" class="btn btn-secondary text-white mr-3" style="float: right">Cuenta</a>
+						<a href="" class="btn btn-secondary text-white mr-3" style="float: right" data-toggle="modal" data-target="#Cuenta">Cuenta</a>
 					</ul>
 				</div>
 			</div>
@@ -77,12 +77,12 @@
 	<br>
 
 	<!-- Cuenta-->
-	<div class="modal fade" id="Check-out" role="dialog">
+	<div class="modal fade" id="Cuenta" role="dialog">
 		<div class="modal-dialog">
 			<div class="modal-content">
 				<!-- Modal Header -->
 				<div class="modal-header bg-secondary text-white">
-						<h5 class="modal-title" id="exampleModalLabel">Agregar el check-out del huesped</h5>
+						<h5 class="modal-title" id="exampleModalLabel">Agregar a la cuenta del huesped</h5>
 					<button type="button" class="close" data-dismiss="modal">
 						<span aria-hidden="true">×</span>
 						<span class="sr-only">Close</span>
@@ -95,12 +95,17 @@
 					<form action="{{ route('huespedes.edit', $huesped->id) }}" method="POST" enctype="multipart/form-data">
 						@csrf
 						<div class="form-group">
-							<label for="slug"> Fecha de salida:</label>
-							<input class= "form-control" name="checkout" type="date" required>
-							<br>
-							<label for="slug">Hora de salida</label>
-							<input class= "form-control" name="h_salida" type="time" required>
-							<input type="hidden" name="habitacion_id" value="{{ $huesped->habitacion->id }}" />
+							@foreach($servicios as $servicio)
+								<label for="">Servicio de {{$servicio->nombre_servicio}}</label>
+								<select name="precio" class="form-control @error('precio') is-invalid @enderror" id="precio">
+									<option value="">----- Selecciona un item -----</option>
+
+									<!-- Se recorren todos los estados de la habitación -->
+									@foreach($servicio->items as $item)
+										<option value="{{ $item->id }}" {{ old('precio') == $item->id ? 'selected' : '' }}> {{ ($item->producto) }}</option>
+									@endforeach
+								</select>
+							@endforeach	
 						</div>
 						<!-- Modal Footer -->
 						<div class="modal-footer">

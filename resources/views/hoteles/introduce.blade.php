@@ -27,7 +27,7 @@
 	</div>
 @endguest
 <div class="container my-5">
-	<div class="row align-items-start" style="margin-left: 10%; margin-top: -10%">
+	<div class="row align-items-start" style="margin-left: 10%">
 		<div class="col-md-8">
 			<img src="/storage/{{ $hotel->imagen }}" class="w-100" style="max-height: 500px">
 			<p class="mt-3 text-justify">{{Str::words( strip_tags( $hotel->descripcion ))}}</p>

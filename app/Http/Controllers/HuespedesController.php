@@ -2,18 +2,14 @@
 
 namespace App\Http\Controllers;
 
-use App\Bar;
 use App\Cuenta;
-use App\Precios;
 use App\Huespedes;
 use Carbon\Carbon;
 use App\Habitacion;
 use App\Hotel;
-use App\Piscinas;
-use App\Restaurantes;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-use Servicios;
+use App\Servicios;
 
 class HuespedesController extends Controller
 {
@@ -39,7 +35,8 @@ class HuespedesController extends Controller
 
     public function information($huesped){
         $huesped = Huespedes::where('id', $huesped)->first();
-        return view('huespedes.information', compact('huesped'));
+        $servicios = Servicios::all();
+        return view('huespedes.information', compact('huesped', 'servicios'));
     }
 
     /**
@@ -175,10 +172,10 @@ class HuespedesController extends Controller
      * @param  \App\Huespedes  $huespedes
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Huespedes $huesped)
+    public function destroy(Huespedes $huesped, Request $request)
     {
+        DB::table('habitaciones')->where('id', $huesped->habitacion->id)->update(['disponibilidad_id' =>  1]);
         $huesped->delete();
-
         return redirect()->route('huespedes.index')->withSuccess('huesped eliminado exitosamente');
 
     }

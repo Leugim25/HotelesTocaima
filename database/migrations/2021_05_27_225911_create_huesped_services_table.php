@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class Cuentas extends Migration
+class CreateHuespedServicesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,9 @@ class Cuentas extends Migration
      */
     public function up()
     {
-        Schema::create('cuentas', function (Blueprint $table) {
+        Schema::create('huesped_services', function (Blueprint $table) {
             $table->id();
-            $table->float('valor')->default(0);
-            $table->float('item')->default(0);
+            $table->foreignId('servicios_id')->references('id')->on('servicios')->onDelete('cascade')->comment('Llave foranea para los servicios');
             $table->foreignId('huespedes_id')->references('id')->on('huespedes')->onDelete('cascade')->comment('Llave foranea para los huespedes');
             $table->timestamps();
         });
@@ -29,6 +28,6 @@ class Cuentas extends Migration
      */
     public function down()
     {
-        //
+        Schema::dropIfExists('huesped_services');
     }
 }

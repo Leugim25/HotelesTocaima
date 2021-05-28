@@ -18,4 +18,7 @@ class Servicios extends Model
         return $this->hasMany('App\Items','servicios_id');
     }
     
+    public function huepedes_service() {
+        return $this->hasMany(HuespedServices::class, 'servicios_id');
+    }
 }

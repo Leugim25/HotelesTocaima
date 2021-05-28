@@ -75,7 +75,6 @@
 							{{ $hotel->categoria->descripcion }}
 						</td>
 						<td>
-							<a href="{{ route('hoteles.show', ['hotel' => $hotel->id]) }}" class="btn btn-warning d-block text-white mt-2">Ver</a>
 							<form action="{{ route('hoteles.destroy', ['hotel' => $hotel->id]) }}" method="POST">
 								@csrf
 								@method('DELETE')
