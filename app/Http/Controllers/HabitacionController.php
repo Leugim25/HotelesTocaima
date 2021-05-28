@@ -170,7 +170,6 @@ class HabitacionController extends Controller
             'created_at' => Carbon::now(),
         ]);
         return redirect()->route('habitaciones.index', $request->hotel_id)->withSuccess('Habitación eliminada exitosamente');
-        ;
     }
 
     public function all(){

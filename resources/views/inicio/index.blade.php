@@ -42,7 +42,7 @@
 	<div class="contenedor_tarjeta">
 		<h2 id="cursiva" class="titulo_principal">Hospedaje</h2>
 		<figure id="tarjeta">
-			<img src="{{ asset('img/H2.jpeg') }}" class="frontal" alt="">
+			<img src="{{ asset('img/H1.jpeg') }}" class="frontal" alt="">
 			<figcaption class="trasera">
 				<h2 class="titulo">Descansa</h2>
 				<hr>

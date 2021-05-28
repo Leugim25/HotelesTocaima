@@ -34,11 +34,11 @@
 		</div>
 		<div class="buttons">
 			<h5>Agregar check-in del huesped</h5>
-			<a class="btn btn-warning text-white d-inline ml-5"data-toggle="modal" data-target="#Check-in" >Agregar Servicio</a>
+			<a class="btn btn-warning text-white d-inline ml-5"data-toggle="modal" data-target="#Check-in" >Agregar check-in</a>
 		</div>
 		<div class="buttons">
 			<h5>Agregar check-out del huesped</h5>
-			<a class="btn btn-warning text-white d-inline ml-5"data-toggle="modal" data-target="#Check-out" >Agregar Servicio</a>
+			<a class="btn btn-warning text-white d-inline ml-5"data-toggle="modal" data-target="#Check-out" >Agregar check-out</a>
 		</div>
 	</div>
 @endsection
@@ -68,7 +68,12 @@
 						<h4 class="titulo-informa">Cuenta total del huesped</h4>
 						<li><h6><strong class="titles-huesped">Número de habitación: </strong>{{$huesped->habitacion->n_habitacion}}</h6></li>
 						<li><h6><strong class="titles-huesped">Precio de la habitación: </strong> ${{number_format($huesped->habitacion->precio->valor)}} pesos</h6></li>
-						<a href="" class="btn btn-secondary text-white mr-3" style="float: right" data-toggle="modal" data-target="#Cuenta">Cuenta</a>
+						@foreach($huesped->cuenta as $cuenta)
+							<li><strong class="titles-huesped">Producto {{$cuenta->id}}:</strong> Valor: ${{ $cuenta->valor }} - Cantidad: {{$cuenta->cantidad}} - total: ${{ number_format(intval($cuenta->valor)*$cuenta->cantidad) }} pesos</li>
+							
+							@endforeach
+					<hr>
+						<a href="" class="btn btn-secondary text-white mr-3 mt-3 mb-3" style="float: right" data-toggle="modal" data-target="#Cuenta">Cuenta</a>
 					</ul>
 				</div>
 			</div>
@@ -92,20 +97,30 @@
 				<!-- Modal Body -->
 				<div class="modal-body">
 					<p class="statusMsg"></p>
-					<form action="{{ route('huespedes.edit', $huesped->id) }}" method="POST" enctype="multipart/form-data">
+					<form action="{{ route('huespedes.service', $huesped->id) }}" method="POST" enctype="multipart/form-data">
 						@csrf
 						<div class="form-group">
 							@foreach($servicios as $servicio)
-								<label for="">Servicio de {{$servicio->nombre_servicio}}</label>
-								<select name="precio" class="form-control @error('precio') is-invalid @enderror" id="precio">
+								<label for="">Servicio de <span style="color: {{$servicio->color}}">{{$servicio->nombre_servicio}}</span></label>
+								
+								<select name="item[]" class="form-control @error('item') is-invalid @enderror" id="item">
 									<option value="">----- Selecciona un item -----</option>
 
 									<!-- Se recorren todos los estados de la habitación -->
 									@foreach($servicio->items as $item)
-										<option value="{{ $item->id }}" {{ old('precio') == $item->id ? 'selected' : '' }}> {{ ($item->producto) }}</option>
+										<option value="{{ $item->id }}" {{ old('item') == $item->id ? 'selected' : '' }}> {{ ($item->producto) }}</option>
 									@endforeach
+									
 								</select>
+								<br>
+								<label for="">Precio del producto</label>
+								<input type="text" class="form-control" name="precio[]" value="{{ $item->precio }}">
+								<br>
+								<label for="">Cantidad de productos</label>
+								<input type="text" name="cantidad[]" class="form-control" value=" {{$item->cantidad}}">
+								<hr class="bg-primary">
 							@endforeach	
+							<input type="hidden" name="huesped_id" value="{{ $huesped->id }}">
 						</div>
 						<!-- Modal Footer -->
 						<div class="modal-footer">
@@ -138,7 +153,7 @@
 						@csrf
 						<div class="form-group">
 							<label for="slug"> Fecha de entrada:</label>
-							<input class= "form-control" name="checkin" type="date" required>
+							<input class= "form-control" name="checkin" type="date" required min="{{ \Carbon\carbon::now()->ToDateString() }}">
 							<br>
 							<label for="slug">Hora de entrada</label>
 							<input class= "form-control" name="h_entrada" type="time" required>
@@ -175,7 +190,7 @@
 						@csrf
 						<div class="form-group">
 							<label for="slug"> Fecha de salida:</label>
-							<input class= "form-control" name="checkout" type="date" required>
+							<input class= "form-control" name="checkout" type="date" required min="{{ \Carbon\Carbon::parse($huesped->checkin)->ToDateString() }}">
 							<br>
 							<label for="slug">Hora de salida</label>
 							<input class= "form-control" name="h_salida" type="time" required>

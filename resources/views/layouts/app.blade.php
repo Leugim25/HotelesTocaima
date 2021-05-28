@@ -73,7 +73,7 @@
 						@endif
 						<li class="nav-item dropdown">
 							<a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre style="position: relative; padding-left:50px">
-								<img src="/storage/upload-ImagenesPerfil/{{Auth::user()->avatar}}" style="width:32px; height:32px; position:absolute; top:10px; left:10px; border-radius: 50%">
+								<img src="/storage/upload-imagenesPerfil/{{Auth::user()->avatar}}" style="width:32px; height:32px; position:absolute; top:10px; left:10px; border-radius: 50%">
 								{{ Auth::user()->name }}
 							</a>
 

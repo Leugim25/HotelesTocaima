@@ -35,6 +35,7 @@ class HuespedesController extends Controller
 
     public function information($huesped){
         $huesped = Huespedes::where('id', $huesped)->first();
+        // $info = Huespedes::where('checkin','>=',$huesped->checkin);
         $servicios = Servicios::all();
         return view('huespedes.information', compact('huesped', 'servicios'));
     }
@@ -105,20 +106,29 @@ class HuespedesController extends Controller
     }
 
     
-    public function service(Request $request, Huespedes $huespedes)
+    public function service(Request $request, $id)
     {
-        $data = request()->validate([
-            'item' =>  'required',
-            'valor' => 'required',
-        ]);
+        //$data = request()->validate([
+        //    'item' =>  'required',
+        //    'valor' => 'required',
+        //]);
+        $data = $request->except('_token');
 
-        Cuenta::create([
-            'item' => $data['item'],
-            'valor' => $data['valor'],
-        ]);
+        for($i=0;$i < count($data['item']);$i++){
+            if($data['item'][$i]){
+                Cuenta::create([
+                    'item' => $data['item'][$i],
+                    'valor' => $data['precio'][$i],
+                    'cantidad' => $data['cantidad'][$i],
+                    'huespedes_id' => $id,
+                ]);
+            }
+            // $cuenta->huesped()->sync($id);
+        }
 
-        return redirect()->route('huespedes.show', auth()->user()->id)->withSuccess('servicio agregado exitosamente');
         
+
+        return redirect()->route('huespedes.information', $id)->withSuccess('servicio agregado exitosamente');
     }
 
     /**

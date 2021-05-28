@@ -9,7 +9,7 @@ class Cuenta extends Model
     protected $table = 'cuentas';
 
     protected $fillable = [
-        'valor', 'item',
+        'item', 'valor', 'cantidad', 'huespedes_id'
     ];
 
     public function huesped()

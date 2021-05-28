@@ -15,9 +15,9 @@ class Servicios extends Migration
     {
         Schema::create('servicios', function (Blueprint $table) {
             $table->id();
-            $table->string('nombre_servicio')->default('sin nombre');
-            $table->string('color')->default('#fff');
-            $table->string('imagen')->default('logoAmarilloNegro.png');
+            $table->string('nombre_servicio')->default('sin nombre')->nullable();
+            $table->string('color')->default('#fff')->nullable();
+            $table->string('imagen')->default('logoAmarilloNegro.png')->nullable();
             $table->timestamps();
         });
     }

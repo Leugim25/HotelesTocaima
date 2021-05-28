@@ -84,7 +84,7 @@
 				</td>
 				<td>
 					<a href="{{ route('habitaciones.edit', $habitacion->id) }}" class="btn btn-secondary d-block text-white mt-2">Editar</a>
-					<form action="" method="POST">
+					<form action="{{route('habitaciones.destroy', $habitacion->id)}}" method="POST">
 						@csrf
 						@method('DELETE')
 						<input type="submit" class="btn btn-danger d-block text-white mt-2 w-100" value="Eliminar" &time>

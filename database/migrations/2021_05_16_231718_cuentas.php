@@ -15,8 +15,9 @@ class Cuentas extends Migration
     {
         Schema::create('cuentas', function (Blueprint $table) {
             $table->id();
-            $table->float('valor')->default(0);
-            $table->float('item')->default(0);
+            $table->string('valor')->nullable();
+            $table->string('item')->nullable();
+            $table->string('cantidad')->nullable();
             $table->foreignId('huespedes_id')->references('id')->on('huespedes')->onDelete('cascade')->comment('Llave foranea para los huespedes');
             $table->timestamps();
         });

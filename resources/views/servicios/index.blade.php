@@ -82,9 +82,9 @@
 									@method('DELETE')
 									<input type="submit" class="btn btn-danger d-block text-white mt-2 w-100" value="Eliminar" &time>
 								</form>
-								<a  class="btn btn-secondary text-white mt-2 w-100" data-toggle="modal" data-target="#Edit_{{ $item->id }}"> Editar item</a>
+								<a  class="btn btn-secondary text-white mt-2 w-100" data-toggle="modal" data-target="#Editar_{{ $item->id }}"> Editar item</a>
 							</td>
-							<div class="modal fade" id="Edit_{{ $item->id }}" role="dialog">
+							<div class="modal fade" id="Editar_{{ $item->id }}" role="dialog">
 								<div class="modal-dialog">
 									<div class="modal-content">
 										<!-- Modal Header -->
